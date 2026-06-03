@@ -68,47 +68,55 @@ $category_title = $queried_object && isset( $queried_object->name ) ? $queried_o
 		<?php
 		$static_products = array(
 			array(
-				'title'    => 'Прибор приемно-контрольный Сигнал-20П',
-				'specs'    => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
-				'image'    => 'product01.png',
+				'slug'    => 'signal-20p-1',
+				'title'   => 'Прибор приемно-контрольный Сигнал-20П',
+				'specs'   => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
+				'image'   => 'product01.png',
 			),
 			array(
-				'title'    => 'Прибор приемно-контрольный Сигнал-20П',
-				'specs'    => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
-				'image'    => 'product01.png',
+				'slug'    => 'signal-20p-2',
+				'title'   => 'Прибор приемно-контрольный Сигнал-20П',
+				'specs'   => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
+				'image'   => 'product01.png',
 			),
 			array(
-				'title'    => 'Прибор приемно-контрольный Сигнал-20П',
-				'specs'    => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
-				'image'    => 'product01.png',
+				'slug'    => 'signal-20p-3',
+				'title'   => 'Прибор приемно-контрольный Сигнал-20П',
+				'specs'   => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
+				'image'   => 'product01.png',
 			),
 			array(
-				'title'    => 'Прибор приемно-контрольный Сигнал-20П',
-				'specs'    => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
-				'image'    => 'product01.png',
+				'slug'    => 'signal-20p-4',
+				'title'   => 'Прибор приемно-контрольный Сигнал-20П',
+				'specs'   => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
+				'image'   => 'product01.png',
 			),
 			array(
-				'title'    => 'Прибор приемно-контрольный Сигнал-20П',
-				'specs'    => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
-				'image'    => 'product01.png',
+				'slug'    => 'signal-20p-5',
+				'title'   => 'Прибор приемно-контрольный Сигнал-20П',
+				'specs'   => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
+				'image'   => 'product01.png',
 			),
 			array(
-				'title'    => 'Прибор приемно-контрольный Сигнал-20П',
-				'specs'    => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
-				'image'    => 'product01.png',
+				'slug'    => 'signal-20p-6',
+				'title'   => 'Прибор приемно-контрольный Сигнал-20П',
+				'specs'   => array( '4 шлейфа сигнализации', 'Питание 12В', 'Память событий 2048' ),
+				'image'   => 'product01.png',
 			),
 		);
 		?>
 
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-			<?php foreach ( $static_products as $static_product ) : ?>
+			<?php foreach ( $static_products as $static_product ) :
+				$product_url = add_query_arg( 'static_product', $static_product['slug'], home_url( '/' ) );
+			?>
 			<div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col">
-				<a href="#" class="aspect-square bg-gray-50 p-6 flex items-center justify-center">
+				<a href="<?php echo esc_url( $product_url ); ?>" class="aspect-square bg-gray-50 p-6 flex items-center justify-center">
 					<img src="<?php echo esc_url( get_template_directory_uri() . '/img/' . $static_product['image'] ); ?>" alt="<?php echo esc_attr( $static_product['title'] ); ?>" class="w-full h-full object-contain">
 				</a>
 				<div class="p-4 md:p-5 flex flex-col flex-1">
 					<h3 class="text-lg font-bold text-black mb-3">
-						<?php echo esc_html( $static_product['title'] ); ?>
+						<a href="<?php echo esc_url( $product_url ); ?>" class="hover:text-[#B3262E] transition-colors"><?php echo esc_html( $static_product['title'] ); ?></a>
 					</h3>
 					<p class="text-sm text-gray-600 mb-2">Приборы приемно-контрольные</p>
 					<ul class="space-y-1 mb-4 text-sm text-gray-700">
@@ -124,7 +132,7 @@ $category_title = $queried_object && isset( $queried_object->name ) ? $queried_o
 						<button type="button" class="w-full bg-[#B3262E] text-white px-6 py-3 rounded hover:bg-[#9a1f26] transition-colors text-base font-medium shadow-lg outline-none border-none">
 							В корзину
 						</button>
-						<a href="#" class="w-full inline-flex items-center justify-center bg-white text-[#B3262E] border-2 border-[#B3262E] px-6 py-3 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-base font-medium mt-3">
+						<a href="<?php echo esc_url( $product_url ); ?>" class="w-full inline-flex items-center justify-center bg-white text-[#B3262E] border-2 border-[#B3262E] px-6 py-3 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-base font-medium mt-3">
 							Подробнее
 						</a>
 					</div>

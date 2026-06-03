@@ -298,6 +298,14 @@ function guardexpert_force_taxonomy_template( $template ) {
 			return $theme_template;
 		}
 	}
+
+	if ( ! empty( $_GET['static_product'] ) ) {
+		$theme_template = locate_template( array( 'woocommerce/single-product.php' ) );
+		if ( ! empty( $theme_template ) ) {
+			return $theme_template;
+		}
+	}
+
 	return $template;
 }
 add_filter( 'template_include', 'guardexpert_force_taxonomy_template', 99 );
