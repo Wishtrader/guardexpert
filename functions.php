@@ -202,3 +202,183 @@ add_filter('woocommerce_validate_billing_email', function($valid, $email) {
     }
     return $valid;
 }, 10, 2);
+
+/**
+ * Get the URL of the page assigned to the "Catalog" page template.
+ *
+ * @return string
+ */
+function guardexpert_get_catalog_url() {
+	$pages = get_pages( array(
+		'meta_key'   => '_wp_page_template',
+		'meta_value' => 'catalog.php',
+		'number'     => 1,
+	) );
+
+	if ( ! empty( $pages ) ) {
+		return get_permalink( $pages[0] );
+	}
+
+	return home_url( '/catalog' );
+}
+
+/**
+ * Get a working URL for a WooCommerce product category.
+ *
+ * Falls back to a manually constructed permalink if the term link
+ * is not available (e.g. when permalinks haven't been flushed).
+ *
+ * @param WP_Term $category Category term.
+ * @return string
+ */
+function guardexpert_get_category_url( $category ) {
+	if ( ! $category || is_wp_error( $category ) || empty( $category->term_id ) ) {
+		return guardexpert_get_catalog_url();
+	}
+
+	$link = get_term_link( $category );
+
+	if ( ! is_wp_error( $link ) && ! empty( $link ) ) {
+		return $link;
+	}
+
+	$base = function_exists( 'WC' ) ? get_option( 'woocommerce_product_category_slug', 'product-category' ) : 'product-category';
+	return home_url( '/' . $base . '/' . $category->slug . '/' );
+}
+
+/**
+ * Flush rewrite rules on theme activation so WooCommerce category
+ * permalinks (/product-category/slug/) work correctly.
+ */
+function guardexpert_flush_rewrites() {
+	flush_rewrite_rules( false );
+}
+add_action( 'after_switch_theme', 'guardexpert_flush_rewrites' );
+
+/**
+ * Allow admins to flush rewrite rules manually via URL:
+ * example.com/?guardexpert_flush_rewrites=1 (must be logged in as admin).
+ */
+function guardexpert_manual_flush_rewrites() {
+	if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	if ( isset( $_GET['guardexpert_flush_rewrites'] ) && '1' === $_GET['guardexpert_flush_rewrites'] ) {
+		flush_rewrite_rules( true );
+		$redirect = remove_query_arg( 'guardexpert_flush_rewrites' );
+		if ( ! $redirect ) {
+			$redirect = home_url( '/' );
+		}
+		wp_safe_redirect( $redirect );
+		exit;
+	}
+}
+add_action( 'init', 'guardexpert_manual_flush_rewrites' );
+
+/**
+ * One-time automatic rewrite flush to ensure WooCommerce taxonomies work.
+ */
+function guardexpert_maybe_flush_rewrites() {
+	$flushed = get_option( 'guardexpert_rewrites_v2_flushed' );
+	if ( ! $flushed ) {
+		flush_rewrite_rules( true );
+		update_option( 'guardexpert_rewrites_v2_flushed', 1 );
+	}
+}
+add_action( 'init', 'guardexpert_maybe_flush_rewrites', 99 );
+
+/**
+ * Force the taxonomy template for product categories as a safety net.
+ */
+function guardexpert_force_taxonomy_template( $template ) {
+	if ( is_tax( 'product_cat' ) ) {
+		$theme_template = locate_template( array( 'taxonomy-product_cat.php', 'taxonomy.php' ) );
+		if ( ! empty( $theme_template ) ) {
+			return $theme_template;
+		}
+	}
+	return $template;
+}
+add_filter( 'template_include', 'guardexpert_force_taxonomy_template', 99 );
+
+/**
+ * Admin notice instructing to flush permalinks for category archives to work.
+ */
+function guardexpert_permalink_flush_notice() {
+	$permalinks = get_option( 'permalink_structure' );
+	$flushed    = get_option( 'guardexpert_rewrites_flushed' );
+	$screen     = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+	if ( ! $screen || $screen->id === 'settings_page_permalinks' ) {
+		return;
+	}
+
+	$flush_url = admin_url( 'admin.php?page=guardexpert-flush' );
+	$perma_url = admin_url( 'options-permalink.php' );
+
+	if ( empty( $permalinks ) ) {
+		echo '<div class="notice notice-error"><p><strong>Guardexpert:</strong> ';
+		echo wp_kses(
+			sprintf(
+				/* translators: %s: permalink settings URL */
+				__( 'Чтобы ссылки на категории товаров работали, перейдите в <a href="%s">Настройки → Постоянные ссылки</a> и выберите «Название записи».', 'guardexpert' ),
+				esc_url( $perma_url )
+			),
+			array( 'a' => array( 'href' => array() ) )
+		);
+		echo '</p></div>';
+		return;
+	}
+
+	if ( ! $flushed ) {
+		echo '<div class="notice notice-warning"><p><strong>Guardexpert:</strong> ';
+		echo esc_html__( 'Нажмите кнопку ниже один раз, чтобы обновить правила постоянных ссылок и активировать страницы категорий.', 'guardexpert' );
+		echo ' <a href="' . esc_url( $flush_url ) . '" class="button button-primary">' . esc_html__( 'Обновить постоянные ссылки', 'guardexpert' ) . '</a>';
+		echo '</p></div>';
+	}
+}
+add_action( 'admin_notices', 'guardexpert_permalink_flush_notice' );
+
+/**
+ * Admin page for one-click rewrite flush.
+ */
+function guardexpert_register_flush_page() {
+	add_menu_page(
+		__( 'Guardexpert: Сброс ссылок', 'guardexpert' ),
+		__( 'Сброс ссылок', 'guardexpert' ),
+		'manage_options',
+		'guardexpert-flush',
+		'guardexpert_render_flush_page',
+		'dashicons-update',
+		100
+	);
+}
+add_action( 'admin_menu', 'guardexpert_register_flush_page' );
+
+function guardexpert_render_flush_page() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$flushed_now = false;
+	if ( isset( $_POST['guardexpert_flush_action'] ) && check_admin_referer( 'guardexpert_flush_action' ) ) {
+		flush_rewrite_rules( true );
+		update_option( 'guardexpert_rewrites_flushed', 1 );
+		$flushed_now = true;
+	}
+	?>
+	<div class="wrap">
+		<h1><?php esc_html_e( 'Сброс правил постоянных ссылок', 'guardexpert' ); ?></h1>
+		<?php if ( $flushed_now ) : ?>
+			<div class="notice notice-success is-dismissible"><p><?php esc_html_e( 'Правила обновлены. Теперь страницы категорий должны открываться корректно.', 'guardexpert' ); ?></p></div>
+		<?php endif; ?>
+		<p><?php esc_html_e( 'Если страницы категорий товаров не открываются или показывают главную — нажмите кнопку ниже, чтобы обновить правила перезаписи URL.', 'guardexpert' ); ?></p>
+		<form method="post">
+			<?php wp_nonce_field( 'guardexpert_flush_action' ); ?>
+			<input type="hidden" name="guardexpert_flush_action" value="1">
+			<button type="submit" class="button button-primary button-large"><?php esc_html_e( 'Обновить правила', 'guardexpert' ); ?></button>
+		</form>
+	</div>
+	<?php
+}

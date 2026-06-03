@@ -64,10 +64,10 @@
 			<!-- Desktop Navigation -->
 			<nav class="hidden md:flex items-center gap-6">
 				<!-- Catalog Button -->
-				<button class="flex items-center gap-2 bg-white text-black px-6 py-3 rounded hover:bg-gray-100 transition-colors outline-none border-none">
+				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center gap-2 bg-white text-black px-6 py-3 rounded hover:bg-gray-100 transition-colors">
 					<ion-icon name="apps-outline" class="text-[#B3262E] text-xl"></ion-icon>
 					<span class="font-medium">Каталог</span>
-				</button>
+				</a>
 
 				<!-- Navigation Links -->
 				<div class="flex items-center gap-4 text-sm">
@@ -153,7 +153,7 @@
 		<!-- Mobile Menu Content -->
 		<div class="px-4 py-6">
 			<!-- Catalog Button -->
-			<a href="/catalog" class="flex items-center justify-center gap-3 bg-[#B3262E] text-white px-6 py-4 rounded mb-8 hover:bg-[#9a1f26] transition-colors">
+			<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center justify-center gap-3 bg-[#B3262E] text-white px-6 py-4 rounded mb-8 hover:bg-[#9a1f26] transition-colors">
 				<ion-icon name="apps-outline" class="text-2xl"></ion-icon>
 				<span class="text-lg font-medium">Перейти в каталог</span>
 			</a>

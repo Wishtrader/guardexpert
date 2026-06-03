@@ -20,39 +20,33 @@
 
 			<!-- Column 2: Catalog -->
 			<div>
-				<h3 class="text-lg mb-4 pb-2 border-b border-[#B3262E] inline-block">Каталог</h3>
-				<ul class="space-y-2">
-					<li>
-						<a href="/catalog/control-panels" class="flex items-center gap-2 hover:text-[#B3262E] transition-colors">
-							<ion-icon name="chevron-forward-outline" class="text-[#B3262E] flex-shrink-0"></ion-icon>
-							Приборы приемно-контрольные
-						</a>
-					</li>
-					<li>
-						<a href="/catalog/detectors" class="flex items-center gap-2 hover:text-[#B3262E] transition-colors">
-							<ion-icon name="chevron-forward-outline" class="text-[#B3262E] flex-shrink-0"></ion-icon>
-							Извещатели
-						</a>
-					</li>
-					<li>
-						<a href="/catalog/access-controllers" class="flex items-center gap-2 hover:text-[#B3262E] transition-colors">
-							<ion-icon name="chevron-forward-outline" class="text-[#B3262E] flex-shrink-0"></ion-icon>
-							Контролеры доступа
-						</a>
-					</li>
-					<li>
-						<a href="/catalog/cameras" class="flex items-center gap-2 hover:text-[#B3262E] transition-colors">
-							<ion-icon name="chevron-forward-outline" class="text-[#B3262E] flex-shrink-0"></ion-icon>
-							Видеокамеры
-						</a>
-					</li>
-					<li>
-						<a href="/catalog/recorders" class="flex items-center gap-2 hover:text-[#B3262E] transition-colors">
-							<ion-icon name="chevron-forward-outline" class="text-[#B3262E] flex-shrink-0"></ion-icon>
-							Видеорегистраторы
-						</a>
-					</li>
-				</ul>
+				<h3 class="text-lg mb-4 pb-2 border-b border-[#B3262E] inline-block">
+					<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="hover:text-[#B3262E] transition-colors">Каталог</a>
+				</h3>
+				<?php
+				$footer_categories = get_terms( array(
+					'taxonomy'   => 'product_cat',
+					'hide_empty' => false,
+					'number'     => 5,
+					'orderby'    => 'menu_order',
+					'order'      => 'ASC',
+				) );
+				if ( ! empty( $footer_categories ) && ! is_wp_error( $footer_categories ) ) : ?>
+					<ul class="space-y-2">
+						<?php foreach ( $footer_categories as $footer_category ) :
+							if ( $footer_category->name === 'Uncategorized' ) continue;
+						?>
+							<li>
+								<a href="<?php echo esc_url( guardexpert_get_category_url( $footer_category ) ); ?>" class="flex items-center gap-2 hover:text-[#B3262E] transition-colors">
+									<ion-icon name="chevron-forward-outline" class="text-[#B3262E] flex-shrink-0"></ion-icon>
+									<?php echo esc_html( $footer_category->name ); ?>
+								</a>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php else : ?>
+					<p class="text-sm text-gray-400">Категории не добавлены</p>
+				<?php endif; ?>
 			</div>
 
 			<!-- Column 3: Navigation -->
