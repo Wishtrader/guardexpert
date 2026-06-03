@@ -15,6 +15,8 @@
 get_header();
 ?>
 
+	<?php get_template_part( 'template-parts/hero-section' ); ?>
+
 	<main id="primary" class="site-main">
 
 		<?php

@@ -5,9 +5,18 @@
 
 get_header();
 ?>
-<main id="primary" class="site-main">
-	<h1 class="uppercase">Content</h1>
-</main><!-- #main -->
+
+<?php get_template_part( 'template-parts/hero-section' ); ?>
+
+<?php get_template_part( 'template-parts/why-choose-us' ); ?>
+
+<?php get_template_part( 'template-parts/equipment-categories' ); ?>
+
+<?php get_template_part( 'template-parts/services-section' ); ?>
+
+<?php get_template_part( 'template-parts/certificates-section' ); ?>
+
+<?php get_template_part( 'template-parts/contact-form-section' ); ?>
 
 <?php
 get_footer();
