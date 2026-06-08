@@ -8,10 +8,9 @@
 
 <!-- Hero Section -->
 <section class="relative overflow-hidden" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/hero-bg.png'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; margin-left: calc(-50vw + 50%);">
-	<!-- Decorative Elements -->
-	<img src="<?php echo get_template_directory_uri(); ?>/img/h1.png" alt="" class="absolute -bottom-20 -right-20 w-[600px] h-auto opacity-30 pointer-events-none hidden lg:block">
+	
 
-	<div class="max-w-[1200px] mx-auto px-4 py-12 lg:py-20 relative z-10">
+	<div class="max-w-[1200px] mx-auto px-4 py-12 lg:pb-20 relative z-10">
 		<!-- Desktop Layout -->
 		<div class="hidden lg:grid lg:grid-cols-12 gap-8 items-center">
 			<!-- Left Column: Text Content (5 columns) -->
@@ -30,7 +29,7 @@
 
 			<!-- Center Column: Main Image (4 columns) -->
 			<div class="lg:col-span-4">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/h1.png" alt="Оборудование систем безопасности" class="w-full h-auto rounded-lg shadow-xl">
+				<img src="<?php echo get_template_directory_uri(); ?>/img/h1.png" alt="Оборудование систем безопасности" class="w-full max-w-[285px] max-h-[612px] rounded-lg shadow-xl">
 			</div>
 
 			<!-- Right Column: Category Cards (3 columns) -->
@@ -74,7 +73,7 @@
 		</div>
 
 		<!-- Bottom Product Links - Desktop -->
-		<div class="hidden lg:grid lg:grid-cols-4 gap-4 mt-12">
+		<div class="hidden lg:grid lg:grid-cols-4 gap-4">
 			<a href="/catalog/access-controllers" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-4 group">
 				<img src="<?php echo get_template_directory_uri(); ?>/img/контроллеры.png" alt="Контролеры доступа" class="w-20 h-20 object-contain">
 				<span class="font-medium text-black group-hover:text-[#B3262E] transition-colors flex-1">Контролеры доступа</span>
@@ -173,31 +172,5 @@
 			</div>
 		</div>
 
-		<!-- Bottom Product Links - Desktop -->
-		<div class="hidden lg:grid grid-cols-4 gap-4 mt-8">
-			<a href="/catalog/access-controllers" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-4 group">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/контроллеры.png" alt="Контролеры доступа" class="w-20 h-20 object-contain">
-				<span class="font-medium text-black group-hover:text-[#B3262E] transition-colors flex-1">Контролеры доступа</span>
-				<ion-icon name="chevron-forward-outline" class="text-[#B3262E] text-xl"></ion-icon>
-			</a>
-
-			<a href="/catalog/detectors" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-4 group">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/извещатели.png" alt="Извещатели" class="w-20 h-20 object-contain">
-				<span class="font-medium text-black group-hover:text-[#B3262E] transition-colors flex-1">Извещатели</span>
-				<ion-icon name="chevron-forward-outline" class="text-[#B3262E] text-xl"></ion-icon>
-			</a>
-
-			<a href="/catalog/cameras" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-4 group">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/видеокамеры.png" alt="Видеокамеры" class="w-20 h-20 object-contain">
-				<span class="font-medium text-black group-hover:text-[#B3262E] transition-colors flex-1">Видеокамеры</span>
-				<ion-icon name="chevron-forward-outline" class="text-[#B3262E] text-xl"></ion-icon>
-			</a>
-
-			<a href="/catalog/locks" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-4 group">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/замки.png" alt="Замки" class="w-20 h-20 object-contain">
-				<span class="font-medium text-black group-hover:text-[#B3262E] transition-colors flex-1">Замки</span>
-				<ion-icon name="chevron-forward-outline" class="text-[#B3262E] text-xl"></ion-icon>
-			</a>
-		</div>
-	</div>
+		
 </section>

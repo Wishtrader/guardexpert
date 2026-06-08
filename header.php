@@ -20,33 +20,33 @@
 <!-- Header -->
 <header class="bg-[#FAF9F7] text-black">
 	<!-- Top Bar (Desktop Only) -->
-	<div class="border-b border-gray-300">
+	<div class="">
 		<div class="max-w-[1200px] mx-auto px-4">
-			<div class="flex items-center justify-between py-3 text-sm hidden md:flex">
+			<div class="flex items-center justify-between py-1 text-sm hidden md:flex">
 				<!-- Left: Contact Info -->
-				<div class="flex items-center gap-6">
-					<div class="flex items-center gap-2">
-						<ion-icon name="call-outline" class="text-[#B3262E] text-lg"></ion-icon>
-						<a href="tel:+375297016402" class="hover:text-[#B3262E] transition-colors">+375 29 701-64-02</a>
+				<div class="flex items-center">
+					<div class="flex items-center gap-4 border-r border-black px-6 py-2">
+						<ion-icon name="call-outline" class="text-[#2E2E33] text-2xl"></ion-icon>
+						<a href="tel:+375297016402" class="hover:text-[#B3262E] text-base	 transition-colors">+375 29 701-64-02</a>
 					</div>
-					<div class="flex items-center gap-2">
-						<ion-icon name="call-outline" class="text-[#B3262E] text-lg"></ion-icon>
-						<a href="tel:+375296257771" class="hover:text-[#B3262E] transition-colors">+375 29 625-77-71</a>
+					<div class="flex items-center gap-4 border-r border-black px-6 py-2">
+						<ion-icon name="call-outline" class="text-[#2E2E33] text-2xl"></ion-icon>
+						<a href="tel:+375296257771" class="hover:text-[#B3262E] text-base	 transition-colors">+375 29 625-77-71</a>
 					</div>
-					<div class="flex items-center gap-2">
-						<ion-icon name="mail-outline" class="text-[#B3262E] text-lg"></ion-icon>
-						<a href="mailto:gexpertshop@mail.ru" class="hover:text-[#B3262E] transition-colors">gexpertshop@mail.ru</a>
+					<div class="flex items-center gap-2 px-6 py-2">
+						<ion-icon name="mail-outline" class="text-[#2E2E33] text-2xl"></ion-icon>
+						<a href="mailto:gexpertshop@mail.ru" class="hover:text-[#B3262E] text-base transition-colors">gexpertshop@mail.ru</a>
 					</div>
 				</div>
 
 				<!-- Right: Cart & Search -->
 				<div class="flex items-center gap-4">
 					<a href="/cart" class="relative hover:text-[#B3262E] transition-colors">
-						<ion-icon name="cart-outline" class="text-2xl"></ion-icon>
+						<ion-icon name="cart-outline" class="text-4xl"></ion-icon>
 						<span class="absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
 					</a>
 					<button id="search-toggle-desktop" class="hover:text-[#B3262E] transition-colors outline-none border-none bg-transparent">
-						<ion-icon name="search-outline" class="text-2xl"></ion-icon>
+						<ion-icon name="search-outline" class="text-4xl"></ion-icon>
 					</button>
 				</div>
 			</div>
@@ -58,15 +58,15 @@
 		<div class="flex items-center justify-between py-4 md:py-6">
 			<!-- Logo -->
 			<a href="/" class="flex-shrink-0">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Gexpert - Системы безопасности" class="h-12 md:h-16 w-auto">
+				<img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Gexpert - Системы безопасности" class="h-12 md:h-[92px] w-auto">
 			</a>
 
 			<!-- Desktop Navigation -->
 			<nav class="hidden md:flex items-center gap-6">
 				<!-- Catalog Button -->
-				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center gap-2 bg-white text-black px-6 py-3 rounded hover:bg-gray-100 transition-colors">
-					<ion-icon name="apps-outline" class="text-[#B3262E] text-xl"></ion-icon>
-					<span class="font-medium">Каталог</span>
+				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center gap-2 bg-[#F2F2F0] text-black px-6 py-3 rounded hover:bg-gray-100 transition-colors border-[1px]">
+					<ion-icon name="grid-outline" class="text-[#B3262E] text-xl"></ion-icon>
+					<span class="font-medium text-base text-[#B3262E]">Каталог</span>
 				</a>
 
 				<!-- Navigation Links -->
@@ -79,7 +79,7 @@
 				</div>
 
 				<!-- CTA Button -->
-				<a href="/consultation" class="border-2 border-[#B3262E] text-[#B3262E] px-6 py-3 rounded hover:bg-[#B3262E] hover:text-white transition-colors">
+				<a href="/consultation" class=" flex items-center justify-center border-[1px] border-[#B3262E] text-[#B3262E] w-[203px] h-[52px] rounded-[2px] hover:bg-[#B3262E] hover:text-white transition-colors">
 					Получить консультацию
 				</a>
 			</nav>
