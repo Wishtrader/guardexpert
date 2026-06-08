@@ -10,6 +10,34 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	
+	<!-- Tailwind Play CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	
+	<style type="text/tailwindcss">
+		/* Предзагрузка базовых стилей, чтобы браузер знал шрифты заранее */
+		@layer base {
+			html {
+				-webkit-tap-highlight-color: transparent;
+				font-family: 'Golos Text', sans-serif;
+			}
+			body {
+				@apply bg-[#FAF9F7] text-black;
+				display: block !important;
+			}
+		}
+	</style>
+
+	<script>
+		// Блокируем отображение до тех пор, пока Tailwind не добавит свои стили в DOM
+		document.documentElement.className = 'invisible';
+		window.addEventListener('DOMContentLoaded', () => {
+			// Даем Tailwind микросекунду на инъекцию стилей
+			setTimeout(() => {
+				document.documentElement.classList.remove('invisible');
+			}, 1);
+		});
+	</script>
 
 	<?php wp_head(); ?>
 </head>
@@ -54,7 +82,7 @@
 	</div>
 
 	<!-- Main Header -->
-	<div class="max-w-[1200px] mx-auto px-4">
+	<div class="max-w-[1200px] mx-auto">
 		<div class="flex items-center justify-between py-4 md:py-6">
 			<!-- Logo -->
 			<a href="/" class="flex-shrink-0">
@@ -62,20 +90,20 @@
 			</a>
 
 			<!-- Desktop Navigation -->
-			<nav class="hidden md:flex items-center gap-6">
+			<nav class="hidden md:flex items-center gap-4">
 				<!-- Catalog Button -->
-				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center gap-2 bg-[#F2F2F0] text-black px-6 py-3 rounded hover:bg-gray-100 transition-colors border-[1px]">
-					<ion-icon name="grid-outline" class="text-[#B3262E] text-xl"></ion-icon>
+				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center justify-center gap-2 bg-[#F2F2F0] rounded hover:bg-gray-100 transition-colors border-[1px] w-[184px] h-[55px]">
+					<ion-icon name="grid-outline" class="text-[#B3262E] text-2xl"></ion-icon>
 					<span class="font-medium text-base text-[#B3262E]">Каталог</span>
 				</a>
 
 				<!-- Navigation Links -->
-				<div class="flex items-center gap-4 text-sm">
-					<a href="/services" class="hover:text-[#B3262E] transition-colors">Услуги</a>
-					<a href="/about" class="hover:text-[#B3262E] transition-colors">О компании</a>
-					<a href="/returns" class="hover:text-[#B3262E] transition-colors">Возврат и обмен</a>
-					<a href="/shipping" class="hover:text-[#B3262E] transition-colors">Оплата и доставка</a>
-					<a href="/contacts" class="hover:text-[#B3262E] transition-colors">Контакты</a>
+				<div class="flex text-base items-center gap-4">
+					<a href="/services" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">Услуги</a>
+					<a href="/about" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">О компании</a>
+					<a href="/returns" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">Возврат и обмен</a>
+					<a href="/shipping" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">Оплата и доставка</a>
+					<a href="/contacts" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">Контакты</a>
 				</div>
 
 				<!-- CTA Button -->

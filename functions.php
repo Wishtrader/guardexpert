@@ -138,9 +138,6 @@ add_action( 'widgets_init', 'guardexpert_widgets_init' );
  * Enqueue scripts and styles.
  */
 function guardexpert_scripts() {
-	// Enqueue Tailwind CSS via CDN
-	wp_enqueue_script( 'tailwind-css', 'https://cdn.tailwindcss.com', array(), '3.4.0', true );
-	
 	// Enqueue Ionicons
 	wp_enqueue_script( 'ionicons', 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js', array(), '7.1.0', true );
 	wp_enqueue_script( 'ionicons-nomodule', 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js', array(), '7.1.0', true );
