@@ -10,7 +10,9 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	
+
+	<!-- Lucide Icons CDN -->
+	<script src="https://unpkg.com/lucide@latest"></script>
 	<!-- Tailwind Play CDN -->
 	<script src="https://cdn.tailwindcss.com"></script>
 	
@@ -69,7 +71,7 @@
 
 				<!-- Right: Cart & Search -->
 				<div class="flex items-center gap-4">
-					<a href="/cart" class="relative hover:text-[#B3262E] transition-colors">
+					<a href="/корзина" class="relative hover:text-[#B3262E] transition-colors">
 						<ion-icon name="cart-outline" class="text-4xl"></ion-icon>
 						<span class="absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
 					</a>

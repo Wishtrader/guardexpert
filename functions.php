@@ -192,6 +192,31 @@ function guardexpert_preconnect_fonts() {
 }
 add_action( 'wp_head', 'guardexpert_preconnect_fonts', 0 );
 
+/**
+ * ACF JSON helper
+ */
+add_action( 'acf/init', 'guardexpert_acf_init' );
+function guardexpert_acf_init() {
+	if ( function_exists( 'acf_add_options_page' ) ) {
+		acf_add_options_page( array(
+			'page_title' => 'Настройки темы',
+			'menu_title' => 'Настройки',
+			'menu_slug'  => 'theme-settings',
+			'capability' => 'edit_posts',
+			'redirect'   => false,
+		) );
+	}
+}
+
+/**
+ * Load ACF field groups from theme JSON folder
+ */
+add_filter( 'acf/settings/load_json', 'guardexpert_acf_json_load' );
+function guardexpert_acf_json_load( $paths ) {
+	$paths[] = get_stylesheet_directory() . '/acf-json';
+	return $paths;
+}
+
 
 add_filter('woocommerce_validate_billing_email', function($valid, $email) {
     if (strpos($email, '@local') !== false) {
@@ -251,6 +276,68 @@ function guardexpert_flush_rewrites() {
 	flush_rewrite_rules( false );
 }
 add_action( 'after_switch_theme', 'guardexpert_flush_rewrites' );
+
+/**
+ * Register custom post type for Services
+ */
+function guardexpert_register_services_post_type() {
+	$labels = array(
+		'name'               => 'Услуги',
+		'singular_name'      => 'Услуга',
+		'menu_name'          => 'Услуги',
+		'name_admin_bar'     => 'Услуги',
+		'add_new'            => 'Добавить услугу',
+		'add_new_item'       => 'Добавить новую услугу',
+		'edit_item'          => 'Редактировать услугу',
+		'new_item'           => 'Новая услуга',
+		'view_item'          => 'Посмотреть услугу',
+		'all_items'          => 'Все услуги',
+		'search_items'       => 'Поиск услуг',
+		'parent_item_colon'  => '',
+		'not_found'          => 'Услуг не найдено',
+		'not_found_in_trash' => 'Услуг не найдено в корзине',
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_admin_bar'  => true,
+		'show_in_rest'        => true,
+		'has_archive'        => false,
+		'rewrite'            => array( 'slug' => 'services', 'with_front' => false ),
+		'capability_type'    => 'post',
+		'capabilities'       => array(
+			'edit_post'           => 'edit_post',
+			'read_post'           => 'read_post',
+			'delete_post'         => 'delete_post',
+			'edit_posts'          => 'edit_posts',
+			'edit_others_posts'   => 'edit_others_posts',
+			'delete_posts'        => 'delete_posts',
+			'publish_posts'       => 'publish_posts',
+			'read_private_posts'  => 'read_private_posts',
+		),
+		'map_meta_cap'       => true,
+		'hierarchical'       => false,
+		'menu_position'      => 5,
+		'menu_icon'          => 'dashicons-clipboard',
+		'supports'           => array( 'title', 'thumbnail' ),
+	);
+
+	register_post_type( 'services', $args );
+}
+add_action( 'init', 'guardexpert_register_services_post_type' );
+
+/**
+ * Flush rewrite rules after registering services post type
+ */
+function guardexpert_flush_on_register() {
+	if ( isset( $_GET['guardexpert_flush_services'] ) && current_user_can( 'manage_options' ) ) {
+		flush_rewrite_rules();
+	}
+}
+add_action( 'admin_init', 'guardexpert_flush_on_register' );
 
 /**
  * Allow admins to flush rewrite rules manually via URL:
@@ -386,4 +473,469 @@ function guardexpert_render_flush_page() {
 		</form>
 	</div>
 	<?php
+}
+
+/**
+ * Register ACF fields for Services post type
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_service_fields' );
+function guardexpert_register_service_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'      => 'group_service_fields',
+		'title'    => 'Данные услуги',
+		'fields'   => array(
+			array(
+				'key'   => 'field_service_hero_title',
+				'label' => 'Заголовок (Hero)',
+				'name'  => 'service_hero_title',
+				'type'  => 'text',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_service_hero_description',
+				'label' => 'Описание (Hero)',
+				'name'  => 'service_hero_description',
+				'type'  => 'textarea',
+				'wrapper' => array( 'width' => '50' ),
+				'rows'  => 4,
+			),
+			array(
+				'key'   => 'field_service_hero_image',
+				'label' => 'Изображение (Hero)',
+				'name'  => 'service_hero_image',
+				'type'  => 'image',
+				'return_format' => 'url',
+			),
+			array(
+				'key'   => 'field_service_hero_bg',
+				'label' => 'Фоновое изображение (Hero)',
+				'name'  => 'service_hero_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+			),
+			array(
+				'key'   => 'field_service_hero_button_text',
+				'label' => 'Текст кнопки',
+				'name'  => 'service_hero_button_text',
+				'type'  => 'text',
+				'default_value' => 'Получить консультацию',
+			),
+			array(
+				'key'      => 'field_service_features',
+				'label'    => 'Преимущества (Features Bar)',
+				'name'     => 'service_features',
+				'type'     => 'repeater',
+				'max'      => 4,
+				'button_label' => 'Добавить преимущество',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_service_feature_icon',
+						'label' => 'Иконка',
+						'name'  => 'icon',
+						'type'  => 'image',
+						'return_format' => 'url',
+					),
+					array(
+						'key'   => 'field_service_feature_title',
+						'label' => 'Заголовок',
+						'name'  => 'title',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_service_feature_subtitle',
+						'label' => 'Подзаголовок',
+						'name'  => 'subtitle',
+						'type'  => 'text',
+					),
+				),
+			),
+			array(
+				'key'   => 'field_service_about_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'service_about_title',
+				'type'  => 'text',
+				'default_value' => 'Об услуге',
+			),
+			array(
+				'key'   => 'field_service_about_content',
+				'label' => 'Содержание',
+				'name'  => 'service_about_content',
+				'type'  => 'wysiwyg',
+				'toolbar' => 'basic',
+			),
+			array(
+				'key'   => 'field_service_about_image',
+				'label' => 'Изображение',
+				'name'  => 'service_about_image',
+				'type'  => 'image',
+				'return_format' => 'url',
+			),
+			array(
+				'key'   => 'field_service_audience_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'service_audience_title',
+				'type'  => 'text',
+				'default_value' => 'Для кого подойдут наши услуги',
+			),
+			array(
+				'key'   => 'field_service_audience_content',
+				'label' => 'Подзаголовок секции',
+				'name'  => 'service_audience_content',
+				'type'  => 'textarea',
+				'rows' => 2,
+			),
+			array(
+				'key'      => 'field_service_audience_items',
+				'label'    => 'Элементы',
+				'name'     => 'service_audience_items',
+				'type'     => 'repeater',
+				'max'      => 4,
+				'button_label' => 'Добавить элемент',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_service_audience_item_icon',
+						'label' => 'Иконка',
+						'name'  => 'icon',
+						'type'  => 'image',
+						'return_format' => 'url',
+					),
+					array(
+						'key'   => 'field_service_audience_item_title',
+						'label' => 'Заголовок',
+						'name'  => 'title',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_service_audience_item_text',
+						'label' => 'Текст',
+						'name'  => 'text',
+						'type'  => 'textarea',
+						'rows' => 3,
+					),
+				),
+			),
+			array(
+				'key'   => 'field_service_when_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'service_when_title',
+				'type'  => 'text',
+				'default_value' => 'Когда нужна услуга',
+			),
+			array(
+				'key'   => 'field_service_when_content',
+				'label' => 'Подзаголовок секции',
+				'name'  => 'service_when_content',
+				'type'  => 'textarea',
+				'rows' => 2,
+			),
+			array(
+				'key'      => 'field_service_when_items',
+				'label'    => 'Сценарии',
+				'name'     => 'service_when_items',
+				'type'     => 'repeater',
+				'max'      => 4,
+				'button_label' => 'Добавить сценарий',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_service_when_item_title',
+						'label' => 'Заголовок',
+						'name'  => 'title',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_service_when_item_text',
+						'label' => 'Текст',
+						'name'  => 'text',
+						'type'  => 'textarea',
+						'rows' => 3,
+					),
+				),
+			),
+			array(
+				'key'   => 'field_service_steps_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'service_steps_title',
+				'type'  => 'text',
+				'default_value' => 'Как строится работа',
+			),
+			array(
+				'key'   => 'field_service_steps_content',
+				'label' => 'Подзаголовок секции',
+				'name'  => 'service_steps_content',
+				'type'  => 'textarea',
+				'rows' => 2,
+			),
+			array(
+				'key'      => 'field_service_steps',
+				'label'    => 'Этапы',
+				'name'     => 'service_steps',
+				'type'     => 'repeater',
+				'max'      => 5,
+				'button_label' => 'Добавить этап',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_service_step_number',
+						'label' => 'Номер',
+						'name'  => 'number',
+						'type'  => 'number',
+						'min' => 1,
+						'max' => 5,
+					),
+					array(
+						'key'   => 'field_service_step_icon',
+						'label' => 'Иконка',
+						'name'  => 'icon',
+						'type'  => 'image',
+						'return_format' => 'url',
+					),
+					array(
+						'key'   => 'field_service_step_title',
+						'label' => 'Заголовок',
+						'name'  => 'title',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_service_step_text',
+						'label' => 'Текст',
+						'name'  => 'text',
+						'type'  => 'textarea',
+						'rows' => 3,
+					),
+				),
+			),
+			array(
+				'key'   => 'field_service_why_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'service_why_title',
+				'type'  => 'text',
+				'default_value' => 'Почему это удобно для клиента',
+			),
+			array(
+				'key'   => 'field_service_why_content',
+				'label' => 'Подзаголовок секции',
+				'name'  => 'service_why_content',
+				'type'  => 'textarea',
+				'rows' => 2,
+			),
+			array(
+				'key'      => 'field_service_why_items',
+				'label'    => 'Пункты',
+				'name'     => 'service_why_items',
+				'type'     => 'repeater',
+				'max'      => 3,
+				'button_label' => 'Добавить пункт',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_service_why_item_title',
+						'label' => 'Заголовок',
+						'name'  => 'title',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_service_why_item_text',
+						'label' => 'Текст',
+						'name'  => 'text',
+						'type'  => 'textarea',
+						'rows' => 3,
+					),
+				),
+			),
+			array(
+				'key'   => 'field_service_why_large_text',
+				'label' => 'Текст большой карточки',
+				'name'  => 'service_why_large_text',
+				'type'  => 'wysiwyg',
+				'toolbar' => 'basic',
+			),
+			array(
+				'key'   => 'field_service_bottom_button',
+				'label' => 'Текст нижней кнопки',
+				'name'  => 'service_bottom_button',
+				'type'  => 'text',
+				'default_value' => 'Получить консультацию',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'services',
+				),
+			),
+		),
+	) );
+}
+
+/**
+ * Register ACF fields for Contact page
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_contact_fields' );
+function guardexpert_register_contact_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'      => 'group_contact_fields',
+		'title'    => 'Данные страницы контактов',
+		'fields'   => array(
+			array(
+				'key'   => 'field_contact_hero_title',
+				'label' => 'Заголовок (Hero)',
+				'name'  => 'contact_hero_title',
+				'type'  => 'text',
+				'default_value' => 'Свяжитесь с нами удобным способом',
+			),
+			array(
+				'key'   => 'field_contact_hero_description',
+				'label' => 'Описание (Hero)',
+				'name'  => 'contact_hero_description',
+				'type'  => 'textarea',
+				'rows' => 4,
+			),
+			array(
+				'key'   => 'field_contact_hero_image',
+				'label' => 'Изображение (Hero)',
+				'name'  => 'contact_hero_image',
+				'type'  => 'image',
+				'return_format' => 'url',
+			),
+			array(
+				'key'   => 'field_contact_hero_bg',
+				'label' => 'Фоновое изображение (Hero)',
+				'name'  => 'contact_hero_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+			),
+			array(
+				'key'   => 'field_contact_hero_button_text',
+				'label' => 'Текст кнопки',
+				'name'  => 'contact_hero_button_text',
+				'type'  => 'text',
+				'default_value' => 'Получить консультацию',
+			),
+			array(
+				'key'      => 'field_contact_items',
+				'label'    => 'Контакты',
+				'name'     => 'contact_items',
+				'type'     => 'repeater',
+				'max'      => 10,
+				'button_label' => 'Добавить контакт',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_contact_item_icon',
+						'label' => 'Иконка',
+						'name'  => 'icon',
+						'type'  => 'image',
+						'return_format' => 'url',
+					),
+					array(
+						'key'   => 'field_contact_item_type',
+						'label' => 'Тип',
+						'name'  => 'type',
+						'type'  => 'select',
+						'choices' => array(
+							'phone' => 'Телефон',
+							'email' => 'Email',
+							'address' => 'Адрес',
+						),
+						'default_value' => 'phone',
+					),
+					array(
+						'key'   => 'field_contact_item_value',
+						'label' => 'Значение',
+						'name'  => 'value',
+						'type'  => 'text',
+					),
+				),
+			),
+			array(
+				'key'   => 'field_contact_requisites_title',
+				'label' => 'Заголовок реквизитов',
+				'name'  => 'contact_requisites_title',
+				'type'  => 'text',
+				'default_value' => 'Реквизиты',
+			),
+			array(
+				'key'      => 'field_contact_requisites_items',
+				'label'    => 'Реквизиты',
+				'name'     => 'contact_requisites_items',
+				'type'     => 'repeater',
+				'max'      => 10,
+				'button_label' => 'Добавить реквизит',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_contact_requisites_label',
+						'label' => 'Название',
+						'name'  => 'label',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_contact_requisites_value',
+						'label' => 'Значение',
+						'name'  => 'value',
+						'type'  => 'text',
+					),
+				),
+			),
+			array(
+				'key'   => 'field_contact_form_title',
+				'label' => 'Заголовок формы',
+				'name'  => 'contact_form_title',
+				'type'  => 'text',
+				'default_value' => 'Оставьте заявку',
+			),
+			array(
+				'key'   => 'field_contact_form_description',
+				'label' => 'Описание формы',
+				'name'  => 'contact_form_description',
+				'type'  => 'textarea',
+				'rows' => 2,
+				'default_value' => 'Свяжемся с вами, поможем подобрать оборудование и ответим на вопросы по поставке.',
+			),
+			array(
+				'key'   => 'field_contact_form_button',
+				'label' => 'Текст кнопки',
+				'name'  => 'contact_form_button',
+				'type'  => 'text',
+				'default_value' => 'Отправить',
+			),
+			array(
+				'key'   => 'field_contact_map_title',
+				'label' => 'Заголовок карты',
+				'name'  => 'contact_map_title',
+				'type'  => 'text',
+				'default_value' => 'Как нас найти',
+			),
+			array(
+				'key'   => 'field_contact_map_description',
+				'label' => 'Описание карты',
+				'name'  => 'contact_map_description',
+				'type'  => 'textarea',
+				'rows' => 2,
+				'default_value' => 'Наш офис находится в Минске. Перед визитом рекомендуем предварительно связаться с нами для уточнения деталей.',
+			),
+			array(
+				'key'   => 'field_contact_map_address',
+				'label' => 'Адрес на карте',
+				'name'  => 'contact_map_address',
+				'type'  => 'text',
+				'default_value' => 'Минск, улица Ольшевского, 22',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param'    => 'page_template',
+					'operator' => '==',
+					'value'    => 'contact.php',
+				),
+			),
+		),
+	) );
 }
