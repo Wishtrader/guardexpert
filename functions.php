@@ -939,3 +939,106 @@ function guardexpert_register_contact_fields() {
 		),
 	) );
 }
+
+/**
+ * Register ACF options page fields for Certificates
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_certificates_fields' );
+function guardexpert_register_certificates_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'      => 'group_certificates_options',
+		'title'    => 'Сертификаты',
+		'fields'   => array(
+			array(
+				'key'      => 'field_certificates_items',
+				'label'    => 'Сертификаты',
+				'name'     => 'certificates_items',
+				'type'     => 'repeater',
+				'max'      => 20,
+				'button_label' => 'Добавить сертификат',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_certificate_image',
+						'label' => 'Изображение',
+						'name'  => 'image',
+						'type'  => 'image',
+						'return_format' => 'url',
+					),
+				),
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param'    => 'options_page',
+					'operator' => '==',
+					'value'    => 'theme-settings',
+				),
+			),
+		),
+	) );
+}
+
+/**
+ * Register custom post type for Certificates
+ */
+add_action( 'init', 'guardexpert_register_certificates_post_type' );
+function guardexpert_register_certificates_post_type() {
+	$labels = array(
+		'name'               => 'Сертификаты',
+		'singular_name'      => 'Сертификат',
+		'menu_name'          => 'Сертификаты',
+		'add_new'            => 'Добавить сертификат',
+		'add_new_item'       => 'Добавить новый сертификат',
+		'edit_item'          => 'Редактировать сертификат',
+		'view_item'          => 'Посмотреть сертификат',
+		'all_items'          => 'Все сертификаты',
+		'search_items'       => 'Поиск сертификатов',
+		'not_found'          => 'Сертификатов не найдено',
+		'not_found_in_trash' => 'Сертификатов не найдено в корзине',
+	);
+
+	register_post_type( 'certificates', array(
+		'labels'             => $labels,
+		'public'             => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_admin_bar'  => true,
+		'show_in_rest'        => true,
+		'menu_icon'          => 'dashicons-media-document',
+		'supports'           => array( 'title', 'thumbnail' ),
+	) );
+}
+
+/**
+ * Register ACF fields for Certificates post type
+ */
+add_action( 'acf/init', 'guardexpert_register_certificate_fields' );
+function guardexpert_register_certificate_fields() {
+	acf_add_local_field_group( array(
+		'key'      => 'group_certificate_fields',
+		'title'    => 'Данные сертификата',
+		'fields'   => array(
+			array(
+				'key'   => 'field_certificate_image',
+				'label' => 'Изображение сертификата',
+				'name'  => 'certificate_image',
+				'type'  => 'image',
+				'return_format' => 'url',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'certificates',
+				),
+			),
+		),
+	) );
+}
