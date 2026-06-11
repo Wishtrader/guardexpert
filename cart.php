@@ -143,7 +143,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 						<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="w-full bg-[#B22234] text-white py-3 rounded font-medium hover:bg-[#8B1A2B] transition text-center inline-block">
 							Перейти к оформлению
 						</a>
-						<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="w-full bg-white border border-[#B22234] text-[#B22234] py-3 rounded font-medium hover:bg-[#B22234] hover:text-white transition text-center inline-block">
+						<a href="#" class="js-open-consultation w-full bg-white border border-[#B22234] text-[#B22234] py-3 rounded font-medium hover:bg-[#B22234] hover:text-white transition text-center inline-block">
 							Получить консультацию
 						</a>
 					</div>

@@ -378,7 +378,7 @@ function guardexpert_register_services_post_type() {
 		'hierarchical'       => false,
 		'menu_position'      => 5,
 		'menu_icon'          => 'dashicons-clipboard',
-		'supports'           => array( 'title', 'thumbnail' ),
+		'supports'           => array( 'title', 'thumbnail', 'page-attributes' ),
 	);
 
 	register_post_type( 'services', $args );
@@ -394,6 +394,183 @@ function guardexpert_flush_on_register() {
 	}
 }
 add_action( 'admin_init', 'guardexpert_flush_on_register' );
+
+/**
+ * Add "Duplicate" link to services post row actions.
+ */
+function guardexpert_duplicate_service_link( $actions, $post ) {
+	if ( $post->post_type !== 'services' || ! current_user_can( 'edit_posts' ) ) {
+		return $actions;
+	}
+
+	$actions['duplicate'] = '<a href="' . wp_nonce_url(
+		admin_url( 'admin.php?action=duplicate_service&post=' . $post->ID ),
+		'duplicate_service_' . $post->ID
+	) . '">Дублировать</a>';
+
+	return $actions;
+}
+add_filter( 'post_row_actions', 'guardexpert_duplicate_service_link', 10, 2 );
+
+/**
+ * Handle service duplication.
+ */
+function guardexpert_handle_duplicate_service() {
+	if ( ! isset( $_GET['post'] ) || ! isset( $_GET['_wpnonce'] ) ) {
+		wp_die( 'Неверный запрос' );
+	}
+
+	$post_id = intval( $_GET['post'] );
+	$post = get_post( $post_id );
+
+	if ( ! $post || $post->post_type !== 'services' ) {
+		wp_die( 'Услуга не найдена' );
+	}
+
+	if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'duplicate_service_' . $post_id ) ) {
+		wp_die( 'Ошибка безопасности' );
+	}
+
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_die( 'Недостаточно прав' );
+	}
+
+	$new_post_data = array(
+		'post_title'   => $post->post_title . ' — копия',
+		'post_status'  => 'draft',
+		'post_type'    => 'services',
+		'post_content' => $post->post_content,
+	);
+
+	$new_post_id = wp_insert_post( $new_post_data );
+
+	if ( is_wp_error( $new_post_id ) ) {
+		wp_die( 'Ошибка при дублировании' );
+	}
+
+	$thumbnail_id = get_post_thumbnail_id( $post_id );
+	if ( $thumbnail_id ) {
+		set_post_thumbnail( $new_post_id, $thumbnail_id );
+	}
+
+	wp_redirect( admin_url( 'edit.php?post_type=services&duplicated=1' ) );
+	exit;
+}
+add_action( 'admin_action_duplicate_service', 'guardexpert_handle_duplicate_service' );
+
+/**
+ * Add reorder submenu page for services.
+ */
+function guardexpert_services_reorder_page() {
+	add_submenu_page(
+		'edit.php?post_type=services',
+		'Порядок услуг',
+		'Порядок',
+		'edit_posts',
+		'services-reorder',
+		'guardexpert_render_services_reorder'
+	);
+}
+add_action( 'admin_menu', 'guardexpert_services_reorder_page' );
+
+/**
+ * Render the reorder page.
+ */
+function guardexpert_render_services_reorder() {
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_die( 'Недостаточно прав' );
+	}
+
+	wp_enqueue_script( 'jquery-ui-sortable' );
+
+	$services = get_posts( array(
+		'post_type'      => 'services',
+		'posts_per_page' => -1,
+		'post_status'    => 'publish',
+		'orderby'        => 'menu_order',
+		'order'          => 'ASC',
+	) );
+	?>
+	<div class="wrap">
+		<h1>Порядок услуг</h1>
+		<p>Перетащите услуги для изменения порядка отображения на сайте.</p>
+
+		<?php if ( isset( $_GET['updated'] ) ) : ?>
+		<div class="notice notice-success is-dismissible"><p>Порядок сохранён.</p></div>
+		<?php endif; ?>
+
+		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+			<?php wp_nonce_field( 'services_reorder', 'services_reorder_nonce' ); ?>
+			<input type="hidden" name="action" value="save_services_order">
+
+			<ul id="services-sortable" class="bg-white border border-gray-300 rounded">
+				<?php foreach ( $services as $service ) : ?>
+				<li class="flex items-center gap-3 p-4 border-b border-gray-200 last:border-0 cursor-move" data-id="<?php echo esc_attr( $service->ID ); ?>">
+					<span class="dashicons dashicons-menu text-gray-400"></span>
+					<span class="font-medium"><?php echo esc_html( $service->post_title ); ?></span>
+				</li>
+				<?php endforeach; ?>
+			</ul>
+
+			<input type="hidden" name="services_order" id="services-order" value="">
+			<p class="submit">
+				<button type="submit" class="button button-primary">Сохранить порядок</button>
+			</p>
+		</form>
+	</div>
+
+	<style>
+		#services-sortable li:hover { background: #f0f0f1; }
+		#services-sortable li.ui-sortable-helper { background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+	</style>
+
+	<script>
+	jQuery( function( $ ) {
+		$( '#services-sortable' ).sortable( {
+			axis: 'y',
+			update: function() {
+				var ids = [];
+				$( '#services-sortable li' ).each( function() {
+					ids.push( $( this ).data( 'id' ) );
+				} );
+				$( '#services-order' ).val( ids.join( ',' ) );
+			}
+		} );
+	} );
+	</script>
+	<?php
+}
+
+/**
+ * Save the reordered services.
+ */
+function guardexpert_save_services_order() {
+	if ( ! isset( $_POST['services_reorder_nonce'] ) || ! wp_verify_nonce( $_POST['services_reorder_nonce'], 'services_reorder' ) ) {
+		wp_die( 'Ошибка безопасности' );
+	}
+
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_die( 'Недостаточно прав' );
+	}
+
+	if ( empty( $_POST['services_order'] ) ) {
+		wp_redirect( admin_url( 'edit.php?post_type=services&page=services-reorder' ) );
+		exit;
+	}
+
+	$ids = explode( ',', $_POST['services_order'] );
+
+	foreach ( $ids as $index => $id ) {
+		wp_update_post( array(
+			'ID'         => intval( $id ),
+			'menu_order' => $index + 1,
+		) );
+	}
+
+	wp_redirect( admin_url( 'edit.php?post_type=services&page=services-reorder&updated=1' ) );
+	exit;
+}
+add_action( 'admin_post_save_services_order', 'guardexpert_save_services_order' );
 
 /**
  * Allow admins to flush rewrite rules manually via URL:
@@ -579,6 +756,15 @@ function guardexpert_register_service_fields() {
 				'name'  => 'service_hero_button_text',
 				'type'  => 'text',
 				'default_value' => 'Получить консультацию',
+			),
+			array(
+				'key'   => 'field_service_card_icon',
+				'label' => 'Иконка на карточке',
+				'name'  => 'service_card_icon',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'instructions' => 'Изображение-иконка для карточки услуги на главной странице',
+				'wrapper' => array( 'width' => '50' ),
 			),
 			array(
 				'key'      => 'field_service_features',
@@ -1098,3 +1284,27 @@ function guardexpert_register_certificate_fields() {
 		),
 	) );
 }
+
+/**
+ * AJAX handler for consultation form submission.
+ */
+function guardexpert_send_consultation() {
+	$name    = isset( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : '';
+	$phone   = isset( $_POST['phone'] ) ? sanitize_text_field( $_POST['phone'] ) : '';
+	$comment = isset( $_POST['comment'] ) ? sanitize_textarea_field( $_POST['comment'] ) : '';
+
+	if ( empty( $name ) || empty( $phone ) ) {
+		wp_send_json_error( array( 'message' => 'Заполните обязательные поля' ) );
+	}
+
+	$to = get_option( 'admin_email' );
+	$subject = 'Новая заявка на консультацию — ' . $name;
+	$message = "Имя: $name\nТелефон: $phone\nКомментарий: $comment";
+	$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
+
+	wp_mail( $to, $subject, $message, $headers );
+
+	wp_send_json_success( array( 'message' => 'Спасибо! Мы свяжемся с вами.' ) );
+}
+add_action( 'wp_ajax_guardexpert_send_consultation', 'guardexpert_send_consultation' );
+add_action( 'wp_ajax_nopriv_guardexpert_send_consultation', 'guardexpert_send_consultation' );

@@ -118,7 +118,7 @@ get_header();
 					</p>
 				</div>
 				<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-					<a href="#consultation" class="inline-flex items-center justify-center gap-2 bg-[#B3262E] text-white px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#9a1f26] transition-colors text-base md:text-lg shadow-lg whitespace-nowrap">
+					<a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B3262E] text-white px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#9a1f26] transition-colors text-base md:text-lg shadow-lg whitespace-nowrap">
 						Получить консультацию
 					</a>
 					<a href="#contacts" class="inline-flex items-center justify-center gap-2 bg-white text-[#B3262E] border-2 border-[#B3262E] px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-base md:text-lg whitespace-nowrap">

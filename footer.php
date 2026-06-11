@@ -147,7 +147,74 @@
 	</div>
 </footer>
 
+<?php get_template_part( 'template-parts/consultation-popup' ); ?>
+
 </div><!-- #page -->
+
+<style>
+#consultation-popup:not(.hidden) { display: flex !important; }
+.backdrop-blur-sm { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	if (typeof lucide !== 'undefined') lucide.createIcons();
+
+	var popup = document.getElementById('consultation-popup');
+	var overlay = document.getElementById('consultation-overlay');
+	var closeBtn = document.getElementById('consultation-close');
+	var form = document.getElementById('consultation-form');
+	var success = document.getElementById('consultation-success');
+
+	function openPopup(e) {
+		e.preventDefault();
+		popup.classList.remove('hidden');
+		document.body.style.overflow = 'hidden';
+		if (window._initPhoneMasks) setTimeout(window._initPhoneMasks, 100);
+	}
+
+	function closePopup() {
+		popup.classList.add('hidden');
+		document.body.style.overflow = '';
+		form.reset();
+		success.classList.add('hidden');
+	}
+
+	document.querySelectorAll('.js-open-consultation').forEach(function(btn) {
+		btn.addEventListener('click', openPopup);
+	});
+
+	if (closeBtn) closeBtn.addEventListener('click', closePopup);
+	if (overlay) overlay.addEventListener('click', closePopup);
+
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape' && !popup.classList.contains('hidden')) {
+			closePopup();
+		}
+	});
+
+	if (form) {
+		form.addEventListener('submit', function(e) {
+			e.preventDefault();
+
+			var data = new FormData(form);
+			data.append('action', 'guardexpert_send_consultation');
+
+			fetch('<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>', {
+				method: 'POST',
+				body: data
+			})
+			.then(function(r) { return r.json(); })
+			.then(function(response) {
+				if (response.success) {
+					success.classList.remove('hidden');
+				}
+			})
+			.catch(function() {});
+		});
+	}
+});
+</script>
 
 <?php wp_footer(); ?>
 

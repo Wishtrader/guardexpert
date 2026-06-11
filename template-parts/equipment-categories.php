@@ -62,7 +62,7 @@
 				<ion-icon name="apps-outline" class="text-2xl"></ion-icon>
 				Смотреть весь каталог
 			</a>
-			<a href="/consultation" class="inline-flex items-center justify-center gap-3 bg-white text-[#B3262E] border-2 border-[#B3262E] px-8 py-4 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-lg">
+			<a href="#" class="js-open-consultation inline-flex items-center justify-center gap-3 bg-white text-[#B3262E] border-2 border-[#B3262E] px-8 py-4 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-lg">
 				Получить консультацию
 			</a>
 		</div>

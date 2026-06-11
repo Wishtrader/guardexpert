@@ -109,7 +109,7 @@
 				</div>
 
 				<!-- CTA Button -->
-				<a href="/consultation" class=" flex items-center justify-center border-[1px] border-[#B3262E] text-[#B3262E] w-[203px] h-[52px] rounded-[2px] hover:bg-[#B3262E] hover:text-white transition-colors">
+				<a href="#" class="js-open-consultation flex items-center justify-center border-[1px] border-[#B3262E] text-[#B3262E] w-[203px] h-[52px] rounded-[2px] hover:bg-[#B3262E] hover:text-white transition-colors">
 					Получить консультацию
 				</a>
 			</nav>

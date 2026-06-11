@@ -52,7 +52,7 @@ $hero_bg_image = get_field('service_hero_bg');
                     <?php echo esc_html($hero_description); ?>
                 </p>
                 <?php endif; ?>
-                <a href="#" class="inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                <a href="#" class="js-open-consultation inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
                     <?php echo esc_html($hero_button_text); ?>
                 </a>
             </div>
@@ -225,7 +225,7 @@ $hero_bg_image = get_field('service_hero_bg');
         </div>
 
         <div class="text-center">
-            <a href="#" class="inline-block bg-[#B22234] text-white px-12 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+            <a href="#" class="js-open-consultation inline-block bg-[#B22234] text-white px-12 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
                 <?php echo esc_html($bottom_button); ?>
             </a>
         </div>

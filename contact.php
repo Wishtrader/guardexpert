@@ -41,7 +41,7 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
                     <?php echo esc_html($hero_description); ?>
                 </p>
                 <?php endif; ?>
-                <a href="#" class="inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                <a href="#" class="js-open-consultation inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
                     <?php echo esc_html($hero_button_text); ?>
                 </a>
             </div>

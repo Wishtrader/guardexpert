@@ -147,7 +147,7 @@ $category_url = $categories ? guardexpert_get_category_url( $categories[0] ) : '
 					<input type="hidden" name="product_id" value="<?php echo get_the_ID(); ?>" />
 				</form>
 				
-				<a href="/contact" class="w-full inline-flex items-center justify-center bg-white text-[#B22234] border-2 border-[#B22234] px-8 py-4 rounded hover:bg-[#B22234] hover:text-white transition-colors text-lg">
+				<a href="#" class="js-open-consultation w-full inline-flex items-center justify-center bg-white text-[#B22234] border-2 border-[#B22234] px-8 py-4 rounded hover:bg-[#B22234] hover:text-white transition-colors text-lg">
 					Получить консультацию
 				</a>
 			</div>
@@ -263,7 +263,7 @@ $category_url = $categories ? guardexpert_get_category_url( $categories[0] ) : '
 				</p>
 			</div>
 			<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-				<a href="/contact" class="inline-flex items-center justify-center gap-2 bg-[#B22234] text-white px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#8B1A2B] transition-colors text-base md:text-lg shadow-lg whitespace-nowrap">
+					<a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B22234] text-white px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#8B1A2B] transition-colors text-base md:text-lg shadow-lg whitespace-nowrap">
 					Получить консультацию
 				</a>
 				<a href="/contact" class="inline-flex items-center justify-center gap-2 bg-white text-[#B22234] border-2 border-[#B22234] px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#B22234] hover:text-white transition-colors text-base md:text-lg whitespace-nowrap">

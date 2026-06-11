@@ -234,7 +234,7 @@ get_header();
             </div>
 
             <div class="text-center">
-                <a href="#" class="inline-block bg-[#B22234] text-white px-12 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                <a href="#" class="js-open-consultation inline-block bg-[#B22234] text-white px-12 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
                     Получить консультацию
                 </a>
             </div>

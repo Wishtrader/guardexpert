@@ -44,7 +44,7 @@ get_header();
                     <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
                         На этой странице собрана основная информация о способах оплаты, условиях поставки и порядке согласования доставки. Если у вас остались вопросы по конкретному заказу, свяжитесь с нами — поможем уточнить детали.
                     </p>
-                    <a href="#" class="inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                    <a href="#" class="js-open-consultation inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
                         Получить консультацию
                     </a>
                 </div>
