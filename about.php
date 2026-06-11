@@ -8,7 +8,7 @@
 get_header();
 ?>
 <!-- Hero Section -->
-    <section class="hero-about-bg relative overflow-hidden">
+    <section class="hero-about-bg relative overflow-hidden bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/about-bg.png' ); ?>')] bg-cover bg-right">
         <div class="max-w-[1200px] mx-auto px-4 py-12 lg:py-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2 relative z-10">
@@ -23,13 +23,10 @@ get_header();
                     <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
                         С 2012 года работаем в сфере систем безопасности, поставляем оборудование для ОПС, СКУД и видеонаблюдения, консультируем по подбору, совместимости и сопровождению решений для бизнеса и объектов по всей Беларуси.
                     </p>
-                    <a href="#" class="inline-flex items-center gap-2 bg-[#B22234] text-white px-6 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                    <a href="/" class="inline-flex items-center gap-2 bg-[#B22234] text-white px-6 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
                         <i data-lucide="grid-3x3" class="w-5 h-5"></i>
                         Перейти в каталог
                     </a>
-                </div>
-                <div class="lg:w-1/2 flex justify-center lg:justify-end">
-                    <img src="https://placehold.co/600x400/e8e0d8/999?text=Security+Equipment" alt="Оборудование безопасности" class="rounded-lg shadow-lg max-w-full h-auto">
                 </div>
             </div>
         </div>
@@ -91,7 +88,7 @@ get_header();
                         </p>
                     </div>
                     <div class="bg-gray-100">
-                        <img src="https://placehold.co/600x400/f0ebe8/999?text=Engineer+at+Desk" alt="О компании" class="w-full h-full object-cover">
+                        <img class="w-full h-full object-cover" src="<?php echo esc_url( get_template_directory_uri() . '/img/who.png' ); ?>">
                     </div>
                 </div>
             </div>

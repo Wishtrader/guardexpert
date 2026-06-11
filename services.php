@@ -7,9 +7,9 @@
 
 get_header();
 ?>
-
+<script src="https://unpkg.com/lucide@latest"></script>
     <!-- Hero Section -->
-    <section class="hero-bg relative overflow-hidden">
+    <section class="hero-bg relative overflow-hidden bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/serv-bg.png' ); ?>')] bg-cover bg-right">
         <div class="max-w-[1200px] mx-auto px-4 py-12 lg:py-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2">
@@ -24,14 +24,12 @@ get_header();
                     <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
                         Помогаем не только с поставкой оборудования, но и с подбором решений, проектированием, монтажом, пусконаладкой, обслуживанием и модернизацией систем безопасности для бизнеса и объектов по всей Беларуси.
                     </p>
-                    <a href="#" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded font-medium hover:bg-primary-dark transition">
-                        <i data-lucide="grid-3x3" class="w-5 h-5"></i>
+                    <a href="#" class="inline-flex items-center gap-2 bg-[#B22234] text-white px-6 py-3 rounded font-medium hover:bg-primary-dark transition">
+                        <i data-lucide="grid-3x3" class="w-5 h-5 text-white"></i>
                         Перейти в каталог
                     </a>
                 </div>
-                <div class="lg:w-1/2 flex justify-center lg:justify-end">
-                    <img src="https://placehold.co/600x400/e8e0d8/999?text=Security+Equipment" alt="Оборудование безопасности" class="rounded-lg shadow-lg max-w-full h-auto">
-                </div>
+                
             </div>
         </div>
     </section>
@@ -94,18 +92,18 @@ get_header();
                     <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3">Комплексный подход к объекту</h3>
                     <p class="text-gray-600 mb-6 flex-grow">Подбираем оборудование, помогаем с проектированием, внедрением и дальнейшим сопровождением систем безопасности под задачи бизнеса и объекта.</p>
                     <a href="#" class="inline-block bg-primary text-white px-6 py-3 rounded font-medium hover:bg-primary-dark transition text-center mb-6">Получить консультацию</a>
-                    <img src="https://placehold.co/500x300/f0ebe8/999?text=Security+Plan" alt="Комплексный подход" class="rounded-lg w-full h-auto">
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/img/serv-i1.png' ); ?>" alt="Комплексный подход" class="rounded-lg w-full h-auto">
                 </div>
 
                 <!-- Small Cards Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
+                    <a href="/services/проектирование/" class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
                         <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mb-3">
                             <i data-lucide="file-text" class="w-5 h-5 text-primary"></i>
                         </div>
                         <h4 class="font-bold text-gray-900 mb-2">Проектирование</h4>
                         <p class="text-gray-600 text-sm">Подготовка решений с учетом задач объекта и требований системы.</p>
-                    </div>
+                    </a>
                     <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
                         <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mb-3">
                             <i data-lucide="wrench" class="w-5 h-5 text-primary"></i>
@@ -312,6 +310,9 @@ get_header();
         </div>
     </section>
 		<?php get_template_part( 'template-parts/contact-form-section' ); ?>
+		<script>
+        lucide.createIcons();
+    </script>
 
 <?php
 get_footer();

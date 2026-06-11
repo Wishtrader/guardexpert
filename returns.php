@@ -30,7 +30,7 @@ get_header();
     </style>
 
 		<!-- Hero Section -->
-    <section class="hero-return-bg relative overflow-hidden">
+    <section class="relative overflow-hidden bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/return-bg.png' ); ?>')] bg-cover bg-right">
         <div class="max-w-[1200px] mx-auto px-4 py-12 lg:py-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2 relative z-10">
@@ -49,9 +49,7 @@ get_header();
                         Получить консультацию
                     </a>
                 </div>
-                <div class="lg:w-1/2 flex justify-center lg:justify-end">
-                    <img src="https://placehold.co/600x400/e8e0d8/999?text=Product+Box+%26+Equipment" alt="Возврат и обмен" class="rounded-lg shadow-lg max-w-full h-auto opacity-90">
-                </div>
+                
             </div>
         </div>
     </section>
