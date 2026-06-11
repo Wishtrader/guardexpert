@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( '_S_VERSION', '1.1.0' );
 }
 
 /**
@@ -150,6 +150,10 @@ function guardexpert_scripts() {
 
 	wp_enqueue_script( 'guardexpert-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
+	// IMask phone mask
+	wp_enqueue_script( 'imask', 'https://unpkg.com/imask', array(), null, true );
+	wp_enqueue_script( 'guardexpert-phone-mask', get_template_directory_uri() . '/js/phone-mask.js', array( 'imask' ), _S_VERSION, true );
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -224,6 +228,22 @@ add_filter('woocommerce_validate_billing_email', function($valid, $email) {
     }
     return $valid;
 }, 10, 2);
+
+/**
+ * Validate Belarus phone number (+375 XX XXX-XX-XX).
+ */
+function guardexpert_is_valid_phone( $phone ) {
+	$phone  = trim( (string) $phone );
+	$digits = preg_replace( '/[^\d]/', '', $phone );
+	return strlen( $digits ) === 12 && strpos( $digits, '375' ) === 0;
+}
+
+/**
+ * Validate email address.
+ */
+function guardexpert_is_valid_email( $email ) {
+	return filter_var( trim( (string) $email ), FILTER_VALIDATE_EMAIL ) !== false;
+}
 
 /**
  * WooCommerce cart fragments — dynamically update header cart count and cart summary.

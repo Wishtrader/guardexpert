@@ -51,7 +51,7 @@
 							type="tel" 
 							name="phone" 
 							id="form-phone" 
-							placeholder="Телефон" 
+							placeholder="+375 (XX) XXX-XX-XX" 
 							required
 							class="w-full px-4 py-3 border border-gray-300 rounded bg-gray-50 focus:border-[#B3262E] focus:outline-none focus:ring-2 focus:ring-[#B3262E]/20 transition-colors"
 						>
@@ -126,6 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
+		if (window.guardexpert && !window.guardexpert.isValidPhone(data.phone)) {
+			alert('Пожалуйста, введите корректный номер телефона в формате +375 (XX) XXX-XX-XX');
+			return;
+		}
+
 		// Here you would normally send the data to your server
 		// For now, we'll just show the success message
 		console.log('Form data:', data);
@@ -142,30 +147,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		}, 5000);
 	});
 
-	// Phone number formatting
-	const phoneInput = document.getElementById('form-phone');
-	phoneInput.addEventListener('input', function(e) {
-		let value = e.target.value.replace(/\D/g, '');
-		
-		if (value.length > 0) {
-			if (value[0] === '3' || value[0] === '7' || value[0] === '8') {
-				// Format: +375 XX XXX-XX-XX
-				if (value.length > 3) {
-					value = '+' + value.substring(0, 3) + ' ' + value.substring(3);
-				}
-				if (value.length > 6) {
-					value = value.substring(0, 6) + ' ' + value.substring(6);
-				}
-				if (value.length > 10) {
-					value = value.substring(0, 10) + '-' + value.substring(10);
-				}
-				if (value.length > 13) {
-					value = value.substring(0, 13) + '-' + value.substring(13);
-				}
+	// Reset phone input with IMask sync on form reset
+	setTimeout(function() {
+		form.addEventListener('reset', function() {
+			var phoneEl = document.getElementById('form-phone');
+			if (phoneEl) {
+				phoneEl.value = '';
+				if (phoneEl._imask) phoneEl._imask.value = '';
 			}
-		}
-		
-		e.target.value = value;
-	});
+		});
+	}, 0);
 });
 </script>

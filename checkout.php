@@ -68,19 +68,19 @@ $cart_total = WC()->cart->get_total();
 					<div class="grid sm:grid-cols-2 gap-4">
 						<div>
 							<label class="block text-sm text-gray-700 mb-2">Ваше имя</label>
-							<input type="text" placeholder="Иван Иванов" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+							<input type="text" name="billing_name" id="billing_name" placeholder="Иван Иванов" required class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
 						</div>
 						<div>
 							<label class="block text-sm text-gray-700 mb-2">Телефон</label>
-							<input type="tel" placeholder="+375 XX XXX-XX-XX" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+							<input type="tel" name="billing_phone" id="billing_phone" placeholder="+375 (XX) XXX-XX-XX" required class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
 						</div>
 						<div>
 							<label class="block text-sm text-gray-700 mb-2">E-mail</label>
-							<input type="email" placeholder="example@mail.com" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+							<input type="email" name="billing_email" id="billing_email" placeholder="example@mail.com" required class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
 						</div>
 						<div>
 							<label class="block text-sm text-gray-700 mb-2">Комментарий (не обязательно)</label>
-							<input type="text" placeholder="Дополнительная информация" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+							<input type="text" name="billing_comment" id="billing_comment" placeholder="Дополнительная информация" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
 						</div>
 					</div>
 				</div>
@@ -109,16 +109,16 @@ $cart_total = WC()->cart->get_total();
 							<div class="grid sm:grid-cols-2 gap-4">
 								<div>
 									<label class="block text-sm text-gray-700 mb-2">Город</label>
-									<input type="text" placeholder="Минск" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+									<input type="text" name="delivery_city" id="delivery_city" placeholder="Минск" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
 								</div>
 								<div>
 									<label class="block text-sm text-gray-700 mb-2">Адрес</label>
-									<input type="text" placeholder="пр-т Независимости 1" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+									<input type="text" name="delivery_address" id="delivery_address" placeholder="пр-т Независимости 1" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
 								</div>
 							</div>
 							<div class="mt-4">
 								<label class="block text-sm text-gray-700 mb-2">Дополнительная информация</label>
-								<input type="text" placeholder="Код домофона, особенности проезда..." class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+								<input type="text" name="delivery_info" id="delivery_info" placeholder="Код домофона, особенности проезда..." class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
 							</div>
 						</div>
 					</div>
@@ -129,7 +129,7 @@ $cart_total = WC()->cart->get_total();
 					<h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-6">Способ оплаты</h2>
 					<div class="space-y-3">
 						<label class="block cursor-pointer">
-							<input type="radio" name="payment" class="radio-custom sr-only" checked>
+							<input type="radio" name="payment" value="non-cash" class="radio-custom sr-only" checked>
 							<div class="radio-label border-2 border-gray-200 rounded-lg px-5 py-4 flex items-center gap-3 hover:border-gray-300 transition">
 								<div class="radio-dot w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center flex-shrink-0"></div>
 								<span class="font-medium text-gray-900">Безналичный расчёт</span>
@@ -204,20 +204,20 @@ $cart_total = WC()->cart->get_total();
 					<!-- Checkboxes -->
 					<div class="space-y-3 mb-6">
 						<label class="flex items-start gap-3 cursor-pointer">
-							<input type="checkbox" class="mt-1 w-4 h-4 text-[#B22234] border-gray-300 rounded focus:ring-[#B22234]">
+							<input type="checkbox" name="privacy" id="checkout-privacy" class="mt-1 w-4 h-4 text-[#B22234] border-gray-300 rounded focus:ring-[#B22234]" required>
 							<span class="text-sm text-gray-600 leading-snug">Продолжая, вы соглашаетесь с политикой конфиденциальности</span>
 						</label>
 						<label class="flex items-start gap-3 cursor-pointer">
-							<input type="checkbox" class="mt-1 w-4 h-4 text-[#B22234] border-gray-300 rounded focus:ring-[#B22234]">
+							<input type="checkbox" name="terms" id="checkout-terms" class="mt-1 w-4 h-4 text-[#B22234] border-gray-300 rounded focus:ring-[#B22234]" required>
 							<span class="text-sm text-gray-600 leading-snug">Я ознакомлен с условиями оплаты и доставки</span>
 						</label>
 					</div>
 
 					<!-- Buttons -->
 					<div class="space-y-3">
-						<a href="/заказ-отправлен" class="w-full bg-[#B22234] text-white py-3 rounded font-medium hover:bg-[#8B1A2B] transition inline-block text-center">
-							Перейти к оформлению
-						</a>
+					<button type="button" id="checkout-submit" class="w-full bg-[#B22234] text-white py-3 rounded font-medium hover:bg-[#8B1A2B] transition inline-block text-center outline-none border-none cursor-pointer">
+						Перейти к оформлению
+					</button>
 						<a href="/contact" class="w-full bg-white border border-[#B22234] text-[#B22234] py-3 rounded font-medium hover:bg-[#B22234] hover:text-white transition text-center inline-block">
 							Получить консультацию
 						</a>
@@ -257,6 +257,86 @@ $cart_total = WC()->cart->get_total();
 			deliveryFields.classList.remove('open');
 		}
 	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+		var submitBtn = document.getElementById('checkout-submit');
+
+		function showError(input, message) {
+			var wrapper = input.closest('div');
+			if (!wrapper) return;
+			input.classList.add('border-red-500', 'focus:border-red-500');
+
+			var existing = wrapper.querySelector('.checkout-error');
+			if (existing) return;
+
+			var err = document.createElement('p');
+			err.className = 'checkout-error text-red-500 text-xs mt-1';
+			err.textContent = message;
+			wrapper.appendChild(err);
+		}
+
+		function clearErrors() {
+			document.querySelectorAll('.checkout-error').forEach(function(el) { el.remove(); });
+			document.querySelectorAll('.border-red-500').forEach(function(el) {
+				el.classList.remove('border-red-500', 'focus:border-red-500');
+			});
+		}
+
+		submitBtn.addEventListener('click', function(e) {
+			clearErrors();
+
+			var name = document.getElementById('billing_name');
+			var phone = document.getElementById('billing_phone');
+			var email = document.getElementById('billing_email');
+			var privacy = document.getElementById('checkout-privacy');
+			var terms = document.getElementById('checkout-terms');
+			var deliveryRadios = document.querySelectorAll('input[name="delivery"]');
+			var isDelivery = deliveryRadios[1] && deliveryRadios[1].checked;
+			var valid = true;
+
+			if (!name.value.trim()) {
+				showError(name, 'Укажите ваше имя');
+				valid = false;
+			}
+
+			if (window.guardexpert && !window.guardexpert.isValidPhone(phone.value)) {
+				showError(phone, 'Введите номер в формате +375 (XX) XXX-XX-XX');
+				valid = false;
+			}
+
+			if (window.guardexpert && !window.guardexpert.isValidEmail(email.value)) {
+				showError(email, 'Введите корректный email-адрес');
+				valid = false;
+			}
+
+			if (!privacy.checked) {
+				showError(privacy, 'Примите политику конфиденциальности');
+				valid = false;
+			}
+
+			if (!terms.checked) {
+				showError(terms, 'Подтвердите ознакомление с условиями');
+				valid = false;
+			}
+
+			if (isDelivery) {
+				var city = document.getElementById('delivery_city');
+				var address = document.getElementById('delivery_address');
+				if (!city.value.trim()) {
+					showError(city, 'Укажите город доставки');
+					valid = false;
+				}
+				if (!address.value.trim()) {
+					showError(address, 'Укажите адрес доставки');
+					valid = false;
+				}
+			}
+
+			if (!valid) return;
+
+			window.location.href = '/заказ-отправлен';
+		});
+	});
 </script>
 <?php
 get_footer();

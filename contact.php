@@ -109,7 +109,7 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
                 <?php endif; ?>
                 <form class="space-y-4">
                     <input type="text" placeholder="Ваше имя" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
-                    <input type="tel" placeholder="Телефон" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+                    <input type="tel" name="contact_phone" id="contact-phone" placeholder="+375 (XX) XXX-XX-XX" required class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
                     <textarea placeholder="Комментарий" rows="3" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234] resize-none"></textarea>
                     <label class="flex items-start gap-3 text-sm text-gray-600">
                         <div class="w-6 h-6 bg-[#B22234] rounded flex items-center justify-center flex-shrink-0 mt-0.5">

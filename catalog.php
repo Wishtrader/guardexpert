@@ -30,7 +30,7 @@ get_header();
 		</p>
 
 		<!-- Search and Sort Bar -->
-		<div class="border border-gray-200 rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 mb-10">
+		<div class="border border-gray-200 rounded-lg p-3 md:p-4 flex flex-col lg:flex-row items-stretch md:items-center gap-3 md:gap-4 mb-10">
 			<form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="relative flex-1">
 				<label for="catalog-search" class="sr-only">Поиск по каталогу</label>
 				<span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
@@ -105,7 +105,7 @@ get_header();
 
 		<!-- Bottom CTA -->
 		<div class="border-t border-gray-200 pt-10 mt-6">
-			<div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+			<div class="flex flex-col lg:flex-row items-center gap-6 md:gap-8">
 				<div class="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-[#B3262E]">
 					<ion-icon name="help-circle-outline" class="text-5xl md:text-6xl"></ion-icon>
 				</div>

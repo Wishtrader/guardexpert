@@ -138,7 +138,7 @@
 	<!-- Bottom Bar -->
 	<div class="border-t border-gray-700 mt-12">
 		<div class="max-w-[1200px] mx-auto px-4 py-6">
-			<div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+			<div class="flex flex-col lg:flex-row items-center justify-between gap-4 text-sm">
 				<a href="/privacy-policy" class="hover:text-[#B3262E] transition-colors order-2 md:order-1">Политика конфиденциальности</a>
 				<p class="order-3 md:order-2">©ГАРДЭКСПЕРТ, <?php echo date('Y'); ?>. Все права защищены.</p>
 				<a href="/cookie-policy" class="hover:text-[#B3262E] transition-colors order-1 md:order-3">Политика обработки файлов cookie</a>

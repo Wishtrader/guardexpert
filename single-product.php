@@ -250,7 +250,7 @@ $category_url = $categories ? guardexpert_get_category_url( $categories[0] ) : '
 <!-- Bottom CTA -->
 <section class="bg-white border-t border-gray-200 py-8">
 	<div class="max-w-[1200px] mx-auto px-4">
-		<div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+		<div class="flex flex-col lg:flex-row items-center gap-6 md:gap-8">
 			<div class="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-[#B22234]">
 				<ion-icon name="help-circle-outline" class="text-5xl md:text-6xl"></ion-icon>
 			</div>

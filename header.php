@@ -51,8 +51,8 @@
 <header class="bg-[#FAF9F7] text-black">
 	<!-- Top Bar (Desktop Only) -->
 	<div class="">
-		<div class="max-w-[1200px] mx-auto px-4">
-			<div class="flex items-center justify-between py-1 text-sm hidden md:flex">
+		<div class="max-w-[1200px] mx-auto fluid-px">
+			<div class="flex items-center justify-between py-1 text-sm hidden lg:flex">
 				<!-- Left: Contact Info -->
 				<div class="flex items-center">
 					<div class="flex items-center gap-4 border-r border-black px-6 py-2">
@@ -84,7 +84,7 @@
 	</div>
 
 	<!-- Main Header -->
-	<div class="max-w-[1200px] mx-auto">
+	<div class="max-w-[1200px] mx-auto fluid-px">
 		<div class="flex items-center justify-between py-4 md:py-6">
 			<!-- Logo -->
 			<a href="/" class="flex-shrink-0">
@@ -92,7 +92,7 @@
 			</a>
 
 			<!-- Desktop Navigation -->
-			<nav class="hidden md:flex items-center gap-4">
+			<nav class="hidden lg:flex items-center gap-4">
 				<!-- Catalog Button -->
 				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center justify-center gap-2 bg-[#F2F2F0] rounded hover:bg-gray-100 transition-colors border-[1px] w-[184px] h-[55px]">
 					<ion-icon name="grid-outline" class="text-[#B3262E] text-2xl"></ion-icon>
@@ -115,7 +115,7 @@
 			</nav>
 
 			<!-- Mobile Actions -->
-			<div class="flex items-center gap-4 md:hidden">
+			<div class="flex items-center gap-4 lg:hidden">
 				<button id="search-toggle-mobile" class="hover:text-[#B3262E] transition-colors outline-none border-none bg-transparent">
 					<ion-icon name="search-outline" class="text-2xl"></ion-icon>
 				</button>
