@@ -122,18 +122,19 @@ $category_url = $categories ? guardexpert_get_category_url( $categories[0] ) : '
 					<?php echo wp_kses_post( $short_desc ); ?>
 				</p>
 				<?php endif; ?>
-				<p class="text-2xl font-bold text-[#B22234] mb-6">
+				<p class="text-2xl font-bold text-[#B22234] mb-6" id="product-total-price" data-price="<?php echo esc_attr( $product->get_price() ); ?>" data-currency="<?php echo esc_attr( get_woocommerce_currency() ); ?>">
 					<?php echo $has_price ? $price_html : 'Цена по запросу'; ?>
 				</p>
 				
-				<form class="woocommerce-add-to-cart-form mb-6" action="<?php echo esc_url( $product->add_to_cart_url() ); ?>" method="post" enctype='multipart/form-data'>
+				<form class="cart mb-6" action="<?php echo esc_url( $product->add_to_cart_url() ); ?>" method="post" enctype='multipart/form-data'>
 					<?php if ( $has_price ): ?>
-					<div class="flex items-center gap-4 mb-4">
+					<div class="mb-4">
 						<?php
 						woocommerce_quantity_input( array(
 							'min_value'   => 1,
 							'max_value'   => $product->get_max_purchase_quantity(),
 							'input_value' => 1,
+							'input_id'    => 'qty-input',
 						) );
 						?>
 					</div>
@@ -333,6 +334,49 @@ document.addEventListener('DOMContentLoaded', function() {
 			thumbsContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 		});
 	}
+
+	// Quantity → total price
+	const priceEl = document.getElementById('product-total-price');
+	const qtyEl = document.getElementById('qty-input');
+
+	if (priceEl && qtyEl && priceEl.dataset.price) {
+		const unitPrice = parseFloat(priceEl.dataset.price);
+		if (isNaN(unitPrice) || unitPrice <= 0) {
+			priceEl.dataset.price = '0';
+		} else {
+			const currency = priceEl.dataset.currency || 'BYN';
+
+			function updateTotal() {
+				const qty = parseInt(qtyEl.value) || 1;
+				priceEl.innerHTML = (unitPrice * qty).toLocaleString('ru-RU', {
+					style: 'currency',
+					currency: currency,
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				});
+			}
+
+			qtyEl.addEventListener('change', updateTotal);
+			qtyEl.addEventListener('input', updateTotal);
+		}
+	}
+
+	// +/- buttons
+	document.querySelector('.quantity')?.addEventListener('click', function(e) {
+		const btn = e.target.closest('.qty-btn');
+		if (!btn) return;
+		const input = this.querySelector('.qty');
+		if (!input) return;
+		const step = parseFloat(input.getAttribute('step')) || 1;
+		const min = parseFloat(input.getAttribute('min')) || 1;
+		const max = parseFloat(input.getAttribute('max')) || Infinity;
+		let val = parseFloat(input.value) || 0;
+		val = btn.classList.contains('qty-plus')
+			? Math.min(val + step, max)
+			: Math.max(val - step, min);
+		input.value = val;
+		input.dispatchEvent(new Event('change', { bubbles: true }));
+	});
 });
 </script>
 

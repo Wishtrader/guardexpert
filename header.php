@@ -73,7 +73,7 @@
 				<div class="flex items-center gap-4">
 					<a href="/корзина" class="relative hover:text-[#B3262E] transition-colors">
 						<ion-icon name="cart-outline" class="text-4xl"></ion-icon>
-						<span class="absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
+						<span class="cart-count absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"><?php echo esc_html( WC()->cart ? WC()->cart->get_cart_contents_count() : 0 ); ?></span>
 					</a>
 					<button id="search-toggle-desktop" class="hover:text-[#B3262E] transition-colors outline-none border-none bg-transparent">
 						<ion-icon name="search-outline" class="text-4xl"></ion-icon>
@@ -121,7 +121,7 @@
 				</button>
 				<a href="/cart" class="relative hover:text-[#B3262E] transition-colors">
 					<ion-icon name="cart-outline" class="text-2xl"></ion-icon>
-					<span class="absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
+					<span class="cart-count absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"><?php echo esc_html( WC()->cart ? WC()->cart->get_cart_contents_count() : 0 ); ?></span>
 				</a>
 				<button id="mobile-menu-toggle" class="hover:text-[#B3262E] transition-colors outline-none border-none bg-transparent">
 					<ion-icon name="menu-outline" class="text-2xl"></ion-icon>
@@ -172,7 +172,7 @@
 				</button>
 				<a href="/cart" class="relative hover:text-[#B3262E] transition-colors">
 					<ion-icon name="cart-outline" class="text-2xl"></ion-icon>
-					<span class="absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
+					<span class="cart-count absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"><?php echo esc_html( WC()->cart ? WC()->cart->get_cart_contents_count() : 0 ); ?></span>
 				</a>
 				<button id="mobile-menu-close" class="hover:text-[#B3262E] transition-colors outline-none border-none bg-transparent">
 					<ion-icon name="close-outline" class="text-2xl"></ion-icon>

@@ -226,6 +226,42 @@ add_filter('woocommerce_validate_billing_email', function($valid, $email) {
 }, 10, 2);
 
 /**
+ * WooCommerce cart fragments — dynamically update header cart count and cart summary.
+ */
+add_filter('woocommerce_add_to_cart_fragments', 'guardexpert_cart_fragments');
+function guardexpert_cart_fragments($fragments) {
+    $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
+
+    ob_start();
+    ?>
+    <span class="cart-count absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"><?php echo esc_html( $count ); ?></span>
+    <?php
+    $fragments['span.cart-count'] = ob_get_clean();
+
+    if (is_cart()) {
+        ob_start();
+        ?>
+        <span id="js-cart-count"><?php echo esc_html( $count ); ?></span>
+        <?php
+        $fragments['#js-cart-count'] = ob_get_clean();
+
+        ob_start();
+        ?>
+        <span id="js-cart-subtotal" class="font-bold text-gray-900 text-lg"><?php echo WC()->cart->get_cart_subtotal(); ?></span>
+        <?php
+        $fragments['#js-cart-subtotal'] = ob_get_clean();
+
+        ob_start();
+        ?>
+        <span id="js-cart-total" class="font-bold text-[#B22234] text-xl"><?php echo WC()->cart->get_total(); ?></span>
+        <?php
+        $fragments['#js-cart-total'] = ob_get_clean();
+    }
+
+    return $fragments;
+}
+
+/**
  * Get the URL of the page assigned to the "Catalog" page template.
  *
  * @return string
