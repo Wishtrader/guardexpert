@@ -9,8 +9,8 @@ get_header();
 ?>
 <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Hero Section -->
-    <section class="hero-bg relative overflow-hidden bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/serv-bg.png' ); ?>')] bg-cover bg-right">
-        <div class="max-w-[1200px] mx-auto px-4 py-12 lg:py-20 relative z-10">
+    <section class="hero-bg relative overflow-hidden -mt-[100px] lg:-mt-[200px] bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/serv-bg.png' ); ?>')] bg-cover bg-right">
+        <div class="max-w-[1200px] mx-auto px-4 pt-[100px] lg:pt-[200px] pb-12 lg:pb-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2">
                     <nav class="text-sm text-gray-500 mb-6">
@@ -88,11 +88,12 @@ get_header();
 
 			<div class="grid lg:grid-cols-[488px_650px] gap-6">
 				<!-- Large Card -->
-				<div class="bg-white border border-gray-200 rounded-lg p-6 lg:p-8 flex flex-col">
+				<div class="bg-white border border-gray-200 rounded-lg p-6 lg:p-[20px] flex flex-col">
+					
 					<h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3">Комплексный подход к объекту</h3>
-					<p class="text-gray-600 mb-6 flex-grow">Подбираем оборудование, помогаем с проектированием, внедрением и дальнейшим сопровождением систем безопасности под задачи бизнеса и объекта.</p>
-					<a href="#" class="js-open-consultation inline-block bg-primary text-white px-6 py-3 rounded font-medium hover:bg-primary-dark transition text-center mb-6">Получить консультацию</a>
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/img/serv-i1.png' ); ?>" alt="Комплексный подход" class="rounded-lg w-full h-auto">
+					<p class="text-gray-600 mb-6">Подбираем оборудование, помогаем с проектированием, внедрением и дальнейшим сопровождением систем безопасности под задачи бизнеса и объекта.</p>
+					<a href="#" class="js-open-consultation inline-block bg-[#B3262E] text-white px-6 py-3 rounded font-medium hover:bg-[#9a1f26] transition text-center mb-6">Получить консультацию</a>
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/img/serv-i1.png' ); ?>" alt="Комплексный подход" class=w-full h-auto">
 				</div>
 
 				<!-- Small Cards Grid -->
@@ -114,17 +115,17 @@ get_header();
 						$hero_desc = get_field( 'service_hero_description', $service->ID );
 						$is_last_full = ( $i === $total - 1 ) && $total % 2 !== 0;
 					?>
-					<a href="<?php echo esc_url( get_permalink( $service->ID ) ); ?>" class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition <?php echo $is_last_full ? 'sm:col-span-2' : ''; ?>">
-						<div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mb-3">
+					<a href="<?php echo esc_url( get_permalink( $service->ID ) ); ?>" class="flex flex-col gap-[20px] items-start bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition <?php echo $is_last_full ? 'sm:col-span-2' : ''; ?>">
 							<?php if ( $icon ) : ?>
-								<img src="<?php echo esc_url( $icon ); ?>" alt="" class="w-5 h-5 object-contain">
+								<img src="<?php echo esc_url( $icon ); ?>" alt="" class="h-[52px] object-contain">
 							<?php else : ?>
 								<i data-lucide="file-text" class="w-5 h-5 text-primary"></i>
 							<?php endif; ?>
-						</div>
-						<h4 class="font-bold text-gray-900 mb-2"><?php echo esc_html( $service->post_title ); ?></h4>
+						<div class="flex flex-col gap-[10px]">
+							<h4 class="font-bold md:text-[22px] text-gray-900"><?php echo esc_html( $service->post_title ); ?></h4>
 						<?php if ( $hero_desc ) : ?>
-						<p class="text-gray-600 text-sm"><?php echo esc_html( $hero_desc ); ?></p>
+						<p class="text-gray-600 text-base"><?php echo esc_html( $hero_desc ); ?></p>
+						</div>
 						<?php endif; ?>
 					</a>
 					<?php endforeach; ?>

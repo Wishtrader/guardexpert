@@ -8,8 +8,8 @@
 get_header();
 ?>
 <!-- Hero Section -->
-    <section class="hero-about-bg relative overflow-hidden bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/about-bg.png' ); ?>')] bg-cover bg-right">
-        <div class="max-w-[1200px] mx-auto px-4 py-12 lg:py-20 relative z-10">
+    <section class="hero-about-bg relative overflow-hidden -mt-[120px] lg:-mt-[220px] bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/about-bg.png' ); ?>')] bg-cover bg-right">
+        <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2 relative z-10">
                     <nav class="text-sm text-gray-500 mb-6">

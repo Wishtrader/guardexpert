@@ -17,15 +17,17 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 	
 	<style type="text/tailwindcss">
-		/* Предзагрузка базовых стилей, чтобы браузер знал шрифты заранее */
 		@layer base {
 			html {
 				-webkit-tap-highlight-color: transparent;
 				font-family: 'Golos Text', sans-serif;
+				margin: 0 !important;
 			}
 			body {
 				@apply bg-[#FAF9F7] text-black;
 				display: block !important;
+				margin: 0 !important;
+				padding: 0 !important;
 			}
 		}
 	</style>
@@ -42,13 +44,15 @@
 	</script>
 
 	<?php wp_head(); ?>
+
+	<style>html { margin-top: 0 !important; } #wpadminbar { top: 0 !important; }</style>
 </head>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
 <!-- Header -->
-<header class="bg-[#FAF9F7] text-black">
+<header class="text-black relative z-30">
 	<!-- Top Bar (Desktop Only) -->
 	<div class="">
 		<div class="max-w-[1200px] mx-auto fluid-px">
@@ -94,18 +98,18 @@
 			<!-- Desktop Navigation -->
 			<nav class="hidden lg:flex items-center gap-4">
 				<!-- Catalog Button -->
-				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center justify-center gap-2 bg-[#F2F2F0] rounded hover:bg-gray-100 transition-colors border-[1px] w-[184px] h-[55px]">
-					<ion-icon name="grid-outline" class="text-[#B3262E] text-2xl"></ion-icon>
-					<span class="font-medium text-base text-[#B3262E]">Каталог</span>
+				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center justify-center gap-2 bg-[#F2F2F0] rounded hover:bg-gray-200 transition-colors border-[#D9D6D2] border-[1px] w-[184px] h-[55px] shadow-md lg:mx-[16px] md:max-w-[184px]">
+					<ion-icon name="grid-outline" class="text-[#B3262E] text-2xl mr-[22px]"></ion-icon>
+					<span class="font-normal text-base text-[#B3262E]">Каталог</span>
 				</a>
 
 				<!-- Navigation Links -->
-				<div class="flex text-base items-center gap-4">
-					<a href="/services" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">Услуги</a>
-					<a href="/about" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">О компании</a>
-					<a href="/returns" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">Возврат и обмен</a>
-					<a href="/shipping" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">Оплата и доставка</a>
-					<a href="/contacts" class="text-[#1F1F21] hover:text-[#B3262E] text-base transition-colors">Контакты</a>
+				<div class="flex text-base items-center gap-4 fomt-normal">
+					<a href="/services" class="<?php echo is_page('services') ? 'text-[#B3262E]' : 'text-[#1F1F21]'; ?> hover:text-[#B3262E] text-base transition-colors">Услуги</a>
+					<a href="/about" class="<?php echo is_page('about') ? 'text-[#B3262E]' : 'text-[#1F1F21]'; ?> hover:text-[#B3262E] text-base transition-colors">О компании</a>
+					<a href="/returns" class="<?php echo is_page('returns') ? 'text-[#B3262E]' : 'text-[#1F1F21]'; ?> hover:text-[#B3262E] text-base transition-colors">Возврат и обмен</a>
+					<a href="/shipping" class="<?php echo is_page('shipping') ? 'text-[#B3262E]' : 'text-[#1F1F21]'; ?> hover:text-[#B3262E] text-base transition-colors">Оплата и доставка</a>
+					<a href="/contacts" class="<?php echo is_page('contacts') ? 'text-[#B3262E]' : 'text-[#1F1F21]'; ?> hover:text-[#B3262E] text-base transition-colors">Контакты</a>
 				</div>
 
 				<!-- CTA Button -->
@@ -193,31 +197,31 @@
 				<h3 class="text-[#B3262E] text-xl mb-4 border-b border-[#B3262E] pb-2">Навигация</h3>
 				<ul class="space-y-3">
 					<li>
-						<a href="/about" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors">
+						<a href="/about" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors<?php echo is_page('about') ? ' !text-[#B3262E]' : ' text-black'; ?>">
 							<ion-icon name="chevron-forward-outline" class="text-[#B3262E]"></ion-icon>
 							О компании
 						</a>
 					</li>
 					<li>
-						<a href="/services" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors">
+						<a href="/services" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors<?php echo is_page('services') ? ' !text-[#B3262E]' : ' text-black'; ?>">
 							<ion-icon name="chevron-forward-outline" class="text-[#B3262E]"></ion-icon>
 							Услуги
 						</a>
 					</li>
 					<li>
-						<a href="/shipping" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors">
+						<a href="/shipping" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors<?php echo is_page('shipping') ? ' !text-[#B3262E]' : ' text-black'; ?>">
 							<ion-icon name="chevron-forward-outline" class="text-[#B3262E]"></ion-icon>
 							Оплата и доставка
 						</a>
 					</li>
 					<li>
-						<a href="/contacts" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors">
+						<a href="/contacts" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors<?php echo is_page('contacts') ? ' !text-[#B3262E]' : ' text-black'; ?>">
 							<ion-icon name="chevron-forward-outline" class="text-[#B3262E]"></ion-icon>
 							Контакты
 						</a>
 					</li>
 					<li>
-						<a href="/returns" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors">
+						<a href="/returns" class="flex items-center gap-2 text-lg hover:text-[#B3262E] transition-colors<?php echo is_page('returns') ? ' !text-[#B3262E]' : ' text-black'; ?>">
 							<ion-icon name="chevron-forward-outline" class="text-[#B3262E]"></ion-icon>
 							Возврат и обмен
 						</a>

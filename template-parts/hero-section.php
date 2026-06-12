@@ -24,14 +24,14 @@ foreach ( $category_names as $name ) {
 ?>
 
 <!-- Hero Section -->
-<section class="relative overflow-hidden" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/hero-bg.png'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; margin-left: calc(-50vw + 50%);">
+<section class="relative overflow-hidden -mt-[120px] lg:-mt-[220px]" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/hero-bg.png'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; margin-left: calc(-50vw + 50%);">
 	
 
-	<div class="max-w-[1200px] mx-auto px-4 py-12 lg:pb-20 relative z-10">
+	<div class="max-w-[1200px] mx-auto px-4 md:px-0 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
 		<!-- Desktop Layout -->
 		<div class="hidden lg:grid lg:grid-cols-12 gap-8 items-center">
 			<!-- Left Column: Text Content (5 columns) -->
-			<div class="lg:col-span-5">
+			<div class="lg:col-span-6">
 				<h1 class="text-4xl xl:text-5xl font-bold text-black mb-6 leading-tight">
 					Оборудование систем безопасности для бизнеса и объектов по всей Беларуси
 				</h1>
@@ -45,7 +45,7 @@ foreach ( $category_names as $name ) {
 			</div>
 
 			<!-- Center Column: Main Image (4 columns) -->
-			<div class="lg:col-span-4">
+			<div class="lg:col-span-3">
 				<img src="<?php echo get_template_directory_uri(); ?>/img/h1.png" alt="Оборудование систем безопасности" class="w-full max-w-[285px] max-h-[612px] rounded-lg shadow-xl">
 			</div>
 
@@ -54,8 +54,8 @@ foreach ( $category_names as $name ) {
 				<!-- ОПС -->
 				<a href="<?php echo esc_url( $category_links['ОПС'] ); ?>" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-3 group">
 					<div class="flex-1">
-						<h3 class="text-xl font-bold text-black mb-1">ОПС</h3>
-						<p class="text-xs text-gray-600">Охранно-пожарная сигнализация</p>
+						<h3 class="text-xl md:text-[28px] font-bold text-black mb-3">ОПС</h3>
+						<p class="text-xs md:text-[14px] text-gray-600">Охранно-пожарная сигнализация</p>
 					</div>
 					<img src="<?php echo get_template_directory_uri(); ?>/img/опс.png" alt="ОПС" class="w-16 h-16 object-contain">
 				</a>
@@ -63,26 +63,26 @@ foreach ( $category_names as $name ) {
 				<!-- СКУД -->
 				<a href="<?php echo esc_url( $category_links['СКУД'] ); ?>" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-3 group">
 					<div class="flex-1">
-						<h3 class="text-xl font-bold text-black mb-1">СКУД</h3>
-						<p class="text-xs text-gray-600">Система контроля и управления доступом</p>
+						<h3 class="text-xl md:text-[28px] font-bold text-black mb-3">СКУД</h3>
+						<p class="text-xs md:text-[14px] text-gray-600">Система контроля и управления доступом</p>
 					</div>
 					<img src="<?php echo get_template_directory_uri(); ?>/img/скуд.png" alt="СКУД" class="w-12 h-16 object-contain">
 				</a>
 
 				<!-- Видеонаблюдение -->
-				<a href="<?php echo esc_url( $category_links['Видеонаблюдение'] ); ?>" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-3 group">
+				<a href="<?php echo esc_url( $category_links['Видеонаблюдение'] ); ?>" class="bg-white rounded-lg p-4 pb-0 shadow-lg hover:shadow-xl transition-shadow flex flex-col items-end gap-3 group">
 					<div class="flex-1">
-						<h3 class="text-lg font-bold text-black mb-1">Видеонаблюдение</h3>
-						<p class="text-xs text-gray-600">Камеры, регистраторы и аналитика</p>
+						<h3 class="text-lg md:text-[26px] font-bold text-black mb-3">Видеонаблюдение</h3>
+						<p class="text-xs md:text-[14px] text-gray-600">Камеры, регистраторы и аналитика</p>
 					</div>
-					<img src="<?php echo get_template_directory_uri(); ?>/img/видеонаблюдение.png" alt="Видеонаблюдение" class="w-20 h-16 object-contain">
+					<img src="<?php echo get_template_directory_uri(); ?>/img/видеонаблюдение.png" alt="Видеонаблюдение" class="w-20 h-16 md:w-[140px] md:-mt-12 md:h-auto object-contain">
 				</a>
 
 				<!-- СОП -->
 				<a href="<?php echo esc_url( $category_links['СОП'] ); ?>" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-3 group">
 					<div class="flex-1">
-						<h3 class="text-xl font-bold text-black mb-1">СОП</h3>
-						<p class="text-xs text-gray-600">Система охраны периметра</p>
+						<h3 class="text-xl md:text-[28px] font-bold text-black mb-3">СОП</h3>
+						<p class="text-xs md:text-[14px] text-gray-600">Система охраны периметра</p>
 					</div>
 					<img src="<?php echo get_template_directory_uri(); ?>/img/соп.png" alt="СОП" class="w-16 h-16 object-contain">
 				</a>
@@ -90,7 +90,7 @@ foreach ( $category_names as $name ) {
 		</div>
 
 		<!-- Bottom Product Links - Desktop -->
-		<div class="hidden lg:grid lg:grid-cols-4 gap-4">
+		<div class="hidden lg:grid lg:grid-cols-4 gap-4 mt-[20px]">
 			<a href="<?php echo esc_url( $category_links['Контролеры доступа'] ); ?>" class="bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow flex items-center gap-4 group">
 				<img src="<?php echo get_template_directory_uri(); ?>/img/контроллеры.png" alt="Контролеры доступа" class="w-20 h-20 object-contain">
 				<span class="font-medium text-black group-hover:text-[#B3262E] transition-colors flex-1">Контролеры доступа</span>

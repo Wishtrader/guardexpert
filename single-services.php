@@ -33,8 +33,8 @@ $hero_bg_image = get_field('service_hero_bg');
 ?>
 
 <!-- Hero Section -->
-<section class="hero-service-bg relative overflow-hidden" <?php if ($hero_bg_image): ?>style="background-image: url('<?php echo esc_url($hero_bg_image); ?>');"<?php endif; ?>>
-    <div class="max-w-[1200px] mx-auto px-4 py-12 lg:py-20 relative z-10">
+<section class="hero-service-bg relative overflow-hidden -mt-[120px] lg:-mt-[220px]" <?php if ($hero_bg_image): ?>style="background-image: url('<?php echo esc_url($hero_bg_image); ?>');"<?php endif; ?>>
+    <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
         <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
             <div class="lg:w-1/2">
                 <nav class="text-sm text-gray-500 mb-6">

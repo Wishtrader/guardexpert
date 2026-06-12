@@ -29,22 +29,22 @@ get_header();
         }
     </style>
 <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/shipping-bg.png' ); ?>')] bg-cover bg-right">
-        <div class="max-w-[1200px] mx-auto px-4 py-12 lg:py-20 relative z-10">
+    <section class="relative overflow-hidden -mt-[120px] lg:-mt-[220px] bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/shipping-bg.png' ); ?>')] bg-cover bg-center">
+        <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2 relative z-10">
-                    <nav class="text-sm text-gray-500 mb-6">
-                        <a href="#" class="hover:text-[#B22234]">Главная</a>
+                    <nav class="text-[15px] mb-6">
+                        <a href="/" class="hover:text-[#66666B]">Главная</a>
                         <span class="mx-2">/</span>
-                        <span class="text-gray-700">Оплата и доставка</span>
+                        <span class="text-black">Оплата и доставка</span>
                     </nav>
                     <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
                         Оплата и доставка
                     </h1>
-                    <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
-                        На этой странице собрана основная информация о способах оплаты, условиях поставки и порядке согласования доставки. Если у вас остались вопросы по конкретному заказу, свяжитесь с нами — поможем уточнить детали.
+                    <p class="text-black text-base lg:text-lg mb-8 max-w-[590px]">
+                        На этой странице собрана основная информация о способах оплаты, условиях поставки и порядке согласования доставки. Если у вас остались вопросы по конкретному заказу, свяжитесь с нами - поможем уточнить детали.
                     </p>
-                    <a href="#" class="js-open-consultation inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                    <a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B3262E] text-[#FAF9F7] px-8 py-3 rounded font-normal hover:bg-[#8B1A2B] transition shadow-md md:w-[285px] md:h-[52px] text-[15px]">
                         Получить консультацию
                     </a>
                 </div>
@@ -54,50 +54,50 @@ get_header();
     </section>
 
     <!-- Способы оплаты -->
-    <section class="py-12 lg:py-16 bg-white">
+    <section class="py-12 lg:py-[80px] bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
-            <div class="bg-white border border-gray-200 rounded-lg p-6 lg:p-8 shadow-sm">
-                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Способы оплаты</h2>
+            <div class="bg-white border border-gray-200 rounded-sm p-6 lg:p-[10px] shadow-md">
+                <h2 class="text-2xl lg:text-4xl font-semibold text-gray-900 mb-6">Способы оплаты</h2>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-gray-900 mb-3">Безналичный расчет</h4>
-                        <p class="text-gray-600 text-sm">Оплата возможна по безналичному расчету. После согласования заказа уточняем состав поставки и необходимые данные для оформления.</p>
+                    <div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px]  shadow-md hover:shadow-lg transition">
+                        <h4 class="font-semibold md:text-[22px] text-black mb-3">Безналичный расчет</h4>
+                        <p class="text-black font-normal text-base">Оплата возможна по безналичному расчету. После согласования заказа уточняем состав поставки и необходимые данные для оформления.</p>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-gray-900 mb-3">Согласование по заказу</h4>
-                        <p class="text-gray-600 text-sm">Перед оплатой уточняем наличие оборудования, стоимость, комплектность и условия поставки по конкретной позиции или заказу.</p>
+										<div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px]  shadow-md hover:shadow-lg transition">
+                        <h4 class="font-semibold md:text-[22px] text-black mb-3">Согласование по заказу</h4>
+                        <p class="text-black font-normal text-base">Перед оплатой уточняем наличие оборудования, стоимость, комплектность и условия поставки по конкретной позиции или заказу.</p>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-gray-900 mb-3">Помощь по заказу</h4>
-                        <p class="text-gray-600 text-sm">Если у вас есть вопросы по оплате, составу заказа или условиям поставки, свяжитесь с нами — поможем уточнить детали.</p>
+
+										<div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px]  shadow-md hover:shadow-lg transition">
+                        <h4 class="font-semibold md:text-[22px] text-black mb-3">Помощь по заказу</h4>
+                        <p class="text-black font-normal text-base">Если у вас есть вопросы по оплате, составу заказа или условиям поставки, свяжитесь с нами - поможем уточнить детали.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Условия доставки -->
-    <section class="pb-12 lg:pb-16 bg-white">
-        <div class="max-w-[1200px] mx-auto px-4">
-            <div class="bg-white border border-gray-200 rounded-lg p-6 lg:p-8 shadow-sm">
-                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Условия доставки</h2>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-gray-900 mb-3">Доставка по Республике Беларусь</h4>
-                        <p class="text-gray-600 text-sm">Организуем поставку оборудования по всей территории Беларуси.</p>
+						<div class="bg-white border border-gray-200 rounded-sm p-6 lg:p-[10px] shadow-md md:mt-[40px]">
+                <h2 class="text-2xl lg:text-4xl font-semibold text-gray-900 mb-6">Условия доставки</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-[18px]">
+                    <div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px] shadow-md hover:shadow-lg transition lg:px-[14px] lg:py-[24px]">
+                        <h4 class="font-semibold md:text-[22px] text-black mb-3">Доставка по Республике Беларусь</h4>
+                        <p class="text-black font-normal text-base max-w-[180px]">Организуем поставку оборудования по всей территории Беларуси.</p>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-gray-900 mb-3">Доставка до объекта</h4>
-                        <p class="text-gray-600 text-sm">По согласованию возможна доставка оборудования непосредственно на объект.</p>
+
+										<div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px] shadow-md hover:shadow-lg transition lg:px-[14px] lg:py-[24px]">
+                        <h4 class="font-semibold md:text-[22px] text-black mb-3">Доставка до объекта</h4>
+                        <p class="text-black font-normal text-base max-w-[227px]">По согласованию возможна доставка оборудования непосредственно на объект.</p>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-gray-900 mb-3">Сроки поставки</h4>
-                        <p class="text-gray-600 text-sm">Сроки зависят от наличия оборудования, объема заказа и адреса доставки. Точные условия уточняются при согласовании.</p>
+
+										<div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px] shadow-md hover:shadow-lg transition lg:px-[14px] lg:py-[24px]">
+                        <h4 class="font-semibold md:text-[22px] text-black mb-3">Сроки поставки</h4>
+                        <p class="text-black font-normal text-base max-w-[230px]">Сроки зависят от наличия оборудования, объема заказа и адреса доставки. Точные условия уточняются при согласовании.</p>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                        <h4 class="font-bold text-gray-900 mb-3">Предварительное согласование</h4>
-                        <p class="text-gray-600 text-sm">Перед доставкой уточняем состав заказа, формат поставки, адрес и другие организационные детали.</p>
+
+										<div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px] shadow-md hover:shadow-lg transition lg:px-[14px] lg:py-[24px]">
+                        <h4 class="font-semibold md:text-[22px] text-black mb-3">Предварительное согласование</h4>
+                        <p class="text-black font-normal text-base max-w-[270px]">Перед доставкой уточняем состав закза, формат поставки, адрес и другие организационные детали.</p>
                     </div>
+										
                 </div>
             </div>
         </div>
