@@ -122,32 +122,50 @@ $category_url = $categories ? guardexpert_get_category_url( $categories[0] ) : '
 					<?php echo wp_kses_post( $short_desc ); ?>
 				</p>
 				<?php endif; ?>
-				<p class="text-2xl font-bold text-[#B22234] mb-6" id="product-total-price" data-price="<?php echo esc_attr( $product->get_price() ); ?>" data-currency="<?php echo esc_attr( get_woocommerce_currency() ); ?>">
-					<?php echo $has_price ? $price_html : 'Цена по запросу'; ?>
-				</p>
-				
-				<form class="cart mb-6" action="<?php echo esc_url( $product->add_to_cart_url() ); ?>" method="post" enctype='multipart/form-data'>
-					<?php if ( $has_price ): ?>
-					<div class="mb-4">
-						<?php
-						woocommerce_quantity_input( array(
-							'min_value'   => 1,
-							'max_value'   => $product->get_max_purchase_quantity(),
-							'input_value' => 1,
-							'input_id'    => 'qty-input',
-						) );
-						?>
-					</div>
+				<p class="text-2xl font-bold text-[#B22234] mb-6" id="product-total-price" data-price="<?php echo esc_attr( $product->get_price() ); ?>" data-currency="BYN">
+					<?php if ( $has_price ) : ?>
+						<?php echo wc_price( $product->get_price(), array( 'currency' => 'BYN' ) ); ?> <span class="text-base font-normal text-gray-600">(Без НДС)</span>
+					<?php else : ?>
+						Цена по запросу
 					<?php endif; ?>
-					
-					<button type="submit" class="w-full bg-[#B22234] text-white px-8 py-4 rounded hover:bg-[#8B1A2B] transition-colors text-lg shadow-lg outline-none border-none mb-3 <?php echo $has_price ? '' : 'hidden'; ?>">
-						В корзину
-					</button>
-					<input type="hidden" name="add-to-cart" value="<?php echo get_the_ID(); ?>" />
-					<input type="hidden" name="product_id" value="<?php echo get_the_ID(); ?>" />
-				</form>
+				</p>
+
+				<hr class="border-gray-200 mb-4">
+
+				<?php
+				$product_attributes = $product->get_attributes();
+				if ( $product_attributes ) :
+					$count = 0;
+				?>
+				<div class="mb-4 space-y-2">
+					<?php foreach ( $product_attributes as $attr_name => $attr ) :
+						if ( $count >= 4 ) break;
+						$attr_value = $product->get_attribute( $attr_name );
+						if ( is_array( $attr_value ) ) {
+							$attr_value = implode( ', ', $attr_value );
+						}
+						$attr_value = urldecode( $attr_value );
+						if ( empty( $attr_value ) ) continue;
+						$count++;
+					?>
+					<div class="text-base text-gray-700">
+						<span class="font-semibold text-black"><?php echo esc_html( str_replace( '-', ' ', urldecode( wc_attribute_label( $attr_name ) ) ) ); ?>:</span>
+						<?php echo esc_html( $attr_value ); ?>
+					</div>
+					<?php endforeach; ?>
+				</div>
+				<?php endif; ?>
 				
-				<a href="#" class="js-open-consultation w-full inline-flex items-center justify-center bg-white text-[#B22234] border-2 border-[#B22234] px-8 py-4 rounded hover:bg-[#B22234] hover:text-white transition-colors text-lg">
+			<form class="cart mb-0" action="<?php echo esc_url( $product->add_to_cart_url() ); ?>" method="post" enctype='multipart/form-data'>
+				<button type="submit" class="w-full bg-[#B22234] text-white px-8 py-4 rounded hover:bg-[#8B1A2B] transition-colors text-[15px] shadow-lg outline-none border-none mb-[10px] <?php echo $has_price ? '' : 'hidden'; ?>">
+					В корзину
+				</button>
+				<input type="hidden" name="add-to-cart" value="<?php echo get_the_ID(); ?>" />
+				<input type="hidden" name="product_id" value="<?php echo get_the_ID(); ?>" />
+				<input type="hidden" name="quantity" value="1" />
+			</form>
+				
+				<a href="#" class="js-open-consultation w-full inline-flex items-center justify-center bg-white text-[#B22234] border-[1px] border-[#B22234] px-8 py-4 rounded hover:bg-[#B22234] hover:text-white transition-colors text-[15px]">
 					Получить консультацию
 				</a>
 			</div>
@@ -335,48 +353,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
-	// Quantity → total price
-	const priceEl = document.getElementById('product-total-price');
-	const qtyEl = document.getElementById('qty-input');
 
-	if (priceEl && qtyEl && priceEl.dataset.price) {
-		const unitPrice = parseFloat(priceEl.dataset.price);
-		if (isNaN(unitPrice) || unitPrice <= 0) {
-			priceEl.dataset.price = '0';
-		} else {
-			const currency = priceEl.dataset.currency || 'BYN';
-
-			function updateTotal() {
-				const qty = parseInt(qtyEl.value) || 1;
-				priceEl.innerHTML = (unitPrice * qty).toLocaleString('ru-RU', {
-					style: 'currency',
-					currency: currency,
-					minimumFractionDigits: 2,
-					maximumFractionDigits: 2
-				});
-			}
-
-			qtyEl.addEventListener('change', updateTotal);
-			qtyEl.addEventListener('input', updateTotal);
-		}
-	}
-
-	// +/- buttons
-	document.querySelector('.quantity')?.addEventListener('click', function(e) {
-		const btn = e.target.closest('.qty-btn');
-		if (!btn) return;
-		const input = this.querySelector('.qty');
-		if (!input) return;
-		const step = parseFloat(input.getAttribute('step')) || 1;
-		const min = parseFloat(input.getAttribute('min')) || 1;
-		const max = parseFloat(input.getAttribute('max')) || Infinity;
-		let val = parseFloat(input.value) || 0;
-		val = btn.classList.contains('qty-plus')
-			? Math.min(val + step, max)
-			: Math.max(val - step, min);
-		input.value = val;
-		input.dispatchEvent(new Event('change', { bubbles: true }));
-	});
 });
 </script>
 

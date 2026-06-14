@@ -1014,6 +1014,836 @@ function guardexpert_register_service_fields() {
 }
 
 /**
+ * Register ACF fields for Front Page (home page)
+ * Fields are registered WITHOUT location — rendered manually via custom meta box
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_page_fields' );
+function guardexpert_register_page_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'      => 'group_page_fields',
+		'title'    => 'Данные страницы',
+		'fields'   => array(
+
+			// ===== Tab: Hero Section =====
+			array(
+				'key'   => 'field_front_hero_tab',
+				'label' => 'Шапка (Hero)',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_front_hero_title',
+				'label' => 'Заголовок',
+				'name'  => 'front_hero_title',
+				'type'  => 'text',
+				'default_value' => 'Оборудование систем безопасности для бизнеса и объектов по всей Беларуси',
+				'wrapper' => array( 'width' => '70' ),
+			),
+			array(
+				'key'   => 'field_front_hero_description',
+				'label' => 'Описание',
+				'name'  => 'front_hero_description',
+				'type'  => 'textarea',
+				'default_value' => 'Поставка оборудования для ОПС, СКУД и видеонаблюдения. Помогаем подобрать решения под объект, задачи и совместимость оборудования.',
+				'rows'  => 3,
+				'wrapper' => array( 'width' => '70' ),
+			),
+			array(
+				'key'   => 'field_front_hero_image',
+				'label' => 'Изображение (десктоп)',
+				'name'  => 'front_hero_image',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'instructions' => 'Основное изображение в шапке (десктоп)',
+				'wrapper' => array( 'width' => '30' ),
+			),
+			array(
+				'key'   => 'field_front_hero_image_mobile',
+				'label' => 'Изображение (мобильное)',
+				'name'  => 'front_hero_image_mobile',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'instructions' => 'Изображение для мобильных устройств',
+				'wrapper' => array( 'width' => '30' ),
+			),
+			array(
+				'key'   => 'field_front_hero_bg',
+				'label' => 'Фоновое изображение',
+				'name'  => 'front_hero_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'instructions' => 'Фоновое изображение для секции Hero',
+				'wrapper' => array( 'width' => '30' ),
+			),
+
+			// ===== Tab: Why Choose Us =====
+			array(
+				'key'   => 'field_front_why_tab',
+				'label' => 'Почему выбирают Гардэксперт',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_front_why_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'front_why_title',
+				'type'  => 'text',
+				'default_value' => 'Почему выбирают Гардэксперт',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_why_description',
+				'label' => 'Описание секции',
+				'name'  => 'front_why_description',
+				'type'  => 'textarea',
+				'default_value' => 'Надежная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.',
+				'rows'  => 3,
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'      => 'field_front_why_features',
+				'label'    => 'Преимущества',
+				'name'     => 'front_why_features',
+				'type'     => 'repeater',
+				'max'      => 6,
+				'button_label' => 'Добавить преимущество',
+				'layout'   => 'block',
+				'sub_fields' => array(
+					array(
+						'key'   => 'field_front_why_feature_icon',
+						'label' => 'Иконка',
+						'name'  => 'icon',
+						'type'  => 'image',
+						'return_format' => 'url',
+						'instructions' => 'Загрузите иконку (PNG или SVG)',
+						'wrapper' => array( 'width' => '30' ),
+					),
+					array(
+						'key'   => 'field_front_why_feature_title',
+						'label' => 'Заголовок',
+						'name'  => 'title',
+						'type'  => 'text',
+						'wrapper' => array( 'width' => '70' ),
+					),
+					array(
+						'key'   => 'field_front_why_feature_description',
+						'label' => 'Описание',
+						'name'  => 'description',
+						'type'  => 'textarea',
+						'rows'  => 3,
+					),
+				),
+			),
+
+			// ===== Tab: Contact Form =====
+			array(
+				'key'   => 'field_front_form_tab',
+				'label' => 'Форма обратной связи',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_front_form_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'front_form_title',
+				'type'  => 'text',
+				'default_value' => 'Подберем оборудование под вашу задачу',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_form_description',
+				'label' => 'Описание секции',
+				'name'  => 'front_form_description',
+				'type'  => 'textarea',
+				'default_value' => 'Поможем с выбором оборудования для ОПС, СКУД и видеонаблюдения, проконсультируем по совместимости и поставке по Беларуси.',
+				'rows'  => 3,
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_form_form_title',
+				'label' => 'Заголовок формы',
+				'name'  => 'front_form_form_title',
+				'type'  => 'text',
+				'default_value' => 'Оставьте заявку',
+				'wrapper' => array( 'width' => '33' ),
+			),
+			array(
+				'key'   => 'field_front_form_form_description',
+				'label' => 'Описание формы',
+				'name'  => 'front_form_form_description',
+				'type'  => 'textarea',
+				'default_value' => 'Свяжемся с вами, поможем подобрать оборудование и ответим на вопросы по поставке.',
+				'rows'  => 2,
+				'wrapper' => array( 'width' => '33' ),
+			),
+			array(
+				'key'   => 'field_front_form_success_text',
+				'label' => 'Текст после отправки',
+				'name'  => 'front_form_success_text',
+				'type'  => 'text',
+				'default_value' => 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.',
+				'wrapper' => array( 'width' => '33' ),
+			),
+			array(
+				'key'   => 'field_front_form_bg',
+				'label' => 'Фоновое изображение',
+				'name'  => 'front_form_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'instructions' => 'Фоновое изображение для секции формы',
+				'wrapper' => array( 'width' => '33' ),
+			),
+		),
+	) );
+}
+
+/**
+ * Determine which field group to show for a given page
+ */
+function guardexpert_get_page_field_group( $post_id ) {
+	$template      = get_page_template_slug( $post_id );
+	$front_page_id = (int) get_option( 'page_on_front' );
+
+	if ( $post_id === $front_page_id ) {
+		return 'group_page_fields';
+	}
+
+	$template_map = array(
+		'about.php'    => 'group_about_fields',
+		'services.php' => 'group_services_fields',
+		'shipping.php' => 'group_shipping_fields',
+		'returns.php'  => 'group_returns_fields',
+		'catalog.php'  => 'group_catalog_fields',
+		'contact.php'  => 'group_contact_fields',
+	);
+
+	return isset( $template_map[ $template ] ) ? $template_map[ $template ] : null;
+}
+
+/**
+ * Register custom meta box for page fields (template-aware)
+ */
+add_action( 'add_meta_boxes', 'guardexpert_add_page_metabox' );
+function guardexpert_add_page_metabox() {
+	add_meta_box(
+		'page_fields_metabox',
+		'Данные страницы',
+		'guardexpert_render_page_metabox',
+		'page',
+		'normal',
+		'high'
+	);
+}
+
+function guardexpert_render_page_metabox( $post ) {
+	$group_key = guardexpert_get_page_field_group( $post->ID );
+
+	if ( ! $group_key ) {
+		echo '<p>Для этой страницы нет кастомных полей.</p>';
+		return;
+	}
+
+	$field_group = acf_get_field_group( $group_key );
+	if ( ! $field_group ) {
+		echo '<p>Группа полей не найдена.</p>';
+		return;
+	}
+
+	$fields = acf_get_fields( $field_group );
+	if ( empty( $fields ) ) {
+		echo '<p>Поля не найдены.</p>';
+		return;
+	}
+
+	acf_form_data( array(
+		'post_id' => $post->ID,
+	) );
+
+	acf_render_fields( $fields, $post->ID );
+}
+
+/**
+ * Register ACF fields for About page
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_about_fields' );
+function guardexpert_register_about_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'    => 'group_about_fields',
+		'title'  => 'Данные страницы About',
+		'fields' => array(
+			array(
+				'key'   => 'field_about_hero_tab',
+				'label' => 'Шапка (Hero)',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_about_hero_title',
+				'label' => 'Заголовок',
+				'name'  => 'about_hero_title',
+				'type'  => 'text',
+				'default_value' => 'Гардэкспер - поставка оборудования и экспертная поддержка для систем безопасности',
+			),
+			array(
+				'key'   => 'field_about_hero_description',
+				'label' => 'Описание',
+				'name'  => 'about_hero_description',
+				'type'  => 'textarea',
+				'default_value' => 'С 2012 года работаем в сфере систем безопасности, поставляем оборудование для ОПС, СКУД и видеонаблюдения, консультируем по подбору, совместимости и сопровождению решений для бизнеса и объектов по всей Беларуси.',
+			),
+			array(
+				'key'   => 'field_about_hero_bg',
+				'label' => 'Фоновое изображение',
+				'name'  => 'about_hero_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			array(
+				'key'   => 'field_about_sections_tab',
+				'label' => 'Основные секции',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_about_who_title',
+				'label' => 'Кто мы — заголовок',
+				'name'  => 'about_who_title',
+				'type'  => 'text',
+				'default_value' => 'Кто мы?',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_who_description',
+				'label' => 'Кто мы — описание',
+				'name'  => 'about_who_description',
+				'type'  => 'textarea',
+				'default_value' => 'Гардэксперт — компания в сфере систем безопасности и поставок оборудования для объектов различного назначения. Мы помогаем клиентам подобрать оборудование под задачу, консультируем по характеристикам и совместимости, а при необходимости подключаем проектирование, монтаж, пусконаладку, обслуживание и модернизацию.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_why_title',
+				'label' => 'Почему выбирают — заголовок',
+				'name'  => 'about_why_title',
+				'type'  => 'text',
+				'default_value' => 'Почему выбирают Гардэксперт',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_why_description',
+				'label' => 'Почему выбирают — описание',
+				'name'  => 'about_why_description',
+				'type'  => 'textarea',
+				'default_value' => 'Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_what_title',
+				'label' => 'Чем занимаемся — заголовок',
+				'name'  => 'about_what_title',
+				'type'  => 'text',
+				'default_value' => 'Чем мы занимаемся',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_what_description',
+				'label' => 'Чем занимаемся — описание',
+				'name'  => 'about_what_description',
+				'type'  => 'textarea',
+				'default_value' => 'Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_work_with_title',
+				'label' => 'С кем работаем — заголовок',
+				'name'  => 'about_work_with_title',
+				'type'  => 'text',
+				'default_value' => 'С кем мы работаем',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_work_with_description',
+				'label' => 'С кем работаем — описание',
+				'name'  => 'about_work_with_description',
+				'type'  => 'textarea',
+				'default_value' => 'Подбираем оборудование и сопровождаем поставки для компаний, монтажных организаций и объектов разного масштаба по всей Беларуси.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_work_title',
+				'label' => 'Как строится работа — заголовок',
+				'name'  => 'about_work_title',
+				'type'  => 'text',
+				'default_value' => 'Как строится работа',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_work_description',
+				'label' => 'Как строится работа — описание',
+				'name'  => 'about_work_description',
+				'type'  => 'textarea',
+				'default_value' => 'Выстраиваем работу последовательно: от запроса и подбора оборудования до поставки и дальнейшего сопровождения.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			array(
+				'key'   => 'field_about_certificates_tab',
+				'label' => 'Сертификаты',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_about_cert_title',
+				'label' => 'Сертификаты — заголовок',
+				'name'  => 'about_cert_title',
+				'type'  => 'text',
+				'default_value' => 'Сертификаты и документы',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_about_cert_description',
+				'label' => 'Сертификаты — описание',
+				'name'  => 'about_cert_description',
+				'type'  => 'textarea',
+				'default_value' => 'Подтверждающие материалы, сопроводительная документация и документы, которые помогают работать с оборудованием уверенно и прозрачно.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+		),
+	) );
+}
+
+/**
+ * Register ACF fields for Services page
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_services_fields' );
+function guardexpert_register_services_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'    => 'group_services_fields',
+		'title'  => 'Данные страницы Services',
+		'fields' => array(
+			array(
+				'key'   => 'field_services_hero_tab',
+				'label' => 'Шапка (Hero)',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_services_hero_title',
+				'label' => 'Заголовок',
+				'name'  => 'services_hero_title',
+				'type'  => 'text',
+				'default_value' => 'Поддержка, внедрение и сопровождение систем безопасности',
+			),
+			array(
+				'key'   => 'field_services_hero_description',
+				'label' => 'Описание',
+				'name'  => 'services_hero_description',
+				'type'  => 'textarea',
+				'default_value' => 'Помогаем не только с поставкой оборудования, но и с подбором решений, проектированием, монтажом, пусконаладкой, обслуживанием и модернизацией систем безопасности для бизнеса и объектов по всей Беларуси.',
+			),
+			array(
+				'key'   => 'field_services_hero_bg',
+				'label' => 'Фоновое изображение',
+				'name'  => 'services_hero_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			array(
+				'key'   => 'field_services_main_tab',
+				'label' => 'Основные секции',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_services_main_title',
+				'label' => 'Основные услуги — заголовок',
+				'name'  => 'services_main_title',
+				'type'  => 'text',
+				'default_value' => 'Основные услуги',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_services_main_description',
+				'label' => 'Основные услуги — описание',
+				'name'  => 'services_main_description',
+				'type'  => 'textarea',
+				'default_value' => 'Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_services_audience_title',
+				'label' => 'Для кого подойдут — заголовок',
+				'name'  => 'services_audience_title',
+				'type'  => 'text',
+				'default_value' => 'Для кого подойдут наши услуги',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_services_audience_description',
+				'label' => 'Для кого подойдут — описание',
+				'name'  => 'services_audience_description',
+				'type'  => 'textarea',
+				'default_value' => 'Подбираем оборудование и сопровождаем поставки для компаний, монтажных организаций и объектов разного масштаба по всей Беларуси.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			array(
+				'key'   => 'field_services_additional_tab',
+				'label' => 'Дополнительно',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_services_work_title',
+				'label' => 'Как строится работа — заголовок',
+				'name'  => 'services_work_title',
+				'type'  => 'text',
+				'default_value' => 'Как строится работа',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_services_work_description',
+				'label' => 'Как строится работа — описание',
+				'name'  => 'services_work_description',
+				'type'  => 'textarea',
+				'default_value' => 'Выстраиваем работу последовательно: от запроса и подбора оборудования до поставки и дальнейшего сопровождения.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_services_trust_title',
+				'label' => 'Почему нам доверяют — заголовок',
+				'name'  => 'services_trust_title',
+				'type'  => 'text',
+				'default_value' => 'Почему нам доверяют выполнение задач',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_services_trust_description',
+				'label' => 'Почему нам доверяют — описание',
+				'name'  => 'services_trust_description',
+				'type'  => 'textarea',
+				'default_value' => 'Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+		),
+	) );
+}
+
+/**
+ * Register ACF fields for Shipping page
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_shipping_fields' );
+function guardexpert_register_shipping_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'    => 'group_shipping_fields',
+		'title'  => 'Данные страницы Shipping',
+		'fields' => array(
+			array(
+				'key'   => 'field_shipping_hero_tab',
+				'label' => 'Шапка (Hero)',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_shipping_hero_title',
+				'label' => 'Заголовок',
+				'name'  => 'shipping_hero_title',
+				'type'  => 'text',
+				'default_value' => 'Оплата и доставка',
+			),
+			array(
+				'key'   => 'field_shipping_hero_description',
+				'label' => 'Описание',
+				'name'  => 'shipping_hero_description',
+				'type'  => 'textarea',
+				'default_value' => 'На этой странице собрана основная информация о способах оплаты, условиях поставки и порядке согласования доставки. Если у вас остались вопросы по конкретному заказу, свяжитесь с нами — поможем уточнить детали.',
+			),
+			array(
+				'key'   => 'field_shipping_hero_bg',
+				'label' => 'Фоновое изображение',
+				'name'  => 'shipping_hero_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			array(
+				'key'   => 'field_shipping_sections_tab',
+				'label' => 'Секции',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_shipping_payment_title',
+				'label' => 'Способы оплаты — заголовок',
+				'name'  => 'shipping_payment_title',
+				'type'  => 'text',
+				'default_value' => 'Способы оплаты',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_shipping_delivery_title',
+				'label' => 'Условия доставки — заголовок',
+				'name'  => 'shipping_delivery_title',
+				'type'  => 'text',
+				'default_value' => 'Условия доставки',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			array(
+				'key'   => 'field_shipping_process_tab',
+				'label' => 'Процесс и FAQ',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_shipping_process_title',
+				'label' => 'Как происходит оформление — заголовок',
+				'name'  => 'shipping_process_title',
+				'type'  => 'text',
+				'default_value' => 'Как происходит оформление и поставка',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_shipping_process_description',
+				'label' => 'Как происходит оформление — описание',
+				'name'  => 'shipping_process_description',
+				'type'  => 'textarea',
+				'default_value' => 'Выстроили процесс так, чтобы заказ был понятным и удобным: от выбора оборудования и согласования деталей до поставки на объект.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_shipping_faq_title',
+				'label' => 'Частые вопросы — заголовок',
+				'name'  => 'shipping_faq_title',
+				'type'  => 'text',
+				'default_value' => 'Частые вопросы',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_shipping_faq_description',
+				'label' => 'Частые вопросы — описание',
+				'name'  => 'shipping_faq_description',
+				'type'  => 'textarea',
+				'default_value' => 'Собрали ответы на основные вопросы по оформлению заказа, оплате и условиям поставки. Если нужной информации нет в списке, свяжитесь с нами — поможем уточнить детали.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+		),
+	) );
+}
+
+/**
+ * Register ACF fields for Returns page
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_returns_fields' );
+function guardexpert_register_returns_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'    => 'group_returns_fields',
+		'title'  => 'Данные страницы Returns',
+		'fields' => array(
+			array(
+				'key'   => 'field_returns_hero_tab',
+				'label' => 'Шапка (Hero)',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_returns_hero_title',
+				'label' => 'Заголовок',
+				'name'  => 'returns_hero_title',
+				'type'  => 'text',
+				'default_value' => 'Возврат и обмен',
+			),
+			array(
+				'key'   => 'field_returns_hero_description',
+				'label' => 'Описание',
+				'name'  => 'returns_hero_description',
+				'type'  => 'textarea',
+				'default_value' => 'На этой странице собрана основная информация о порядке возврата и обмена товара. Если у вас остались вопросы по конкретной позиции или условиям поставки, свяжитесь с нами — поможем уточнить детали.',
+			),
+			array(
+				'key'   => 'field_returns_hero_bg',
+				'label' => 'Фоновое изображение',
+				'name'  => 'returns_hero_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			array(
+				'key'   => 'field_returns_sections_tab',
+				'label' => 'Основные секции',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_returns_important_title',
+				'label' => 'Что важно знать — заголовок',
+				'name'  => 'returns_important_title',
+				'type'  => 'text',
+				'default_value' => 'Что важно знать',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_returns_important_description',
+				'label' => 'Что важно знать — описание',
+				'name'  => 'returns_important_description',
+				'type'  => 'textarea',
+				'default_value' => 'Условия возврата и обмена зависят от состояния товара, его комплектности, сохранности упаковки и характера поставки. Для уточнения деталей по конкретному заказу рекомендуем связаться с нами до оформления возврата.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_returns_terms_title',
+				'label' => 'Условия возврата — заголовок',
+				'name'  => 'returns_terms_title',
+				'type'  => 'text',
+				'default_value' => 'Условия возврата и обмена',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			array(
+				'key'   => 'field_returns_process_tab',
+				'label' => 'Процесс и FAQ',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_returns_process_title',
+				'label' => 'Как происходит возврат — заголовок',
+				'name'  => 'returns_process_title',
+				'type'  => 'text',
+				'default_value' => 'Как происходит возврат и обмен',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_returns_process_description',
+				'label' => 'Как происходит возврат — описание',
+				'name'  => 'returns_process_description',
+				'type'  => 'textarea',
+				'default_value' => 'Если у вас возник вопрос по возврату или обмену товара, рекомендуем предварительно связаться с нами. Мы поможем уточнить порядок действий по конкретной позиции, комплектности и условиям поставки.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_returns_faq_title',
+				'label' => 'Частые вопросы — заголовок',
+				'name'  => 'returns_faq_title',
+				'type'  => 'text',
+				'default_value' => 'Частые вопросы',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_returns_faq_description',
+				'label' => 'Частые вопросы — описание',
+				'name'  => 'returns_faq_description',
+				'type'  => 'textarea',
+				'default_value' => 'Собрали ответы на вопросы, которые чаще всего возникают при возврате или обмене товара. Если вашей ситуации нет в списке, свяжитесь с нами — поможем уточнить детали.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+		),
+	) );
+}
+
+/**
+ * Register ACF fields for Catalog page
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_catalog_fields' );
+function guardexpert_register_catalog_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'    => 'group_catalog_fields',
+		'title'  => 'Данные страницы Catalog',
+		'fields' => array(
+			array(
+				'key'   => 'field_catalog_main_tab',
+				'label' => 'Основное',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_catalog_title',
+				'label' => 'Заголовок страницы',
+				'name'  => 'catalog_title',
+				'type'  => 'text',
+				'default_value' => 'Каталог оборудования',
+			),
+			array(
+				'key'   => 'field_catalog_description',
+				'label' => 'Описание страницы',
+				'name'  => 'catalog_description',
+				'type'  => 'textarea',
+				'default_value' => 'Оборудование для ОПС, СКУД, видеонаблюдения и сопутствующих инженерных решений с возможностью подбора под задачу и объект.',
+			),
+
+			array(
+				'key'   => 'field_catalog_cta_tab',
+				'label' => 'Нижний CTA-блок',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_catalog_cta_title',
+				'label' => 'Заголовок CTA',
+				'name'  => 'catalog_cta_title',
+				'type'  => 'text',
+				'default_value' => 'Нужна помощь с подбором оборудования?',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_catalog_cta_description',
+				'label' => 'Описание CTA',
+				'name'  => 'catalog_cta_description',
+				'type'  => 'textarea',
+				'default_value' => 'Поможем подобрать решение по задаче, совместимости, стоимости и поставке.',
+				'wrapper' => array( 'width' => '50' ),
+			),
+		),
+	) );
+}
+
+/**
  * Register ACF fields for Contact page
  */
 add_action( 'acf/include_fields', 'guardexpert_register_contact_fields' );
@@ -1308,3 +2138,30 @@ function guardexpert_send_consultation() {
 }
 add_action( 'wp_ajax_guardexpert_send_consultation', 'guardexpert_send_consultation' );
 add_action( 'wp_ajax_nopriv_guardexpert_send_consultation', 'guardexpert_send_consultation' );
+
+/**
+ * Save cart comment to session on AJAX update.
+ */
+function guardexpert_save_cart_comment() {
+	if ( isset( $_POST['order_comments'] ) ) {
+		WC()->session->set( 'order_comments', sanitize_textarea_field( $_POST['order_comments'] ) );
+	}
+	wp_send_json_success();
+}
+add_action( 'wp_ajax_guardexpert_save_cart_comment', 'guardexpert_save_cart_comment' );
+add_action( 'wp_ajax_nopriv_guardexpert_save_cart_comment', 'guardexpert_save_cart_comment' );
+
+/**
+ * Add cart comment to order notes and admin email.
+ */
+function guardexpert_add_comment_to_order( $order_id ) {
+	$comment = WC()->session->get( 'order_comments' );
+	if ( ! empty( $comment ) ) {
+		$order = wc_get_order( $order_id );
+		if ( $order ) {
+			$order->add_order_note( $comment );
+			WC()->session->set( 'order_comments', '' );
+		}
+	}
+}
+add_action( 'woocommerce_checkout_order_processed', 'guardexpert_add_comment_to_order' );

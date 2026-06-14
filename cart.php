@@ -113,9 +113,21 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 					<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="text-gray-900 font-medium hover:text-[#B22234] transition underline">
 						Продолжить покупки
 					</a>
-					<a href="<?php echo esc_url( wc_get_cart_url() ); ?>#order_comments" class="text-gray-900 font-medium hover:text-[#B22234] transition underline">
+					<button type="button" id="js-toggle-comment" class="text-gray-900 font-medium hover:text-[#B22234] transition underline cursor-pointer bg-transparent border-none outline-none">
 						Комментарий к заказу
-					</a>
+					</button>
+				</div>
+
+				<!-- Comment Field -->
+				<div id="js-comment-field" class="hidden mt-4">
+					<label for="order_comments" class="block text-sm font-medium text-gray-700 mb-2">Комментарий к заказу</label>
+					<textarea
+						id="order_comments"
+						name="order_comments"
+						rows="4"
+						class="w-full border border-gray-300 rounded-lg p-3 text-base text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#B22234] focus:border-transparent resize-none"
+						placeholder="Ваши пожелания или вопросы к заказу..."
+					><?php echo esc_textarea( WC()->session->get( 'order_comments' ) ); ?></textarea>
 				</div>
 			</div>
 
@@ -135,7 +147,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 						</div>
 						<div class="flex justify-between items-center">
 							<span class="text-gray-900 font-bold text-xl">Итого</span>
-							<span id="js-cart-total" class="font-bold text-[#B22234] text-xl"><?php echo WC()->cart->get_total(); ?></span>
+							<span id="js-cart-total" class="font-bold text-[#B22234] text-xl"><?php echo WC()->cart->get_total(); ?> <span class="text-base font-normal text-gray-600">(Без НДС)</span></span>
 						</div>
 					</div>
 
@@ -168,6 +180,20 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 	lucide.createIcons();
+
+	// Comment toggle
+	var toggleBtn = document.getElementById('js-toggle-comment');
+	var commentField = document.getElementById('js-comment-field');
+	var commentTextarea = document.getElementById('order_comments');
+
+	if (toggleBtn && commentField) {
+		toggleBtn.addEventListener('click', function() {
+			commentField.classList.toggle('hidden');
+			if (!commentField.classList.contains('hidden')) {
+				commentTextarea.focus();
+			}
+		});
+	}
 
 	var cartForm = document.querySelector('.woocommerce-cart-form');
 	var cartItems = document.getElementById('js-cart-items');
@@ -264,6 +290,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		input.value = val;
 		input.dispatchEvent(new Event('change', { bubbles: true }));
 	});
+
+	// Save comment to session
+	if (commentTextarea) {
+		var commentTimer;
+		commentTextarea.addEventListener('input', function() {
+			clearTimeout(commentTimer);
+			commentTimer = setTimeout(function() {
+				var formData = new FormData();
+				formData.append('action', 'guardexpert_save_cart_comment');
+				formData.append('order_comments', commentTextarea.value);
+				fetch('<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>', {
+					method: 'POST',
+					body: formData
+				});
+			}, 500);
+		});
+	}
 });
 </script>
 <?php
