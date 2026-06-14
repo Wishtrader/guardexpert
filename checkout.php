@@ -213,10 +213,13 @@ $cart_total = WC()->cart->get_total();
 						</label>
 					</div>
 
+					<?php wp_nonce_field( 'guardexpert_checkout', 'checkout_nonce' ); ?>
+
 					<!-- Buttons -->
 					<div class="space-y-3">
+					<div id="checkout-error" class="hidden bg-red-50 border border-red-200 text-red-600 text-sm rounded p-3 mb-3"></div>
 					<button type="button" id="checkout-submit" class="w-full bg-[#B22234] text-white py-3 rounded font-medium hover:bg-[#8B1A2B] transition inline-block text-center outline-none border-none cursor-pointer">
-						Перейти к оформлению
+						Оформить заказ
 					</button>
 						<a href="#" class="js-open-consultation w-full bg-white border border-[#B22234] text-[#B22234] py-3 rounded font-medium hover:bg-[#B22234] hover:text-white transition text-center inline-block">
 							Получить консультацию
@@ -249,7 +252,7 @@ $cart_total = WC()->cart->get_total();
 	function toggleDeliveryFields() {
 		const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
 		const deliveryFields = document.getElementById('deliveryFields');
-		const isDeliveryToObject = deliveryRadios[1].checked;
+		const isDeliveryToObject = deliveryRadios[1] && deliveryRadios[1].checked;
 
 		if (isDeliveryToObject) {
 			deliveryFields.classList.add('open');
@@ -260,6 +263,7 @@ $cart_total = WC()->cart->get_total();
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var submitBtn = document.getElementById('checkout-submit');
+		var errorBox = document.getElementById('checkout-error');
 
 		function showError(input, message) {
 			var wrapper = input.closest('div');
@@ -280,6 +284,22 @@ $cart_total = WC()->cart->get_total();
 			document.querySelectorAll('.border-red-500').forEach(function(el) {
 				el.classList.remove('border-red-500', 'focus:border-red-500');
 			});
+			if (errorBox) {
+				errorBox.classList.add('hidden');
+				errorBox.textContent = '';
+			}
+		}
+
+		function setSubmitLoading(loading) {
+			if (loading) {
+				submitBtn.disabled = true;
+				submitBtn.textContent = 'Отправка...';
+				submitBtn.classList.add('opacity-60', 'cursor-not-allowed');
+			} else {
+				submitBtn.disabled = false;
+				submitBtn.textContent = 'Оформить заказ';
+				submitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+			}
 		}
 
 		submitBtn.addEventListener('click', function(e) {
@@ -334,7 +354,48 @@ $cart_total = WC()->cart->get_total();
 
 			if (!valid) return;
 
-			window.location.href = '/заказ-отправлен';
+			var deliveryValue = 'manager';
+			if (isDelivery) {
+				deliveryValue = 'delivery';
+			}
+
+			var formData = new FormData();
+			formData.append('action', 'guardexpert_submit_order');
+			formData.append('nonce', document.getElementById('checkout_nonce').value);
+			formData.append('billing_name', name.value.trim());
+			formData.append('billing_phone', phone.value.trim());
+			formData.append('billing_email', email.value.trim());
+			formData.append('billing_comment', document.getElementById('billing_comment').value.trim());
+			formData.append('delivery', deliveryValue);
+			formData.append('delivery_city', document.getElementById('delivery_city') ? document.getElementById('delivery_city').value.trim() : '');
+			formData.append('delivery_address', document.getElementById('delivery_address') ? document.getElementById('delivery_address').value.trim() : '');
+			formData.append('delivery_info', document.getElementById('delivery_info') ? document.getElementById('delivery_info').value.trim() : '');
+
+			setSubmitLoading(true);
+
+			fetch('<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>', {
+				method: 'POST',
+				body: formData
+			})
+			.then(function(response) { return response.json(); })
+			.then(function(data) {
+				if (data.success) {
+					window.location.href = '<?php echo esc_url( home_url( '/заказ-отправлен/' ) ); ?>?order_id=' + data.data.order_id;
+				} else {
+					setSubmitLoading(false);
+					if (errorBox) {
+						errorBox.textContent = data.data ? data.data.message : 'Ошибка отправки заказа';
+						errorBox.classList.remove('hidden');
+					}
+				}
+			})
+			.catch(function() {
+				setSubmitLoading(false);
+				if (errorBox) {
+					errorBox.textContent = 'Ошибка сети. Попробуйте ещё раз.';
+					errorBox.classList.remove('hidden');
+				}
+			});
 		});
 	});
 </script>

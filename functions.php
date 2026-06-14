@@ -2152,16 +2152,93 @@ add_action( 'wp_ajax_guardexpert_save_cart_comment', 'guardexpert_save_cart_comm
 add_action( 'wp_ajax_nopriv_guardexpert_save_cart_comment', 'guardexpert_save_cart_comment' );
 
 /**
- * Add cart comment to order notes and admin email.
+ * AJAX: Submit order from custom checkout.
  */
-function guardexpert_add_comment_to_order( $order_id ) {
-	$comment = WC()->session->get( 'order_comments' );
-	if ( ! empty( $comment ) ) {
-		$order = wc_get_order( $order_id );
-		if ( $order ) {
-			$order->add_order_note( $comment );
-			WC()->session->set( 'order_comments', '' );
+function guardexpert_submit_order() {
+	if ( ! class_exists( 'WooCommerce' ) ) {
+		wp_send_json_error( array( 'message' => 'WooCommerce не активен' ) );
+	}
+
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'guardexpert_checkout' ) ) {
+		wp_send_json_error( array( 'message' => 'Ошибка безопасности' ) );
+	}
+
+	$name             = isset( $_POST['billing_name'] ) ? sanitize_text_field( $_POST['billing_name'] ) : '';
+	$phone            = isset( $_POST['billing_phone'] ) ? sanitize_text_field( $_POST['billing_phone'] ) : '';
+	$email            = isset( $_POST['billing_email'] ) ? sanitize_email( $_POST['billing_email'] ) : '';
+	$delivery         = isset( $_POST['delivery'] ) ? sanitize_text_field( $_POST['delivery'] ) : '';
+	$delivery_city    = isset( $_POST['delivery_city'] ) ? sanitize_text_field( $_POST['delivery_city'] ) : '';
+	$delivery_address = isset( $_POST['delivery_address'] ) ? sanitize_text_field( $_POST['delivery_address'] ) : '';
+	$delivery_info    = isset( $_POST['delivery_info'] ) ? sanitize_text_field( $_POST['delivery_info'] ) : '';
+	$checkout_comment = isset( $_POST['billing_comment'] ) ? sanitize_textarea_field( $_POST['billing_comment'] ) : '';
+	$cart_comment     = WC()->session->get( 'order_comments', '' );
+
+	if ( empty( $name ) || empty( $phone ) || empty( $email ) ) {
+		wp_send_json_error( array( 'message' => 'Заполните обязательные поля' ) );
+	}
+
+	$order = wc_create_order();
+	if ( is_wp_error( $order ) ) {
+		wp_send_json_error( array( 'message' => 'Ошибка создания заказа: ' . $order->get_error_message() ) );
+	}
+
+	foreach ( WC()->cart->get_cart() as $cart_item ) {
+		$product = $cart_item['data'];
+		if ( $product ) {
+			$order->add_product( $product, $cart_item['quantity'] );
 		}
 	}
+
+	$order->set_billing_first_name( $name );
+	$order->set_billing_phone( $phone );
+	$order->set_billing_email( $email );
+
+	if ( $delivery === 'delivery' && ! empty( $delivery_city ) && ! empty( $delivery_address ) ) {
+		$full_address = $delivery_address . ', ' . $delivery_city;
+		if ( ! empty( $delivery_info ) ) {
+			$full_address .= ' (' . $delivery_info . ')';
+		}
+		$order->set_shipping_first_name( $name );
+		$order->set_shipping_address_1( $full_address );
+	} else {
+		$order->set_shipping_first_name( $name );
+		$order->set_shipping_address_1( 'Согласование с менеджером' );
+	}
+
+	$order->set_payment_method_title( 'Безналичный расчёт' );
+	$order->set_currency( 'BYN' );
+	$order->set_status( 'on-hold' );
+	$order->calculate_totals();
+
+	$note_parts = array();
+	if ( ! empty( $cart_comment ) ) {
+		$note_parts[] = $cart_comment;
+	}
+	if ( ! empty( $checkout_comment ) ) {
+		$note_parts[] = $checkout_comment;
+	}
+	if ( ! empty( $note_parts ) ) {
+		$order->add_order_note( implode( "\n\n", $note_parts ) );
+	}
+
+	$order->save();
+
+	// Send email notifications manually
+	$emails = WC()->mailer()->get_emails();
+	if ( isset( $emails['WC_Email_New_Order'] ) ) {
+		$emails['WC_Email_New_Order']->trigger( $order->get_id(), $order );
+	}
+	if ( isset( $emails['WC_Email_Customer_Processing_Order'] ) ) {
+		$emails['WC_Email_Customer_Processing_Order']->trigger( $order->get_id(), $order );
+	}
+
+	WC()->cart->empty_cart();
+	WC()->session->set( 'order_comments', '' );
+
+	wp_send_json_success( array(
+		'order_id'     => $order->get_id(),
+		'order_number' => $order->get_order_number(),
+	) );
 }
-add_action( 'woocommerce_checkout_order_processed', 'guardexpert_add_comment_to_order' );
+add_action( 'wp_ajax_guardexpert_submit_order', 'guardexpert_submit_order' );
+add_action( 'wp_ajax_nopriv_guardexpert_submit_order', 'guardexpert_submit_order' );
