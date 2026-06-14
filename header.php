@@ -75,7 +75,7 @@
 
 				<!-- Right: Cart & Search -->
 				<div class="flex items-center gap-4">
-					<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="relative hover:text-[#B3262E] transition-colors">
+					<a href="/корзина" class="relative hover:text-[#B3262E] transition-colors">
 						<ion-icon name="cart-outline" class="text-4xl"></ion-icon>
 						<span class="cart-count absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"><?php echo esc_html( WC()->cart ? WC()->cart->get_cart_contents_count() : 0 ); ?></span>
 					</a>
@@ -123,7 +123,7 @@
 				<button id="search-toggle-mobile" class="hover:text-[#B3262E] transition-colors outline-none border-none bg-transparent">
 					<ion-icon name="search-outline" class="text-2xl"></ion-icon>
 				</button>
-				<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="relative hover:text-[#B3262E] transition-colors">
+				<a href="/корзина" class="relative hover:text-[#B3262E] transition-colors">
 					<ion-icon name="cart-outline" class="text-2xl"></ion-icon>
 					<span class="cart-count absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"><?php echo esc_html( WC()->cart ? WC()->cart->get_cart_contents_count() : 0 ); ?></span>
 				</a>
@@ -174,7 +174,7 @@
 					<button id="search-toggle-mobile-menu" class="hover:text-[#B3262E] transition-colors outline-none border-none bg-transparent">
 						<ion-icon name="search-outline" class="text-2xl"></ion-icon>
 					</button>
-					<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="relative hover:text-[#B3262E] transition-colors">
+					<a href="/корзина" class="relative hover:text-[#B3262E] transition-colors">
 						<ion-icon name="cart-outline" class="text-2xl"></ion-icon>
 						<span class="cart-count absolute -top-1 -right-2 bg-[#B3262E] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"><?php echo esc_html( WC()->cart ? WC()->cart->get_cart_contents_count() : 0 ); ?></span>
 					</a>
