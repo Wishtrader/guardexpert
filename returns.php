@@ -6,6 +6,21 @@
  */
 
 get_header();
+
+$returns_hero_title        = get_field( 'returns_hero_title' ) ?: 'Возврат и обмен';
+$returns_hero_description  = get_field( 'returns_hero_description' ) ?: 'На этой странице собрана основная информация о порядке возврата и обмена товара. Если у вас остались вопросы по конкретной позиции или условиям поставки, свяжитесь с нами — поможем уточнить детали.';
+$returns_hero_bg           = get_field( 'returns_hero_bg' );
+$returns_important_title   = get_field( 'returns_important_title' ) ?: 'Что важно знать';
+$returns_important_description = get_field( 'returns_important_description' ) ?: 'Условия возврата и обмена зависят от состояния товара, его комплектности, сохранности упаковки и характера поставки. Для уточнения деталей по конкретному заказу рекомендуем связаться с нами до оформления возврата.';
+$returns_terms_title       = get_field( 'returns_terms_title' ) ?: 'Условия возврата и обмена';
+$returns_process_title     = get_field( 'returns_process_title' ) ?: 'Как происходит возврат и обмен';
+$returns_process_description = get_field( 'returns_process_description' ) ?: 'Если у вас возник вопрос по возврату или обмену товара, рекомендуем предварительно связаться с нами. Мы поможем уточнить порядок действий по конкретной позиции, комплектности и условиям поставки.';
+$returns_faq_title         = get_field( 'returns_faq_title' ) ?: 'Частые вопросы';
+$returns_faq_description   = get_field( 'returns_faq_description' ) ?: 'Собрали ответы на вопросы, которые чаще всего возникают при возврате или обмене товара. Если вашей ситуации нет в списке, свяжитесь с нами — поможем уточнить детали.';
+
+if ( empty( $returns_hero_bg ) ) {
+	$returns_hero_bg = get_template_directory_uri() . '/img/return-bg.png';
+}
 ?>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -30,7 +45,7 @@ get_header();
     </style>
 
 		<!-- Hero Section -->
-    <section class="relative overflow-hidden -mt-[120px] lg:-mt-[220px] bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/return-bg.png' ); ?>')] bg-cover bg-right">
+    <section class="relative overflow-hidden -mt-[120px] lg:-mt-[220px] bg-[url('<?php echo esc_url( $returns_hero_bg ); ?>')] bg-cover bg-right">
         <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2 relative z-10">
@@ -40,10 +55,10 @@ get_header();
                         <span class="text-gray-700">Возврат и обмен</span>
                     </nav>
                     <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                        Возврат и обмен
+                        <?php echo esc_html( $returns_hero_title ); ?>
                     </h1>
                     <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
-                        На этой странице собрана основная информация о порядке возврата и обмена товара. Если у вас остались вопросы по конкретной позиции или условиям поставки, свяжитесь с нами — поможем уточнить детали.
+                        <?php echo esc_html( $returns_hero_description ); ?>
                     </p>
                     <a href="#" class="js-open-consultation inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
                         Получить консультацию
@@ -58,9 +73,9 @@ get_header();
     <section class="py-12 lg:py-16 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="bg-white border border-gray-200 rounded-lg p-6 lg:p-8 shadow-sm">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">Что важно знать</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-4"><?php echo esc_html( $returns_important_title ); ?></h2>
                 <p class="text-gray-600">
-                    Условия возврата и обмена зависят от состояния товара, его комплектности, сохранности упаковки и характера поставки. Для уточнения деталей по конкретному заказу рекомендуем связаться с нами до оформления возврата.
+                    <?php echo esc_html( $returns_important_description ); ?>
                 </p>
             </div>
         </div>
@@ -69,25 +84,37 @@ get_header();
     <!-- Условия возврата и обмена -->
     <section class="pb-12 lg:pb-16 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
-            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-8">Условия возврата и обмена</h2>
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-8"><?php echo esc_html( $returns_terms_title ); ?></h2>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <?php
+                $terms_cards = get_field( 'returns_terms_cards' );
+                if ( $terms_cards ) :
+                    foreach ( $terms_cards as $card ) :
+                ?>
                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                    <h4 class="font-bold text-gray-900 mb-3">Товар надлежащего качества</h4>
-                    <p class="text-gray-600 text-sm">Возврат или обмен возможен при сохранности товарного вида, комплектности и упаковки, если товар не был в эксплуатации и соответствует условия возврата.</p>
+                    <h4 class="font-bold text-gray-900 mb-3"><?php echo esc_html( $card['card_title'] ); ?></h4>
+                    <p class="text-gray-600 text-sm"><?php echo esc_html( $card['card_description'] ); ?></p>
                 </div>
+                <?php
+                    endforeach;
+                else :
+                    $default_cards = array(
+                        array( 'title' => 'Товар надлежащего качества', 'desc' => 'Возврат или обмен возможен при сохранности товарного вида, комплектности и упаковки, если товар не был в эксплуатации и соответствует условия возврата.' ),
+                        array( 'title' => 'Товар с недостатками', 'desc' => 'Если при получении или в процессе эксплуатации выявлены недостатки, свяжитесь с нами. Мы поможем уточнить порядок дальнейших действий по конкретной ситуации.' ),
+                        array( 'title' => 'Документы и подтверждение', 'desc' => 'Для обращения по возврату или обмену желательно сохранить документы, подтверждающие покупку, а также информацию по заказу и товарной позиции.' ),
+                        array( 'title' => 'Согласование обращения', 'desc' => 'Перед возвратом или обменом рекомендуем заранее связаться с менеджером, чтобы уточнить порядок передачи товара, комплектность и дальнейшие шаги.' ),
+                    );
+                    foreach ( $default_cards as $card ) :
+                ?>
                 <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                    <h4 class="font-bold text-gray-900 mb-3">Товар с недостатками</h4>
-                    <p class="text-gray-600 text-sm">Если при получении или в процессе эксплуатации выявлены недостатки, свяжитесь с нами. Мы поможем уточнить порядок дальнейших действий по конкретной ситуации.</p>
+                    <h4 class="font-bold text-gray-900 mb-3"><?php echo esc_html( $card['title'] ); ?></h4>
+                    <p class="text-gray-600 text-sm"><?php echo esc_html( $card['desc'] ); ?></p>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                    <h4 class="font-bold text-gray-900 mb-3">Документы и подтверждение</h4>
-                    <p class="text-gray-600 text-sm">Для обращения по возврату или обмену желательно сохранить документы, подтверждающие покупку, а также информацию по заказу и товарной позиции.</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-                    <h4 class="font-bold text-gray-900 mb-3">Согласование обращения</h4>
-                    <p class="text-gray-600 text-sm">Перед возвратом или обменом рекомендуем заранее связаться с менеджером, чтобы уточнить порядок передачи товара, комплектность и дальнейшие шаги.</p>
-                </div>
+                <?php
+                    endforeach;
+                endif;
+                ?>
             </div>
         </div>
     </section>
@@ -96,8 +123,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-gray-50">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Как происходит возврат и обмен</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Если у вас возник вопрос по возврату или обмену товара, рекомендуем предварительно связаться с нами. Мы поможем уточнить порядок действий по конкретной позиции, комплектности и условиям поставки.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $returns_process_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $returns_process_description ); ?></p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -149,8 +176,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Частые вопросы</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Собрали ответы на вопросы, которые чаще всего возникают при возврате или обмене товара. Если вашей ситуации нет в списке, свяжитесь с нами — поможем уточнить детали.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $returns_faq_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $returns_faq_description ); ?></p>
             </div>
 
             <div class="max-w-3xl mx-auto">

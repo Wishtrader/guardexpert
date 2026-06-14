@@ -1737,6 +1737,30 @@ function guardexpert_register_returns_fields() {
 				'default_value' => 'Условия возврата и обмена',
 				'wrapper' => array( 'width' => '50' ),
 			),
+			array(
+				'key'          => 'field_returns_terms_cards',
+				'label'        => 'Карточки условий',
+				'name'         => 'returns_terms_cards',
+				'type'         => 'repeater',
+				'max'          => 4,
+				'button_label' => 'Добавить карточку',
+				'layout'       => 'block',
+				'sub_fields'   => array(
+					array(
+						'key'   => 'field_returns_card_title',
+						'label' => 'Заголовок',
+						'name'  => 'card_title',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_returns_card_description',
+						'label' => 'Описание',
+						'name'  => 'card_description',
+						'type'  => 'textarea',
+						'rows'  => 4,
+					),
+				),
+			),
 
 			array(
 				'key'   => 'field_returns_process_tab',
