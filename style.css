@@ -33,3 +33,41 @@ Version: 1.0.0
 /* Header (1024px → 1200px) */
 .fluid-logo { height: clamp(40px, calc(40px + 20 * (100vw - 1024px) / 176), 60px); }
 .fluid-cat-btn { width: clamp(130px, calc(130px + 50 * (100vw - 1024px) / 176), 180px); }
+
+/* ===== Process cards carousel (mobile) ===== */
+.process-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+.process-scroll::-webkit-scrollbar { display: none; }
+
+/* ===== Pagination ===== */
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.pagination .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #374151;
+    background: #fff;
+    transition: all 0.2s;
+}
+.pagination .page-numbers:hover {
+    border-color: #B3262E;
+    color: #B3262E;
+}
+.pagination .page-numbers.current {
+    background: #B3262E;
+    border-color: #B3262E;
+    color: #fff;
+}
+.pagination .prev,
+.pagination .next {
+    font-size: 18px;
+}

@@ -50,13 +50,11 @@ if ( $certificates ) {
 		<!-- Certificates Grid -->
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="certificates-grid">
 			<?php foreach ( $certificate_images as $index => $image ): ?>
-			<div class="certificate-card bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer group" data-certificate="<?php echo esc_attr( $index + 1 ); ?>">
-				<div class="aspect-[3/4] bg-gray-50 p-4 flex items-center justify-center">
+			<div class="certificate-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow cursor-pointer group" data-certificate="<?php echo esc_attr( $index + 1 ); ?>">
+				<div class="aspect-[3/4] bg-gray-50 flex items-center justify-center">
 					<img src="<?php echo esc_url( $image ); ?>" alt="Сертификат <?php echo esc_attr( $index + 1 ); ?>" class="w-full h-full object-contain">
 				</div>
-				<div class="p-4 text-center">
-					<p class="text-sm text-gray-600 group-hover:text-[#B22234] transition-colors">Нажмите для просмотра</p>
-				</div>
+				
 			</div>
 			<?php endforeach; ?>
 		</div>

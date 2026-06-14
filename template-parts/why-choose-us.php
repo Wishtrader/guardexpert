@@ -6,163 +6,137 @@
  */
 ?>
 
+<?php
+// Per-page custom fields
+$page_id = get_queried_object_id();
+
+if ( is_page() && $page_id > 0 ) {
+	$why_title = get_field( 'front_why_title', $page_id );
+	$why_description = get_field( 'front_why_description', $page_id );
+	$why_features = get_field( 'front_why_features', $page_id );
+}
+if ( empty( $why_title ) ) {
+	$why_title = 'Почему выбирают Гардэксперт';
+}
+if ( empty( $why_description ) ) {
+	$why_description = 'Надежная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.';
+}
+
+// Fallback features if repeater is empty
+$fallback_features = array(
+	array(
+		'title' => 'С 2012 года на рынке',
+		'description' => 'Более 14 лет работаем в сфере систем безопасности и поставок оборудования для объектов разного масштаба.',
+		'icon_svg' => '<img src="' . esc_url( get_template_directory_uri() . '/img/f1.svg' ) . '" alt="" class="w-12 h-12 md:w-16 md:h-16 object-contain" />',
+	),
+	array(
+		'title' => 'Подбор под задачу',
+		'description' => 'Помогаем подобрать оборудование с учетом объекта, задач, совместимости и бюджета.',
+		'icon_svg' => '<img src="' . esc_url( get_template_directory_uri() . '/img/f2.svg' ) . '" alt="" class="w-12 h-12 md:w-16 md:h-16 object-contain" />',
+	),
+	array(
+		'title' => 'Поставка по всей Беларуси',
+		'description' => 'Работаем с клиентами по всей РБ и организуем поставку оборудования на объект.',
+		'icon_svg' => '<img src="' . esc_url( get_template_directory_uri() . '/img/f3.svg' ) . '" alt="" class="w-12 h-12 md:w-16 md:h-16 object-contain" />',
+	),
+	array(
+		'title' => 'Сертификаты и документы',
+		'description' => 'Предоставляем сопроводительную документацию и подтверждающие материалы по продукции.',
+		'icon_svg' => '<img src="' . esc_url( get_template_directory_uri() . '/img/f4.svg' ) . '" alt="" class="w-12 h-12 md:w-16 md:h-16 object-contain" />',
+	),
+	array(
+		'title' => 'Техническая экспертиза',
+		'description' => 'Консультируем по ОПС, СКУД и видеонаблюдению, помогаем разобраться в характеристиках и выборе.',
+		'icon_svg' => '<img src="' . esc_url( get_template_directory_uri() . '/img/f5.svg' ) . '" alt="" class="w-12 h-12 md:w-16 md:h-16 object-contain" />',
+	),
+	array(
+		'title' => 'Поддержка после покупки',
+		'description' => 'При необходимости подключаем проектирование, монтаж, пусконаладку, обслуживание и модернизацию.',
+		'icon_svg' => '<img src="' . esc_url( get_template_directory_uri() . '/img/f6.svg' ) . '" alt="" class="w-12 h-12 md:w-16 md:h-16 object-contain" />',
+	),
+);
+
+$allowed_icon_svg = array(
+	'img' => array(
+		'src' => array(),
+		'alt' => array(),
+		'class' => array(),
+	),
+	'svg' => array(
+		'class' => array(),
+		'viewBox' => array(),
+		'fill' => array(),
+		'stroke' => array(),
+		'stroke-width' => array(),
+	),
+	'path' => array(
+		'd' => array(),
+	),
+	'line' => array(
+		'x1' => array(),
+		'y1' => array(),
+		'x2' => array(),
+		'y2' => array(),
+	),
+	'circle' => array(
+		'cx' => array(),
+		'cy' => array(),
+		'r' => array(),
+		'fill' => array(),
+	),
+);
+?>
+
 <!-- Why Choose Us Section -->
 <section class="bg-[#FAF9F7] py-16 md:py-20">
 	<div class="max-w-[1200px] mx-auto px-4">
 		<!-- Section Header -->
 		<div class="text-center mb-12 md:mb-16">
 			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6">
-				Почему выбирают Гардэксперт
+				<?php echo esc_html( $why_title ); ?>
 			</h2>
 			<p class="text-base md:text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
-				Надежная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажные организаций и объектов по все Беларуси.
+				<?php echo esc_html( $why_description ); ?>
 			</p>
 		</div>
 
 		<!-- Features Grid -->
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-			<!-- Feature 1: Calendar -->
-			<div class="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
-				<div class="flex items-start gap-4 md:gap-6">
-					<div class="flex-shrink-0">
-						<svg class="w-12 h-12 md:w-16 md:h-16 text-[#B3262E]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-							<rect x="8" y="12" width="48" height="44" rx="4"/>
-							<line x1="8" y1="24" x2="56" y2="24"/>
-							<line x1="20" y1="8" x2="20" y2="16"/>
-							<line x1="44" y1="8" x2="44" y2="16"/>
-							<circle cx="32" cy="42" r="8"/>
-							<line x1="32" y1="38" x2="32" y2="42"/>
-							<line x1="32" y1="42" x2="35" y2="45"/>
-						</svg>
+			<?php if ( ! empty( $why_features ) && is_array( $why_features ) ) : ?>
+				<?php foreach ( $why_features as $feature ) : ?>
+					<div class="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
+						<div class="flex items-start gap-4 md:gap-6">
+							<?php if ( ! empty( $feature['icon'] ) ) : ?>
+								<div class="flex-shrink-0">
+									<img src="<?php echo esc_url( $feature['icon'] ); ?>" alt="" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+								</div>
+							<?php endif; ?>
+							<div>
+								<h3 class="text-xl md:text-2xl font-semibold text-black mb-3"><?php echo esc_html( $feature['title'] ); ?></h3>
+								<?php if ( ! empty( $feature['description'] ) ) : ?>
+									<p class="text-sm md:text-base text-gray-700 leading-relaxed"><?php echo esc_html( $feature['description'] ); ?></p>
+								<?php endif; ?>
+							</div>
+						</div>
 					</div>
-					<div>
-						<h3 class="text-xl md:text-2xl font-bold text-black mb-3">С 2012 года на рынке</h3>
-						<p class="text-sm md:text-base text-gray-700 leading-relaxed">
-							Более 14 лет работаем в сфере систем безопасности и поставок оборудования для объектов разного масштаба.
-						</p>
+				<?php endforeach; ?>
+			<?php else : ?>
+				<?php foreach ( $fallback_features as $fb ) : ?>
+					<div class="bg-white rounded-lg md:px-[30px] md:py-[20px] md:p-8 shadow-lg hover:shadow-xl transition-shadow">
+						<div class="flex items-start gap-4 md:gap-6">
+							<div class="flex flex-col items-start justify-start gap-4">
+							<div class="md:min-h-[52px] md:min-w-[52px]">
+								<?php echo wp_kses( $fb['icon_svg'], $allowed_icon_svg ); ?>
+							</div>
+						<div>
+								<h3 class="text-xl md:text-[22px] font-semibold text-black mb-3"><?php echo esc_html( $fb['title'] ); ?></h3>
+								<p class="text-sm md:text-base text-gray-700 leading-relaxed"><?php echo esc_html( $fb['description'] ); ?></p>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-
-			<!-- Feature 2: Selection -->
-			<div class="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
-				<div class="flex items-start gap-4 md:gap-6">
-					<div class="flex-shrink-0">
-						<svg class="w-12 h-12 md:w-16 md:h-16 text-[#B3262E]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-							<line x1="8" y1="16" x2="56" y2="16"/>
-							<line x1="8" y1="32" x2="56" y2="32"/>
-							<line x1="8" y1="48" x2="56" y2="48"/>
-							<circle cx="20" cy="16" r="4" fill="currentColor"/>
-							<circle cx="36" cy="32" r="4" fill="currentColor"/>
-							<circle cx="28" cy="48" r="4" fill="currentColor"/>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl md:text-2xl font-bold text-black mb-3">Подбор под задачу</h3>
-						<p class="text-sm md:text-base text-gray-700 leading-relaxed">
-							Помогаем подобрать оборудование с учетом объекта, задач, совместимости и бюджета.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Feature 3: Delivery -->
-			<div class="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
-				<div class="flex items-start gap-4 md:gap-6">
-					<div class="flex-shrink-0">
-						<svg class="w-12 h-12 md:w-16 md:h-16 text-[#B3262E]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M8 20 L24 20 L28 12 L44 12 L52 28 L56 28 L56 40 L48 40"/>
-							<path d="M8 20 L8 40 L16 40"/>
-							<circle cx="20" cy="44" r="6"/>
-							<circle cx="44" cy="44" r="6"/>
-							<path d="M24 44 L40 44"/>
-							<path d="M48 32 L52 32 L56 36"/>
-							<line x1="44" y1="20" x2="52" y2="20"/>
-							<line x1="46" y1="16" x2="50" y2="16"/>
-							<line x1="48" y1="12" x2="48" y2="8"/>
-							<path d="M48 8 L44 12 L52 12 Z"/>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl md:text-2xl font-bold text-black mb-3">Поставка по всей Беларуси</h3>
-						<p class="text-sm md:text-base text-gray-700 leading-relaxed">
-							Работаем с клиентами по всей РБ и организуем поставку оборудования на объект.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Feature 4: Certificates -->
-			<div class="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
-				<div class="flex items-start gap-4 md:gap-6">
-					<div class="flex-shrink-0">
-						<svg class="w-12 h-12 md:w-16 md:h-16 text-[#B3262E]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M16 8 L40 8 L48 16 L48 48 L16 48 Z"/>
-							<path d="M40 8 L40 16 L48 16"/>
-							<circle cx="32" cy="32" r="8"/>
-							<path d="M28 32 L31 35 L36 29"/>
-							<path d="M32 40 L32 48 L28 44"/>
-							<path d="M32 48 L36 44"/>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl md:text-2xl font-bold text-black mb-3">Сертификаты и документы</h3>
-						<p class="text-sm md:text-base text-gray-700 leading-relaxed">
-							Предоставляем сопроводительную документацию и подтверждающие материалы по продукции.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Feature 5: Expertise -->
-			<div class="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
-				<div class="flex items-start gap-4 md:gap-6">
-					<div class="flex-shrink-0">
-						<svg class="w-12 h-12 md:w-16 md:h-16 text-[#B3262E]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M32 8 L32 16"/>
-							<path d="M32 16 C20 16 12 24 12 32 C12 44 24 52 32 56 C40 52 52 44 52 32 C52 24 44 16 32 16 Z"/>
-							<circle cx="24" cy="28" r="3"/>
-							<circle cx="40" cy="28" r="3"/>
-							<circle cx="24" cy="38" r="3"/>
-							<circle cx="40" cy="38" r="3"/>
-							<circle cx="32" cy="33" r="3"/>
-							<line x1="27" y1="28" x2="29" y2="31"/>
-							<line x1="37" y1="28" x2="35" y2="31"/>
-							<line x1="27" y1="38" x2="29" y2="35"/>
-							<line x1="37" y1="38" x2="35" y2="35"/>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl md:text-2xl font-bold text-black mb-3">Техническая экспертиза</h3>
-						<p class="text-sm md:text-base text-gray-700 leading-relaxed">
-							Консультируем по ОПС, СКУД и видеонаблюдению, помогаем разобраться в характеристиках и выборе.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Feature 6: Support -->
-			<div class="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
-				<div class="flex items-start gap-4 md:gap-6">
-					<div class="flex-shrink-0">
-						<svg class="w-12 h-12 md:w-16 md:h-16 text-[#B3262E]" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M12 44 L28 28"/>
-							<path d="M20 44 L28 36"/>
-							<path d="M28 28 L36 20"/>
-							<path d="M36 20 C40 16 44 16 48 20 C52 24 52 28 48 32 L40 40"/>
-							<path d="M40 40 L44 44"/>
-							<path d="M36 36 L40 40"/>
-							<circle cx="16" cy="48" r="4"/>
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-xl md:text-2xl font-bold text-black mb-3">Поддержка после покупки</h3>
-						<p class="text-sm md:text-base text-gray-700 leading-relaxed">
-							При необходимости подключаем проектирование, монтаж, пусконаладку, обслуживание и модернизацию.
-						</p>
-					</div>
-				</div>
-			</div>
+				<?php endforeach; ?>
+			<?php endif; ?>
 		</div>
 	</div>
 </section>

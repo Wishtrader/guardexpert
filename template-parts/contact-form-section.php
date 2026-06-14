@@ -4,32 +4,72 @@
  *
  * @package guardexpert
  */
+
+// Per-page custom fields
+$page_id = get_queried_object_id();
+$page_slug = get_page_uri( $page_id );
+
+if ( is_page() && $page_id > 0 ) {
+	// Check for page-specific fields first (e.g., returns_form_title)
+	$form_title = get_field( $page_slug . '_form_title', $page_id );
+	$form_description = get_field( $page_slug . '_form_description', $page_id );
+	$form_form_title = get_field( $page_slug . '_form_form_title', $page_id );
+	$form_form_description = get_field( $page_slug . '_form_form_description', $page_id );
+	$form_success_text = get_field( $page_slug . '_form_success_text', $page_id );
+	$form_bg = get_field( $page_slug . '_form_bg', $page_id );
+
+	// Fallback to front_ fields
+	if ( empty( $form_title ) ) $form_title = get_field( 'front_form_title', $page_id );
+	if ( empty( $form_description ) ) $form_description = get_field( 'front_form_description', $page_id );
+	if ( empty( $form_form_title ) ) $form_form_title = get_field( 'front_form_form_title', $page_id );
+	if ( empty( $form_form_description ) ) $form_form_description = get_field( 'front_form_form_description', $page_id );
+	if ( empty( $form_success_text ) ) $form_success_text = get_field( 'front_form_success_text', $page_id );
+	if ( empty( $form_bg ) ) $form_bg = get_field( 'front_form_bg', $page_id );
+}
+if ( empty( $form_title ) ) {
+	$form_title = 'Подберем оборудование под вашу задачу';
+}
+if ( empty( $form_description ) ) {
+	$form_description = 'Поможем с выбором оборудования для ОПС, СКУД и видеонаблюдения, проконсультируем по совместимости и поставке по Беларуси.';
+}
+if ( empty( $form_form_title ) ) {
+	$form_form_title = 'Оставьте заявку';
+}
+if ( empty( $form_form_description ) ) {
+	$form_form_description = 'Свяжемся с вами, поможем подобрать оборудование и ответим на вопросы по поставке.';
+}
+if ( empty( $form_success_text ) ) {
+	$form_success_text = 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.';
+}
+if ( empty( $form_bg ) ) {
+	$form_bg = get_template_directory_uri() . '/img/form-bg.png';
+}
 ?>
 
 <!-- Contact Form Section -->
-<section class="relative py-16 md:py-20" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/form-bg.png'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; margin-left: calc(-50vw + 50%);">
+<section class="relative py-16 md:py-20" style="background-image: url('<?php echo esc_url( $form_bg ); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; margin-left: calc(-50vw + 50%);">
 	<div class="max-w-[1200px] mx-auto px-4">
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+		<div class="flex flex-col md:flex-row justify-between gap-[20px] w-full items-center">
 			<!-- Left Column: Text Content -->
-			<div>
-				<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6 leading-tight">
-					Подберем оборудование под вашу задачу
+			<div class="flex flex-col gap-[20px]">
+				<h2 class="text-[26px] md:text-[36px] font-semibold text-black leading-tight">
+					<?php echo esc_html( $form_title ); ?>
 				</h2>
-				<p class="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
-					Поможем с выбором оборудования для ОПС, СКУД и видеонаблюдения, проконсультируем по совместимости и поставке по Беларуси.
+				<p class="text-base md:text-[18px] font-normal text-black leading-relaxed">
+					<?php echo esc_html( $form_description ); ?>
 				</p>
-				<a href="/catalog" class="inline-flex items-center justify-center gap-3 bg-white text-[#B3262E] border-2 border-[#B3262E] px-8 py-4 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-lg">
+				<a href="/catalog" class="inline-flex items-center justify-center gap-3 text-[#B3262E] border-[1px] border-[#B3262E] px-8 py-4 rounded-[2px] hover:bg-[#B3262E] hover:text-white transition-colors md:w-[285px] md:h-[52px] text-[15px]">
 					Перейти в каталог
 				</a>
 			</div>
 
 			<!-- Right Column: Contact Form -->
-			<div class="bg-white rounded-lg p-6 md:p-8 shadow-xl">
-				<h3 class="text-2xl md:text-3xl font-bold text-black mb-3">
-					Оставьте заявку
+			<div class="bg-white rounded-[4px] p-6 md:p-8 shadow-sm max-w-[488px]">
+				<h3 class="text-[26px] md:text-[36px] font-semibold text-black mb-3">
+					<?php echo esc_html( $form_form_title ); ?>
 				</h3>
 				<p class="text-base text-gray-700 mb-6">
-					Свяжемся с вами, поможем подобрать оборудование и ответим на вопросы по поставке.
+					<?php echo esc_html( $form_form_description ); ?>
 				</p>
 
 				<form id="contact-form" class="space-y-4">
@@ -95,7 +135,7 @@
 
 				<!-- Success Message (Hidden by default) -->
 				<div id="form-success" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
-					<p class="text-green-800 text-center">Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.</p>
+					<p class="text-green-800 text-center"><?php echo esc_html( $form_success_text ); ?></p>
 				</div>
 			</div>
 		</div>

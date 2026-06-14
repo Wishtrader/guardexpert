@@ -6,10 +6,26 @@
  */
 
 get_header();
+
+$services_hero_title        = get_field( 'services_hero_title' ) ?: 'Поддержка, внедрение и сопровождение систем безопасности';
+$services_hero_description  = get_field( 'services_hero_description' ) ?: 'Помогаем не только с поставкой оборудования, но и с подбором решений, проектированием, монтажом, пусконаладкой, обслуживанием и модернизацией систем безопасности для бизнеса и объектов по всей Беларуси.';
+$services_hero_bg           = get_field( 'services_hero_bg' );
+$services_main_title        = get_field( 'services_main_title' ) ?: 'Основные услуги';
+$services_main_description  = get_field( 'services_main_description' ) ?: 'Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.';
+$services_audience_title    = get_field( 'services_audience_title' ) ?: 'Для кого подойдут наши услуги';
+$services_audience_description = get_field( 'services_audience_description' ) ?: 'Подбираем оборудование и сопровождаем поставки для компаний, монтажных организаций и объектов разного масштаба по всей Беларуси.';
+$services_work_title        = get_field( 'services_work_title' ) ?: 'Как строится работа';
+$services_work_description  = get_field( 'services_work_description' ) ?: 'Выстраиваем работу последовательно: от запроса и подбора оборудования до поставки и дальнейшего сопровождения.';
+$services_trust_title       = get_field( 'services_trust_title' ) ?: 'Почему нам доверяют выполнение задач';
+$services_trust_description = get_field( 'services_trust_description' ) ?: 'Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.';
+
+if ( empty( $services_hero_bg ) ) {
+	$services_hero_bg = get_template_directory_uri() . '/img/serv-bg.png';
+}
 ?>
 <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Hero Section -->
-    <section class="hero-bg relative overflow-hidden -mt-[100px] lg:-mt-[200px] bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/serv-bg.png' ); ?>')] bg-cover bg-right">
+    <section class="hero-bg relative overflow-hidden -mt-[100px] lg:-mt-[200px] bg-[url('<?php echo esc_url( $services_hero_bg ); ?>')] bg-cover bg-right">
         <div class="max-w-[1200px] mx-auto px-4 pt-[100px] lg:pt-[200px] pb-12 lg:pb-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2">
@@ -19,10 +35,10 @@ get_header();
                         <span class="text-gray-700">Услуги</span>
                     </nav>
                     <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                        Поддержка, внедрение и сопровождение систем безопасности
+                        <?php echo esc_html( $services_hero_title ); ?>
                     </h1>
                     <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
-                        Помогаем не только с поставкой оборудования, но и с подбором решений, проектированием, монтажом, пусконаладкой, обслуживанием и модернизацией систем безопасности для бизнеса и объектов по всей Беларуси.
+                        <?php echo esc_html( $services_hero_description ); ?>
                     </p>
                     <a href="#" class="inline-flex items-center gap-2 bg-[#B22234] text-white px-6 py-3 rounded font-medium hover:bg-primary-dark transition">
                         <i data-lucide="grid-3x3" class="w-5 h-5 text-white"></i>
@@ -82,8 +98,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Основные услуги</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_main_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $services_main_description ); ?></p>
             </div>
 
 			<div class="grid lg:grid-cols-[488px_650px] gap-6">
@@ -139,8 +155,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-gray-50">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Для кого подойдут наши услуги</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Подбираем оборудование и сопровождаем поставки для компаний, монтажных организаций и объектов разного масштаба по всей Беларуси.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_audience_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $services_audience_description ); ?></p>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -180,8 +196,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Как строится работа</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Выстраиваем работу последовательно: от запроса и подбора оборудования до поставки и дальнейшего сопровождения.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_work_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $services_work_description ); ?></p>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -233,8 +249,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-gray-50">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Почему нам доверяют выполнение задач</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_trust_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $services_trust_description ); ?></p>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

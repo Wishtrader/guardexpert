@@ -6,6 +6,20 @@
  */
 
 get_header();
+
+$shipping_hero_title        = get_field( 'shipping_hero_title' ) ?: 'Оплата и доставка';
+$shipping_hero_description  = get_field( 'shipping_hero_description' ) ?: 'На этой странице собрана основная информация о способах оплаты, условиях поставки и порядке согласования доставки. Если у вас остались вопросы по конкретному заказу, свяжитесь с нами — поможем уточнить детали.';
+$shipping_hero_bg           = get_field( 'shipping_hero_bg' );
+$shipping_payment_title     = get_field( 'shipping_payment_title' ) ?: 'Способы оплаты';
+$shipping_delivery_title    = get_field( 'shipping_delivery_title' ) ?: 'Условия доставки';
+$shipping_process_title     = get_field( 'shipping_process_title' ) ?: 'Как происходит оформление и поставка';
+$shipping_process_description = get_field( 'shipping_process_description' ) ?: 'Выстроили процесс так, чтобы заказ был понятным и удобным: от выбора оборудования и согласования деталей до поставки на объект.';
+$shipping_faq_title         = get_field( 'shipping_faq_title' ) ?: 'Частые вопросы';
+$shipping_faq_description   = get_field( 'shipping_faq_description' ) ?: 'Собрали ответы на основные вопросы по оформлению заказа, оплате и условиям поставки. Если нужной информации нет в списке, свяжитесь с нами — поможем уточнить детали.';
+
+if ( empty( $shipping_hero_bg ) ) {
+	$shipping_hero_bg = get_template_directory_uri() . '/img/shipping-bg.png';
+}
 ?>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -29,7 +43,7 @@ get_header();
         }
     </style>
 <!-- Hero Section -->
-    <section class="relative overflow-hidden -mt-[120px] lg:-mt-[220px] bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/shipping-bg.png' ); ?>')] bg-cover bg-center">
+    <section class="relative overflow-hidden -mt-[120px] lg:-mt-[220px] bg-[url('<?php echo esc_url( $shipping_hero_bg ); ?>')] bg-cover bg-center">
         <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2 relative z-10">
@@ -39,10 +53,10 @@ get_header();
                         <span class="text-black">Оплата и доставка</span>
                     </nav>
                     <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                        Оплата и доставка
+                        <?php echo esc_html( $shipping_hero_title ); ?>
                     </h1>
                     <p class="text-black text-base lg:text-lg mb-8 max-w-[590px]">
-                        На этой странице собрана основная информация о способах оплаты, условиях поставки и порядке согласования доставки. Если у вас остались вопросы по конкретному заказу, свяжитесь с нами - поможем уточнить детали.
+                        <?php echo esc_html( $shipping_hero_description ); ?>
                     </p>
                     <a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B3262E] text-[#FAF9F7] px-8 py-3 rounded font-normal hover:bg-[#8B1A2B] transition shadow-md md:w-[285px] md:h-[52px] text-[15px]">
                         Получить консультацию
@@ -57,7 +71,7 @@ get_header();
     <section class="py-12 lg:py-[80px] bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="bg-white border border-gray-200 rounded-sm p-6 lg:p-[10px] shadow-md">
-                <h2 class="text-2xl lg:text-4xl font-semibold text-gray-900 mb-6">Способы оплаты</h2>
+                <h2 class="text-2xl lg:text-4xl font-semibold text-gray-900 mb-6"><?php echo esc_html( $shipping_payment_title ); ?></h2>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px]  shadow-md hover:shadow-lg transition">
                         <h4 class="font-semibold md:text-[22px] text-black mb-3">Безналичный расчет</h4>
@@ -76,7 +90,7 @@ get_header();
             </div>
 
 						<div class="bg-white border border-gray-200 rounded-sm p-6 lg:p-[10px] shadow-md md:mt-[40px]">
-                <h2 class="text-2xl lg:text-4xl font-semibold text-gray-900 mb-6">Условия доставки</h2>
+                <h2 class="text-2xl lg:text-4xl font-semibold text-gray-900 mb-6"><?php echo esc_html( $shipping_delivery_title ); ?></h2>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-[18px]">
                     <div class="bg-white border border-gray-200 rounded-[4px] py-[20px] px-[64px] shadow-md hover:shadow-lg transition lg:px-[14px] lg:py-[24px]">
                         <h4 class="font-semibold md:text-[22px] text-black mb-3">Доставка по Республике Беларусь</h4>
@@ -107,8 +121,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-gray-50">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Как происходит оформление и поставка</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Выстроили процесс так, чтобы заказ был понятным и удобным: от выбора оборудования и согласования деталей до поставки на объект.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $shipping_process_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $shipping_process_description ); ?></p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -160,8 +174,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Частые вопросы</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Собрали ответы на основные вопросы по оформлению заказа, оплате и условиям поставки. Если нужной информации нет в списке, свяжитесь с нами — поможем уточнить детали.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $shipping_faq_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $shipping_faq_description ); ?></p>
             </div>
 
             <div class="max-w-3xl mx-auto">

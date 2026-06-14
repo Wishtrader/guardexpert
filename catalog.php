@@ -6,6 +6,11 @@
  */
 
 get_header();
+
+$catalog_title        = get_field( 'catalog_title' ) ?: 'Каталог оборудования';
+$catalog_description  = get_field( 'catalog_description' ) ?: 'Оборудование для ОПС, СКУД, видеонаблюдения и сопутствующих инженерных решений с возможностью подбора под задачу и объект.';
+$catalog_cta_title    = get_field( 'catalog_cta_title' ) ?: 'Нужна помощь с подбором оборудования?';
+$catalog_cta_description = get_field( 'catalog_cta_description' ) ?: 'Поможем подобрать решение по задаче, совместимости, стоимости и поставке.';
 ?>
 
 <!-- Catalog Section -->
@@ -23,10 +28,10 @@ get_header();
 
 		<!-- Page Title -->
 		<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
-			Каталог оборудования
+			<?php echo esc_html( $catalog_title ); ?>
 		</h1>
 		<p class="text-base md:text-lg text-gray-700 max-w-2xl mb-8">
-			Оборудование для ОПС, СКУД, видеонаблюдения и сопутствующих инженерных решений с возможностью под задачу и объект.
+			<?php echo esc_html( $catalog_description ); ?>
 		</p>
 
 		<!-- Search and Sort Bar -->
@@ -111,10 +116,10 @@ get_header();
 				</div>
 				<div class="flex-1 text-center md:text-left">
 					<h3 class="text-xl md:text-2xl font-bold text-black mb-2">
-						Нужна помощь с подбором оборудования?
+						<?php echo esc_html( $catalog_cta_title ); ?>
 					</h3>
 					<p class="text-base text-gray-700">
-						Поможем подобрать решение по задаче, совместимости, стоимости и поставке.
+						<?php echo esc_html( $catalog_cta_description ); ?>
 					</p>
 				</div>
 				<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">

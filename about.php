@@ -6,22 +6,42 @@
  */
 
 get_header();
+
+$about_hero_title       = get_field( 'about_hero_title' ) ?: 'Гардэкспер - поставка оборудования и экспертная поддержка для систем безопасности';
+$about_hero_description = get_field( 'about_hero_description' ) ?: 'С 2012 года работаем в сфере систем безопасности, поставляем оборудование для ОПС, СКУД и видеонаблюдения, консультируем по подбору, совместимости и сопровождению решений для бизнеса и объектов по всей Беларуси.';
+$about_hero_bg          = get_field( 'about_hero_bg' );
+$about_who_title        = get_field( 'about_who_title' ) ?: 'Кто мы?';
+$about_who_description  = get_field( 'about_who_description' ) ?: 'Гардэксперт — компания в сфере систем безопасности и поставок оборудования для объектов различного назначения. Мы помогаем клиентам подобрать оборудование под задачу, консультируем по характеристикам и совместимости, а при необходимости подключаем проектирование, монтаж, пусконаладку, обслуживание и модернизацию.';
+$about_why_title        = get_field( 'about_why_title' ) ?: 'Почему выбирают Гардэксперт';
+$about_why_description  = get_field( 'about_why_description' ) ?: 'Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.';
+$about_what_title        = get_field( 'about_what_title' ) ?: 'Чем мы занимаемся';
+$about_what_description  = get_field( 'about_what_description' ) ?: 'Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.';
+$about_work_with_title        = get_field( 'about_work_with_title' ) ?: 'С кем мы работаем';
+$about_work_with_description  = get_field( 'about_work_with_description' ) ?: 'Подбираем оборудование и сопровождаем поставки для компаний, монтажных организаций и объектов разного масштаба по всей Беларуси.';
+$about_work_title        = get_field( 'about_work_title' ) ?: 'Как строится работа';
+$about_work_description  = get_field( 'about_work_description' ) ?: 'Выстраиваем работу последовательно: от запроса и подбора оборудования до поставки и дальнейшего сопровождения.';
+$about_cert_title        = get_field( 'about_cert_title' ) ?: 'Сертификаты и документы';
+$about_cert_description  = get_field( 'about_cert_description' ) ?: 'Подтверждающие материалы, сопроводительная документация и документы, которые помогают работать с оборудованием уверенно и прозрачно.';
+
+if ( empty( $about_hero_bg ) ) {
+	$about_hero_bg = get_template_directory_uri() . '/img/about-bg.png';
+}
 ?>
 <!-- Hero Section -->
-    <section class="hero-about-bg relative overflow-hidden -mt-[120px] lg:-mt-[220px] bg-[url('<?php echo esc_url( get_template_directory_uri() . '/img/about-bg.png' ); ?>')] bg-cover bg-right">
+    <section class="hero-about-bg relative overflow-hidden -mt-[120px] lg:-mt-[220px] bg-[url('<?php echo esc_url( $about_hero_bg ); ?>')] bg-cover bg-right">
         <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2 relative z-10">
                     <nav class="text-sm text-gray-500 mb-6">
-                        <a href="#" class="hover:text-[#B22234]">Главная</a>
+                        <a href="/" class="hover:text-[#B22234]">Главная</a>
                         <span class="mx-2">/</span>
                         <span class="text-gray-700">О компании</span>
                     </nav>
                     <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                        Гардэкспер - поставка оборудования и экспертная поддержка для систем безопасности
+                        <?php echo esc_html( $about_hero_title ); ?>
                     </h1>
                     <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
-                        С 2012 года работаем в сфере систем безопасности, поставляем оборудование для ОПС, СКУД и видеонаблюдения, консультируем по подбору, совместимости и сопровождению решений для бизнеса и объектов по всей Беларуси.
+                        <?php echo esc_html( $about_hero_description ); ?>
                     </p>
                     <a href="/" class="inline-flex items-center gap-2 bg-[#B22234] text-white px-6 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
                         <i data-lucide="grid-3x3" class="w-5 h-5"></i>
@@ -82,9 +102,9 @@ get_header();
             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
                 <div class="grid lg:grid-cols-2">
                     <div class="p-8 lg:p-12 flex flex-col justify-center">
-                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">Кто мы?</h2>
+                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4"><?php echo esc_html( $about_who_title ); ?></h2>
                         <p class="text-gray-600">
-                            Гардэксперт - компания в сфере систем безопасности и поставок оборудования для объектов различного назначения. Мы помогаем клиентам подобрать оборудование под задачу, консультируем по характеристикам и совместимости, а при необходимости подключаем проектирование, монтаж, пусконаладку, обслуживание и модернизацию
+                            <?php echo esc_html( $about_who_description ); ?>
                         </p>
                     </div>
                     <div class="bg-gray-100">
@@ -99,8 +119,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-gray-50">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Почему выбирают Гардэксперт</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $about_why_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $about_why_description ); ?></p>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -178,8 +198,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Чем мы занимаемся</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $about_what_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $about_what_description ); ?></p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-4 mb-4">
@@ -245,8 +265,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-gray-50">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">С кем мы работаем</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Подбираем оборудование и сопровождаем поставки для компаний, монтажных организаций и объектов разного масштаба по всей Беларуси.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $about_work_with_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $about_work_with_description ); ?></p>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -286,8 +306,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Как строится работа</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Выстраиваем работу последовательно: от запроса и подбора оборудования до поставки и дальнейшего сопровождения.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $about_work_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $about_work_description ); ?></p>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -339,8 +359,8 @@ get_header();
     <section class="py-16 lg:py-24 bg-gray-50">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Сертификаты и документы</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Подтверждающие материалы, сопроводительная документация и документы, которые помогают работать с оборудованием уверенно и прозрачно.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $about_cert_title ); ?></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $about_cert_description ); ?></p>
             </div>
 
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">

@@ -104,7 +104,7 @@
 				</a>
 
 				<!-- Navigation Links -->
-				<div class="flex text-base items-center gap-4 fomt-normal">
+				<div class="flex text-base items-center gap-4 fomt-normal flex-nowrap whitespace-nowrap">
 					<a href="/services" class="<?php echo is_page('services') ? 'text-[#B3262E]' : 'text-[#1F1F21]'; ?> hover:text-[#B3262E] text-base transition-colors">Услуги</a>
 					<a href="/about" class="<?php echo is_page('about') ? 'text-[#B3262E]' : 'text-[#1F1F21]'; ?> hover:text-[#B3262E] text-base transition-colors">О компании</a>
 					<a href="/returns" class="<?php echo is_page('returns') ? 'text-[#B3262E]' : 'text-[#1F1F21]'; ?> hover:text-[#B3262E] text-base transition-colors">Возврат и обмен</a>

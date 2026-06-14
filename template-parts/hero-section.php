@@ -21,10 +21,36 @@ foreach ( $category_names as $name ) {
 		? get_term_link( $term )
 		: guardexpert_get_catalog_url();
 }
+
+// Per-page custom fields
+$page_id = get_queried_object_id();
+
+if ( is_page() && $page_id > 0 ) {
+	$hero_title = get_field( 'front_hero_title', $page_id );
+	$hero_description = get_field( 'front_hero_description', $page_id );
+	$hero_image = get_field( 'front_hero_image', $page_id );
+	$hero_image_mobile = get_field( 'front_hero_image_mobile', $page_id );
+	$hero_bg = get_field( 'front_hero_bg', $page_id );
+}
+if ( empty( $hero_title ) ) {
+	$hero_title = 'Оборудование систем безопасности для бизнеса и объектов по всей Беларуси';
+}
+if ( empty( $hero_description ) ) {
+	$hero_description = 'Поставка оборудования для ОПС, СКУД и видеонаблюдения. Помогаем подобрать решения под объект, задачи и совместимость оборудования.';
+}
+if ( empty( $hero_image ) ) {
+	$hero_image = get_template_directory_uri() . '/img/h1.png';
+}
+if ( empty( $hero_image_mobile ) ) {
+	$hero_image_mobile = get_template_directory_uri() . '/img/hero-main.png';
+}
+if ( empty( $hero_bg ) ) {
+	$hero_bg = get_template_directory_uri() . '/img/hero-bg.png';
+}
 ?>
 
 <!-- Hero Section -->
-<section class="relative overflow-hidden -mt-[120px] lg:-mt-[220px]" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/hero-bg.png'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; margin-left: calc(-50vw + 50%);">
+<section class="relative overflow-hidden -mt-[120px] lg:-mt-[220px]" style="background-image: url('<?php echo esc_url( $hero_bg ); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; margin-left: calc(-50vw + 50%);">
 	
 
 	<div class="max-w-[1200px] mx-auto px-4 md:px-0 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
@@ -33,10 +59,10 @@ foreach ( $category_names as $name ) {
 			<!-- Left Column: Text Content (5 columns) -->
 			<div class="lg:col-span-6">
 				<h1 class="text-4xl xl:text-5xl font-bold text-black mb-6 leading-tight">
-					Оборудование систем безопасности для бизнеса и объектов по всей Беларуси
+					<?php echo esc_html( $hero_title ); ?>
 				</h1>
 				<p class="text-base xl:text-lg text-gray-700 mb-8 leading-relaxed">
-					Поставка оборудования для ОПС, СКУД и видеонаблюдения. Помогаем подобрать решения под объект, задачи и совместимость оборудования.
+					<?php echo esc_html( $hero_description ); ?>
 				</p>
 				<a href="/catalog" class="inline-flex items-center gap-3 bg-[#B3262E] text-white px-8 py-4 rounded hover:bg-[#9a1f26] transition-colors text-lg shadow-lg">
 					<ion-icon name="apps-outline" class="text-2xl"></ion-icon>
@@ -46,7 +72,7 @@ foreach ( $category_names as $name ) {
 
 			<!-- Center Column: Main Image (4 columns) -->
 			<div class="lg:col-span-3">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/h1.png" alt="Оборудование систем безопасности" class="w-full max-w-[285px] max-h-[612px] rounded-lg shadow-xl">
+				<img src="<?php echo esc_url( $hero_image ); ?>" alt="Оборудование систем безопасности" class="w-full max-w-[285px] max-h-[612px] rounded-lg shadow-xl">
 			</div>
 
 			<!-- Right Column: Category Cards (3 columns) -->
@@ -185,7 +211,7 @@ foreach ( $category_names as $name ) {
 
 			<!-- Main Image - Mobile -->
 			<div class="mt-4">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/hero-main.png" alt="Оборудование систем безопасности" class="w-full h-auto rounded-lg shadow-xl">
+				<img src="<?php echo esc_url( $hero_image_mobile ); ?>" alt="Оборудование систем безопасности" class="w-full h-auto rounded-lg shadow-xl">
 			</div>
 		</div>
 
