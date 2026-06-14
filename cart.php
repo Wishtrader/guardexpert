@@ -169,7 +169,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 		<?php else: ?>
 		<div class="text-center py-12">
 			<p class="text-gray-600 text-lg mb-4">Ваша корзина пуста</p>
-			<a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>" class="inline-block bg-[#B22234] text-white px-6 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+			<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="inline-block bg-[#B22234] text-white px-6 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
 				Перейти в каталог
 			</a>
 		</div>
