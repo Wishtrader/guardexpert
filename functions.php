@@ -2242,3 +2242,49 @@ function guardexpert_submit_order() {
 }
 add_action( 'wp_ajax_guardexpert_submit_order', 'guardexpert_submit_order' );
 add_action( 'wp_ajax_nopriv_guardexpert_submit_order', 'guardexpert_submit_order' );
+
+/**
+ * Register ACF fields for WooCommerce products: Delivery & Payment tab.
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_product_delivery_fields' );
+function guardexpert_register_product_delivery_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'      => 'group_product_delivery',
+		'title'    => 'Доставка и оплата',
+		'fields'   => array(
+			array(
+				'key'          => 'field_product_delivery_content',
+				'label'        => 'Содержимое вкладки',
+				'name'         => 'product_delivery_content',
+				'type'         => 'wysiwyg',
+				'tabs'         => 'all',
+				'toolbar'      => 'full',
+				'media_upload' => false,
+				'default_value' => '<p><strong>Доставка по Беларуси</strong></p>
+<p>Доставка осуществляется курьерской службой по всей территории Республики Беларусь. Срок доставки — от 1 до 5 рабочих дней в зависимости от региона.</p>
+<p><strong>Способы оплаты</strong></p>
+<ul>
+<li>Наличный расчёт при получении</li>
+<li>Безналичный расчёт для юридических лиц</li>
+<li>Оплата банковской картой онлайн</li>
+<li>Рассрочка и кредит (уточняйте у менеджера)</li>
+</ul>
+<p><strong>Самовывоз</strong></p>
+<p>г. Минск, ул. Ольшевского 22, помещение 7, каб. 34. Перед приездом согласуйте время с менеджером.</p>',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'product',
+				),
+			),
+		),
+	) );
+}

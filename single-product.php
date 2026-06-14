@@ -215,17 +215,24 @@ $category_url = $categories ? guardexpert_get_category_url( $categories[0] ) : '
 			</div>
 			
 			<div class="product-tab-content p-6 md:p-8 text-base text-gray-700 leading-relaxed hidden" data-tab-content="delivery" role="tabpanel">
-				<p><strong>Доставка по Беларуси</strong></p>
-				<p>Доставка осуществляется курьерской службой по всей территории Республики Беларусь. Срок доставки — от 1 до 5 рабочих дней в зависимости от региона.</p>
-				<p><strong>Способы оплаты</strong></p>
-				<ul class="list-disc pl-5 space-y-1">
-					<li>Наличный расчёт при получении</li>
-					<li>Безналичный расчёт для юридических лиц</li>
-					<li>Оплата банковской картой онлайн</li>
-					<li>Рассрочка и кредит (уточняйте у менеджера)</li>
-				</ul>
-				<p><strong>Самовывоз</strong></p>
-				<p>г. Минск, ул. Ольшевского 22, помещение 7, каб. 34. Перед приездом согласуйте время с менеджером.</p>
+				<?php
+				$delivery_content = get_field( 'product_delivery_content' );
+				if ( $delivery_content ) :
+					echo wp_kses_post( $delivery_content );
+				else :
+				?>
+					<p><strong>Доставка по Беларуси</strong></p>
+					<p>Доставка осуществляется курьерской службой по всей территории Республики Беларусь. Срок доставки — от 1 до 5 рабочих дней в зависимости от региона.</p>
+					<p><strong>Способы оплаты</strong></p>
+					<ul class="list-disc pl-5 space-y-1">
+						<li>Наличный расчёт при получении</li>
+						<li>Безналичный расчёт для юридических лиц</li>
+						<li>Оплата банковской картой онлайн</li>
+						<li>Рассрочка и кредит (уточняйте у менеджера)</li>
+					</ul>
+					<p><strong>Самовывоз</strong></p>
+					<p>г. Минск, ул. Ольшевского 22, помещение 7, каб. 34. Перед приездом согласуйте время с менеджером.</p>
+				<?php endif; ?>
 			</div>
 		</div>
 
