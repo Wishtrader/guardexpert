@@ -380,7 +380,7 @@ $cart_total = WC()->cart->get_total();
 			.then(function(response) { return response.json(); })
 			.then(function(data) {
 				if (data.success) {
-					window.location.href = '<?php echo esc_url( home_url( '/заказ-отправлен/' ) ); ?>?order_id=' + data.data.order_id;
+					window.location.href = '<?php echo esc_js( home_url( '/заказ-отправлен/' ) ); ?>?order_id=' + data.data.order_id;
 				} else {
 					setSubmitLoading(false);
 					if (errorBox) {
