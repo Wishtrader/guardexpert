@@ -95,24 +95,25 @@ $allowed_icon_svg = array(
 			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6">
 				<?php echo esc_html( $why_title ); ?>
 			</h2>
-			<p class="text-base md:text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+			<p class="text-base md:text-lg text-black leading-relaxed">
 				<?php echo esc_html( $why_description ); ?>
 			</p>
 		</div>
 
 		<!-- Features Grid -->
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 			<?php if ( ! empty( $why_features ) && is_array( $why_features ) ) : ?>
 				<?php foreach ( $why_features as $feature ) : ?>
 					<div class="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
 						<div class="flex items-start gap-4 md:gap-6">
 							<?php if ( ! empty( $feature['icon'] ) ) : ?>
-								<div class="flex-shrink-0">
+								<div class="flex">
 									<img src="<?php echo esc_url( $feature['icon'] ); ?>" alt="" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+									<h3 class="text-xl md:text-2xl font-semibold text-black mb-3"><?php echo esc_html( $feature['title'] ); ?></h3>
 								</div>
 							<?php endif; ?>
 							<div>
-								<h3 class="text-xl md:text-2xl font-semibold text-black mb-3"><?php echo esc_html( $feature['title'] ); ?></h3>
+								
 								<?php if ( ! empty( $feature['description'] ) ) : ?>
 									<p class="text-sm md:text-base text-gray-700 leading-relaxed"><?php echo esc_html( $feature['description'] ); ?></p>
 								<?php endif; ?>
@@ -122,18 +123,16 @@ $allowed_icon_svg = array(
 				<?php endforeach; ?>
 			<?php else : ?>
 				<?php foreach ( $fallback_features as $fb ) : ?>
-					<div class="bg-white rounded-lg md:px-[30px] md:py-[20px] md:p-8 shadow-lg hover:shadow-xl transition-shadow">
-						<div class="flex items-start gap-4 md:gap-6">
-							<div class="flex flex-col items-start justify-start gap-4">
-							<div class="md:min-h-[52px] md:min-w-[52px]">
+				<div class="bg-white rounded-lg md:px-[30px] md:py-[20px] md:p-8 shadow-lg hover:shadow-xl transition-shadow">
+						<div class="flex items-center gap-4">
+							<div class="md:min-h-[52px] md:min-w-[52px] shrink-0">
 								<?php echo wp_kses( $fb['icon_svg'], $allowed_icon_svg ); ?>
 							</div>
-						<div>
-								<h3 class="text-xl md:text-[22px] font-semibold text-black mb-3"><?php echo esc_html( $fb['title'] ); ?></h3>
-								<p class="text-sm md:text-base text-gray-700 leading-relaxed"><?php echo esc_html( $fb['description'] ); ?></p>
-								</div>
-							</div>
+							<h3 class="text-xl md:text-[22px] font-semibold text-black"><?php echo esc_html( $fb['title'] ); ?></h3>
 						</div>
+						<?php if ( ! empty( $fb['description'] ) ) : ?>
+							<p class="text-sm md:text-base text-gray-700 leading-relaxed mt-4"><?php echo esc_html( $fb['description'] ); ?></p>
+						<?php endif; ?>
 					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>

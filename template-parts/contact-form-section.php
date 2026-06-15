@@ -68,7 +68,7 @@ if ( empty( $form_bg ) ) {
 				<h3 class="text-[26px] md:text-[36px] font-semibold text-black mb-3">
 					<?php echo esc_html( $form_form_title ); ?>
 				</h3>
-				<p class="text-base text-gray-700 mb-6">
+				<p class="text-base text-black mb-6">
 					<?php echo esc_html( $form_form_description ); ?>
 				</p>
 
@@ -99,24 +99,24 @@ if ( empty( $form_bg ) ) {
 
 					<!-- Comment Field -->
 					<div>
-						<textarea 
+						<input
 							name="comment" 
 							id="form-comment" 
 							placeholder="Комментарий" 
 							rows="3"
 							class="w-full px-4 py-3 border border-gray-300 rounded bg-gray-50 focus:border-[#B3262E] focus:outline-none focus:ring-2 focus:ring-[#B3262E]/20 transition-colors resize-none"
-						></textarea>
+						></input>
 					</div>
 
 					<!-- Privacy Checkbox -->
-					<div class="flex items-start gap-3">
-						<label class="flex items-start gap-3 cursor-pointer">
+					<div class="flex items-center gap-3">
+						<label class="flex items-center gap-3 cursor-pointer">
 							<input 
 								type="checkbox" 
 								name="privacy" 
 								id="form-privacy" 
 								required
-								class="mt-1 w-5 h-5 text-[#B3262E] border-gray-300 rounded focus:ring-[#B3262E] cursor-pointer"
+								class="mt-1 w-5 md:w-[44px] h-5 md:h-[44px] text-[#B3262E] border-gray-300 rounded focus:ring-[#B3262E] cursor-pointer"
 							>
 							<span class="text-sm text-gray-700">
 								Продолжая, вы соглашаетесь с политикой конфиденциальности

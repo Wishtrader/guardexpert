@@ -1141,6 +1141,91 @@ function guardexpert_register_page_fields() {
 				),
 			),
 
+			// ===== Tab: Services Section =====
+			array(
+				'key'   => 'field_front_services_tab',
+				'label' => 'Основные услуги',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_front_services_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'front_services_title',
+				'type'  => 'text',
+				'default_value' => 'Основные услуги',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_services_description',
+				'label' => 'Описание секции',
+				'name'  => 'front_services_description',
+				'type'  => 'textarea',
+				'default_value' => 'Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.',
+				'rows'  => 3,
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_services_big_image',
+				'label' => 'Большая карточка — изображение',
+				'name'  => 'front_services_big_image',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_services_big_title',
+				'label' => 'Большая карточка — заголовок',
+				'name'  => 'front_services_big_title',
+				'type'  => 'text',
+				'default_value' => 'Комплексный подход к объекту',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_services_big_description',
+				'label' => 'Большая карточка — описание',
+				'name'  => 'front_services_big_description',
+				'type'  => 'textarea',
+				'default_value' => 'Подбираем оборудование, помогаем с проектированием, внедрением и дальнейшим сопровождением систем безопасности под задачи бизнеса и объекта.',
+				'rows'  => 3,
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_services_big_button',
+				'label' => 'Большая карточка — текст кнопки',
+				'name'  => 'front_services_big_button',
+				'type'  => 'text',
+				'default_value' => 'Получить консультацию',
+				'wrapper' => array( 'width' => '50' ),
+			),
+
+			// ===== Tab: Certificates Section =====
+			array(
+				'key'   => 'field_front_certificates_tab',
+				'label' => 'Сертификаты и документы',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_front_certificates_title',
+				'label' => 'Заголовок секции',
+				'name'  => 'front_certificates_title',
+				'type'  => 'text',
+				'default_value' => 'Сертификаты и документы',
+				'wrapper' => array( 'width' => '50' ),
+			),
+			array(
+				'key'   => 'field_front_certificates_description',
+				'label' => 'Описание секции',
+				'name'  => 'front_certificates_description',
+				'type'  => 'textarea',
+				'default_value' => 'Подтверждающие материалы, сопроводительная документация и документы, которые помогают работать с оборудованием уверенно и прозрачно.',
+				'rows'  => 3,
+				'wrapper' => array( 'width' => '50' ),
+			),
+
 			// ===== Tab: Contact Form =====
 			array(
 				'key'   => 'field_front_form_tab',

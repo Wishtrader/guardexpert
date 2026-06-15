@@ -4,23 +4,36 @@
  *
  * @package guardexpert
  */
+
+$page_id = get_queried_object_id();
+
+$services_title = get_field( 'front_services_title', $page_id ) ?: 'Основные услуги';
+$services_description = get_field( 'front_services_description', $page_id ) ?: 'Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.';
+$big_image = get_field( 'front_services_big_image', $page_id );
+$big_title = get_field( 'front_services_big_title', $page_id ) ?: 'Комплексный подход к объекту';
+$big_description = get_field( 'front_services_big_description', $page_id ) ?: 'Подбираем оборудование, помогаем с проектированием, внедрением и дальнейшим сопровождением систем безопасности под задачи бизнеса и объекта.';
+$big_button = get_field( 'front_services_big_button', $page_id ) ?: 'Получить консультацию';
+
+if ( empty( $big_image ) ) {
+	$big_image = get_template_directory_uri() . '/img/serv-i1.png';
+}
 ?>
 
 <!-- Основные услуги -->
     <section class="py-16 lg:py-24 bg-white">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Основные услуги</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Поставляем оборудование систем безопасности и помогаем подобрать, внедрить и сопровождать решения под задачи бизнеса и объекта.</p>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_title ); ?></h2>
+                <p class="text-black"><?php echo esc_html( $services_description ); ?></p>
             </div>
 
 			<div class="grid lg:grid-cols-[488px_650px] gap-6">
 				<!-- Large Card -->
 				<div class="bg-white border border-gray-200 rounded-lg p-6 lg:p-8 flex flex-col">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/img/serv-i1.png' ); ?>" alt="Комплексный подход" class=w-full h-auto">
-					<h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3 mt-6">Комплексный подход к объекту</h3>
-					<p class="text-gray-600 mb-6 flex-grow">Подбираем оборудование, помогаем с проектированием, внедрением и дальнейшим сопровождением систем безопасности под задачи бизнеса и объекта.</p>
-					<a href="#" class="js-open-consultation inline-block bg-[#B3262E] text-white px-6 py-3 rounded font-medium hover:bg-[#9a1f26] transition text-center mb-6">Получить консультацию</a>
+					<img src="<?php echo esc_url( $big_image ); ?>" alt="<?php echo esc_attr( $big_title ); ?>" class="w-full h-auto">
+					<h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-3 mt-6"><?php echo esc_html( $big_title ); ?></h3>
+					<p class="text-gray-600 mb-6 flex-grow"><?php echo esc_html( $big_description ); ?></p>
+					<a href="#" class="js-open-consultation inline-block bg-[#B3262E] text-white px-6 py-3 rounded font-medium hover:bg-[#9a1f26] transition text-center mb-6"><?php echo esc_html( $big_button ); ?></a>
 				</div>
 
 				<!-- Small Cards Grid -->

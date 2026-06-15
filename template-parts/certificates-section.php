@@ -5,6 +5,11 @@
  * @package guardexpert
  */
 
+$page_id = get_queried_object_id();
+
+$certificates_title = get_field( 'front_certificates_title', $page_id ) ?: 'Сертификаты и документы';
+$certificates_description = get_field( 'front_certificates_description', $page_id ) ?: 'Подтверждающие материалы, сопроводительная документация и документы, которые помогают работать с оборудованием уверенно и прозрачно.';
+
 $certificates = get_posts( array(
 	'post_type'      => 'certificates',
 	'posts_per_page' => -1,
@@ -39,10 +44,10 @@ if ( $certificates ) {
 		<!-- Section Header -->
 		<div class="text-center mb-12 md:mb-16">
 			<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
-				Сертификаты и документы
+				<?php echo esc_html( $certificates_title ); ?>
 			</h2>
 			<p class="text-base md:text-lg text-gray-700 max-w-5xl mx-auto">
-				Подтверждающие материалы, сопроводительная документация и документы, которые помогают работать с оборудованием уверенно и прозрачно.
+				<?php echo esc_html( $certificates_description ); ?>
 			</p>
 		</div>
 

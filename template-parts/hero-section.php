@@ -65,7 +65,7 @@ if ( empty( $hero_bg ) ) {
 					<?php echo esc_html( $hero_description ); ?>
 				</p>
 				<a href="/catalog" class="inline-flex items-center gap-3 bg-[#B3262E] text-white px-8 py-4 rounded hover:bg-[#9a1f26] transition-colors text-lg shadow-lg">
-					<ion-icon name="apps-outline" class="text-2xl"></ion-icon>
+					<ion-icon name="grid-outline" class="text-2xl"></ion-icon>
 					Перейти в каталог
 				</a>
 			</div>
