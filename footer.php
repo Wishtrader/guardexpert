@@ -6,9 +6,9 @@
 
 <!-- Footer -->
 <footer class="relative bg-[#2D2D2D] text-white" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/footer-bg.png'); background-size: cover; background-position: center;">
-	<div class="max-w-[1200px] mx-auto px-4 py-12 md:py-16">
+	<div class="max-w-[1200px] mx-auto px-4 py-12 md:py-8">
 		<!-- Main Footer Content -->
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+		<div class="flex flex-col md:flex-row gap-12 md:gap-20">
 			<!-- Column 1: Logo & Company Info -->
 			<div class="lg:col-span-1">
 				<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.png" alt="Gexpert - Системы безопасности" class="h-20 w-auto mb-6">
@@ -19,7 +19,7 @@
 			</div>
 
 			<!-- Column 2: Catalog -->
-			<div>
+			<div class="md:min-w-[310px]">
 				<h3 class="text-lg mb-4 pb-2 border-b border-[#B3262E] inline-block">
 					<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="hover:text-[#B3262E] transition-colors">Каталог</a>
 				</h3>
@@ -45,7 +45,7 @@
 						<?php endforeach; ?>
 					</ul>
 				<?php else : ?>
-					<p class="text-sm text-gray-400">Категории не добавлены</p>
+					
 				<?php endif; ?>
 			</div>
 
@@ -92,42 +92,32 @@
 				<ul class="space-y-3">
 					<li>
 						<a href="tel:+375297016402" class="flex items-center gap-3 hover:text-[#B3262E] transition-colors">
-							<div class="border border-[#B3262E] p-1.5 flex-shrink-0">
-								<ion-icon name="call-outline" class="text-[#B3262E] text-lg"></ion-icon>
-							</div>
+							<img src="<?php echo get_template_directory_uri(); ?>/img/phone2.svg" alt="phone">
 							+375 29 701-64-02
 						</a>
 					</li>
 					<li>
 						<a href="tel:+375296257771" class="flex items-center gap-3 hover:text-[#B3262E] transition-colors">
-							<div class="border border-[#B3262E] p-1.5 flex-shrink-0">
-								<ion-icon name="call-outline" class="text-[#B3262E] text-lg"></ion-icon>
-							</div>
+							<img src="<?php echo get_template_directory_uri(); ?>/img/phone2.svg" alt="phone">
 							+375 29 625-77-71
 						</a>
 					</li>
 					<li>
 						<a href="tel:3798070" class="flex items-center gap-3 hover:text-[#B3262E] transition-colors">
-							<div class="border border-[#B3262E] p-1.5 flex-shrink-0">
-								<ion-icon name="call-outline" class="text-[#B3262E] text-lg"></ion-icon>
-							</div>
+							<img src="<?php echo get_template_directory_uri(); ?>/img/phone2.svg" alt="phone">
 							379-80-70
 						</a>
 					</li>
 					<li>
 						<a href="mailto:gexpertshop@mail.ru" class="flex items-center gap-3 hover:text-[#B3262E] transition-colors">
-							<div class="border border-[#B3262E] p-1.5 flex-shrink-0">
-								<ion-icon name="mail-outline" class="text-[#B3262E] text-lg"></ion-icon>
-							</div>
+							<img src="<?php echo get_template_directory_uri(); ?>/img/mail2.svg" alt="mail">
 							gexpertshop@mail.ru
 						</a>
 					</li>
 					<li>
-						<div class="flex items-start gap-3">
-							<div class="border border-[#B3262E] p-1.5 flex-shrink-0">
-								<ion-icon name="location-outline" class="text-[#B3262E] text-lg"></ion-icon>
-							</div>
-							<span>220073 г.Минск<br>ул.Ольшевского 22,<br>помещение 7, каб.34</span>
+						<div class="flex items-center gap-3">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/pin2.svg" alt="pin">
+							<span class="leading-[1.2]">220073 г.Минск<br>ул.Ольшевского 22,<br>помещение 7, каб.34</span>
 						</div>
 					</li>
 				</ul>
@@ -136,7 +126,7 @@
 	</div>
 
 	<!-- Bottom Bar -->
-	<div class="border-t border-gray-700 mt-12">
+	<div class="mt-2">
 		<div class="max-w-[1200px] mx-auto px-4 py-6">
 			<div class="flex flex-col lg:flex-row items-center justify-between gap-4 text-sm">
 				<a href="/privacy-policy" class="hover:text-[#B3262E] transition-colors order-2 md:order-1">Политика конфиденциальности</a>

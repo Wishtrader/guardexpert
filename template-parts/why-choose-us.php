@@ -88,7 +88,7 @@ $allowed_icon_svg = array(
 ?>
 
 <!-- Why Choose Us Section -->
-<section class="bg-[#FAF9F7] py-16 md:py-20">
+<section class="bg-[#FAF9F7] md:py-16 py-8 md:py-20">
 	<div class="max-w-[1200px] mx-auto px-4">
 		<!-- Section Header -->
 		<div class="text-center mb-12 md:mb-16">
@@ -123,7 +123,7 @@ $allowed_icon_svg = array(
 				<?php endforeach; ?>
 			<?php else : ?>
 				<?php foreach ( $fallback_features as $fb ) : ?>
-				<div class="bg-white rounded-lg md:px-[30px] md:py-[20px] md:p-8 shadow-lg hover:shadow-xl transition-shadow">
+				<div class="bg-white rounded-[2px] p-2 md:px-[30px] md:py-[20px] md:p-8 shadow-lg hover:shadow-xl transition-shadow">
 						<div class="flex items-center gap-4">
 							<div class="md:min-h-[52px] md:min-w-[52px] shrink-0">
 								<?php echo wp_kses( $fb['icon_svg'], $allowed_icon_svg ); ?>
