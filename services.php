@@ -28,6 +28,19 @@ if ( empty( $services_audience_items ) || ! is_array( $services_audience_items )
 $services_audience_lucide_icons = array( 'building-2', 'wrench', 'factory', 'building' );
 $services_work_title        = get_field( 'services_work_title' ) ?: 'Как строится работа';
 $services_work_description  = get_field( 'services_work_description' ) ?: 'Выстраиваем работу последовательно: от запроса и подбора оборудования до поставки и дальнейшего сопровождения.';
+
+$services_work_items = get_field( 'services_work_items' );
+if ( empty( $services_work_items ) || ! is_array( $services_work_items ) ) {
+	$services_work_items = array(
+		array( 'icon' => '', 'title' => 'Запрос', 'description' => 'Клиент обращается с задачей, перечнем оборудования или описание объекта.' ),
+		array( 'icon' => '', 'title' => 'Консультация и подбор', 'description' => 'Помогаем подобрать оборудование с учетом требований, совместимости и бюджета.' ),
+		array( 'icon' => '', 'title' => 'Согласование решения', 'description' => 'Уточняем состав поставки, характеристики, наличие и условия сотрудничества.' ),
+		array( 'icon' => '', 'title' => 'Поставка оборудования', 'description' => 'Организуем поставку оборудования по Минску и по всей Беларуси.' ),
+		array( 'icon' => '', 'title' => 'Поддержка и сопровождение', 'description' => 'При необходимости консультируем дальше, подключаем обслуживание, модернизацию и техническую помощь.' ),
+	);
+}
+
+$services_work_lucide_icons = array( 'file-text', 'sliders-horizontal', 'file-check', 'truck', 'settings' );
 $services_trust_title       = get_field( 'services_trust_title' ) ?: 'Почему нам доверяют выполнение задач';
 $services_trust_description = get_field( 'services_trust_description' ) ?: 'Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.';
 
@@ -186,54 +199,43 @@ if ( empty( $services_hero_bg ) ) {
     </section>
 
     <!-- Как строится работа -->
-    <section class="py-16 lg:py-24">
+    <section class="py-16">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_work_title ); ?></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $services_work_description ); ?></p>
+                <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html( $services_work_title ); ?></h2>
+                <p class="text-black md:text-lg mx-auto"><?php echo esc_html( $services_work_description ); ?></p>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">01</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="file-text" class="w-6 h-6 text-primary"></i>
+            <?php $total_work = count( $services_work_items ); ?>
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-4 sm:pb-0 sm:flex-row scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+                <?php foreach ( $services_work_items as $i => $item ) :
+                    $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
+                    $step_title = isset( $item['title'] ) ? $item['title'] : '';
+                    $step_desc  = isset( $item['description'] ) ? $item['description'] : '';
+                    $lucide_name = isset( $services_work_lucide_icons[ $i ] ) ? $services_work_lucide_icons[ $i ] : 'circle';
+                    $step_num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                    $is_last = ( $i === $total_work - 1 );
+                ?>
+                <div class="flex gap-2 shrink-0 snap-start w-[70%] sm:w-auto sm:flex-1 min-w-0">
+                    <div class="bg-white border border-gray-200 rounded-[4px] p-2 md:p-5 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                        <div class="md:text-[48px] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
+                        <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                            <?php if ( ! empty( $step_icon ) ) : ?>
+                                <img src="<?php echo esc_url( $step_icon ); ?>" alt="" class="h-[52px] object-contain">
+                            <?php else : ?>
+                                <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-primary"></i>
+                            <?php endif; ?>
+                        </div>
+                        <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html( $step_title ); ?></h4>
+                        <p class="text-black text-sm leading-[1.2]"><?php echo esc_html( $step_desc ); ?></p>
                     </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Запрос</h4>
-                    <p class="text-gray-600 text-sm">Клиент обращается с задачей, перечнем оборудования или описание объекта.</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">02</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="sliders-horizontal" class="w-6 h-6 text-primary"></i>
+                    <?php if ( ! $is_last ) : ?>
+                    <div class="hidden sm:flex items-center justify-center shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B22234" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Консультация и подбор</h4>
-                    <p class="text-gray-600 text-sm">Помогаем подобрать оборудование с учетом требований, совместимости и бюджета.</p>
+                    <?php endif; ?>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">03</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="file-check" class="w-6 h-6 text-primary"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Согласование решения</h4>
-                    <p class="text-gray-600 text-sm">Уточняем состав поставки, характеристики, наличие и условия сотрудничества.</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">04</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="truck" class="w-6 h-6 text-primary"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Поставка оборудования</h4>
-                    <p class="text-gray-600 text-sm">Организуем поставку оборудования по Минску и по всей Беларуси.</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">05</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="settings" class="w-6 h-6 text-primary"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Поддержка и сопровождение</h4>
-                    <p class="text-gray-600 text-sm">При необходимости консультируем дальше, подключаем обслуживание, модернизацию и техническую помощь.</p>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
