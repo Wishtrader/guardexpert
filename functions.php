@@ -1925,6 +1925,40 @@ function guardexpert_register_services_fields() {
 				'default_value' => 'Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.',
 				'wrapper' => array( 'width' => '50' ),
 			),
+			array(
+				'key'          => 'field_services_trust_items',
+				'label'        => 'Карточки',
+				'name'         => 'services_trust_items',
+				'type'         => 'repeater',
+				'max'          => 6,
+				'button_label' => 'Добавить карточку',
+				'layout'       => 'block',
+				'sub_fields'   => array(
+					array(
+						'key'          => 'field_services_trust_item_icon',
+						'label'        => 'Иконка',
+						'name'         => 'icon',
+						'type'         => 'image',
+						'return_format' => 'url',
+						'instructions' => 'Загрузите иконку (PNG или SVG). Если не загружена — используется Lucide-иконка по умолчанию.',
+						'preview_size' => 'thumbnail',
+						'library'      => 'all',
+					),
+					array(
+						'key'   => 'field_services_trust_item_title',
+						'label' => 'Заголовок',
+						'name'  => 'title',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_services_trust_item_description',
+						'label' => 'Описание',
+						'name'  => 'description',
+						'type'  => 'textarea',
+						'rows'  => 3,
+					),
+				),
+			),
 		),
 	) );
 }

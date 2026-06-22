@@ -44,6 +44,20 @@ $services_work_lucide_icons = array( 'file-text', 'sliders-horizontal', 'file-ch
 $services_trust_title       = get_field( 'services_trust_title' ) ?: 'Почему нам доверяют выполнение задач';
 $services_trust_description = get_field( 'services_trust_description' ) ?: 'Надёжная поставка оборудования систем безопасности, профессиональная консультация и поддержка для бизнеса, монтажных организаций и объектов по всей Беларуси.';
 
+$services_trust_items = get_field( 'services_trust_items' );
+if ( empty( $services_trust_items ) || ! is_array( $services_trust_items ) ) {
+	$services_trust_items = array(
+		array( 'icon' => '', 'title' => 'С 2012 года на рынке', 'description' => 'Более 14 лет работаем в сфере систем безопасности и поставок оборудования для объектов разного масштаба.' ),
+		array( 'icon' => '', 'title' => 'Подбор под задачу', 'description' => 'Помогаем подобрать оборудование с учетом объекта, задач, совместимости и бюджета.' ),
+		array( 'icon' => '', 'title' => 'Поставка по всей Беларуси', 'description' => 'Работаем с клиентами по всей РБ и организуем поставку оборудования на объект.' ),
+		array( 'icon' => '', 'title' => 'Сертификаты и документы', 'description' => 'Предоставляем сопроводительную документацию и подтверждающие материалы по продукции.' ),
+		array( 'icon' => '', 'title' => 'Техническая экспертиза', 'description' => 'Консультируем по ОПС, СКУД и видеонаблюдению, помогаем разобраться в характеристиках и выборе.' ),
+		array( 'icon' => '', 'title' => 'Поддержка после покупки', 'description' => 'При необходимости подключаем проектирование, монтаж, пусконаладку, обслуживание и модернизацию.' ),
+	);
+}
+
+$services_trust_lucide_icons = array( 'calendar', 'sliders-horizontal', 'map-pin', 'file-text', 'shield-check', 'wrench' );
+
 $services_stats_items = get_field( 'services_stats_items' );
 if ( empty( $services_stats_items ) || ! is_array( $services_stats_items ) ) {
 	$services_stats_items = array(
@@ -114,8 +128,8 @@ if ( empty( $services_hero_bg ) ) {
     <section class="py-16 lg:py-24">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_main_title ); ?></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $services_main_description ); ?></p>
+                <h2 class="text-3xl lg:text-[48px] font-bold text-black mb-4"><?php echo esc_html( $services_main_title ); ?></h2>
+                <p class="text-black lg:text-lg font-light lg:px-2 mx-auto"><?php echo esc_html( $services_main_description ); ?></p>
             </div>
 
 			<div class="grid lg:grid-cols-[488px_650px] gap-6">
@@ -171,8 +185,8 @@ if ( empty( $services_hero_bg ) ) {
     <section class="py-16 lg:py-24">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_audience_title ); ?></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $services_audience_description ); ?></p>
+                <h2 class="text-3xl lg:text-[48px] font-bold text-black mb-4"><?php echo esc_html( $services_audience_title ); ?></h2>
+                <p class="text-black text-lg mx-auto"><?php echo esc_html( $services_audience_description ); ?></p>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -202,7 +216,7 @@ if ( empty( $services_hero_bg ) ) {
     <section class="py-16">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html( $services_work_title ); ?></h2>
+                <h2 class="text-3xl lg:text-[48px] font-bold text-black mb-4"><?php echo esc_html( $services_work_title ); ?></h2>
                 <p class="text-black md:text-lg mx-auto"><?php echo esc_html( $services_work_description ); ?></p>
             </div>
 
@@ -241,80 +255,32 @@ if ( empty( $services_hero_bg ) ) {
     </section>
 
     <!-- Почему нам доверяют -->
-    <section class="py-16 lg:py-24">
+    <section class="py-16">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $services_trust_title ); ?></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $services_trust_description ); ?></p>
+                <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html( $services_trust_title ); ?></h2>
+                <p class="text-black text-lg mx-auto"><?php echo esc_html( $services_trust_description ); ?></p>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="calendar" class="w-5 h-5 text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">С 2012 года на рынке</h4>
-                            <p class="text-gray-600 text-sm">Более 14 лет работаем в сфере систем безопасности и поставок оборудования для объектов разного масштаба.</p>
-                        </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <?php foreach ( $services_trust_items as $i => $item ) :
+                    $trust_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
+                    $trust_title = isset( $item['title'] ) ? $item['title'] : '';
+                    $trust_desc  = isset( $item['description'] ) ? $item['description'] : '';
+                    $lucide_name = isset( $services_trust_lucide_icons[ $i ] ) ? $services_trust_lucide_icons[ $i ] : 'circle';
+                ?>
+                <div class="flex flex-col items-start justify-start bg-white border border-gray-200 rounded-[4px] md:py-5 md:px-[30px] hover:shadow-lg transition shadow-md md:gap-5">
+                    <div class="flex items-center gap-4">
+                        <?php if ( ! empty( $trust_icon ) ) : ?>
+                            <img src="<?php echo esc_url( $trust_icon ); ?>" alt="" class="h-[52px] object-contain">
+                        <?php else : ?>
+                            <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-primary"></i>
+                        <?php endif; ?>
+                        <h4 class="font-medium text-[22px] text-black mb-2 leading-[1.2]"><?php echo esc_html( $trust_title ); ?></h4>
                     </div>
+                    <p class="text-black text-sm md:text-lg !leading-[1.2]"><?php echo esc_html( $trust_desc ); ?></p>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="sliders-horizontal" class="w-5 h-5 text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Подбор под задачу</h4>
-                            <p class="text-gray-600 text-sm">Помогаем подобрать оборудование с учетом объекта, задач, совместимости и бюджета.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Поставка по всей Беларуси</h4>
-                            <p class="text-gray-600 text-sm">Работаем с клиентами по всей РБ и организуем поставку оборудования на объект.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="file-text" class="w-5 h-5 text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Сертификаты и документы</h4>
-                            <p class="text-gray-600 text-sm">Предоставляем сопроводительную документацию и подтверждающие материалы по продукции.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="shield-check" class="w-5 h-5 text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Техническая экспертиза</h4>
-                            <p class="text-gray-600 text-sm">Консультируем по ОПС, СКУД и видеонаблюдению, помогаем разобраться в характеристиках и выборе.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="wrench" class="w-5 h-5 text-primary"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mb-2">Поддержка после покупки</h4>
-                            <p class="text-gray-600 text-sm">При необходимости подключаем проектирование, монтаж, пусконаладку, обслуживание и модернизацию.</p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
