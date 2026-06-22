@@ -24,7 +24,7 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
 ?>
 
 <!-- Hero Section -->
-<section class="hero-contacts-bg relative overflow-hidden -mt-[120px] lg:-mt-[220px]" <?php if ($hero_bg): ?>style="background-image: url('<?php echo esc_url($hero_bg); ?>');"<?php endif; ?>>
+<section class="hero-contacts-bg relative bg-cover overflow-hidden -mt-[120px] lg:-mt-[220px]" <?php if ($hero_bg): ?>style="background-image: url('<?php echo esc_url($hero_bg); ?>');"<?php endif; ?>>
     <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
         <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
             <div class="lg:w-1/2">
@@ -33,15 +33,15 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
                     <span class="mx-2">/</span>
                     <span class="text-gray-700">Контакты</span>
                 </nav>
-                <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6 leading-[1.2]">
                     <?php echo esc_html($hero_title); ?>
                 </h1>
                 <?php if ($hero_description): ?>
-                <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
+                <p class="text-black text-base lg:text-lg mb-8 max-w-lg leading-[1.2]">
                     <?php echo esc_html($hero_description); ?>
                 </p>
                 <?php endif; ?>
-                <a href="#" class="js-open-consultation inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                <a href="#" class="js-open-consultation md:w-[285px] md:h-[52px] inline-flex items-center justify-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded-[2px] font-medium hover:bg-[#8B1A2B] transition shadow-md hover:shadow-lg">
                     <?php echo esc_html($hero_button_text); ?>
                 </a>
             </div>
@@ -55,7 +55,7 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
 </section>
 
 <!-- Контактная информация -->
-<section class="py-16 lg:py-24 bg-white">
+<section class="py-16 lg:py-24">
     <div class="max-w-[1200px] mx-auto px-4">
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-8">Контактная информация</h2>
 
@@ -63,21 +63,21 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
             <!-- Left Column: Contacts + Requisites -->
             <div class="flex flex-col gap-6">
                 <?php if ($contacts): ?>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-sm">
                     <ul class="space-y-4">
                         <?php foreach ($contacts as $contact): ?>
                         <li class="flex items-center gap-3">
-                            <div class="w-10 h-10 border-2 border-[#B22234] rounded flex items-center justify-center flex-shrink-0">
+                            <div class="flex items-center justify-center flex-shrink-0">
                                 <?php if ($contact['icon']): ?>
-                                <img src="<?php echo esc_url($contact['icon']); ?>" alt="<?php echo esc_attr($contact['type']); ?>" class="w-5 h-5 object-contain">
+                                <img src="<?php echo esc_url($contact['icon']); ?>" alt="<?php echo esc_attr($contact['type']); ?>" class="w-[35px] h-[31px] object-contain">
                                 <?php endif; ?>
                             </div>
                             <?php if ($contact['type'] === 'phone'): ?>
-                            <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9+]/', '', $contact['value'])); ?>" class="text-gray-900 font-medium hover:text-[#B22234] transition">
+                            <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9+]/', '', $contact['value'])); ?>" class="text-black text-[22px] font-medium hover:text-[#B22234] transition">
                                 <?php echo esc_html($contact['value']); ?>
                             </a>
                             <?php elseif ($contact['type'] === 'email'): ?>
-                            <a href="mailto:<?php echo esc_attr($contact['value']); ?>" class="text-gray-900 font-medium hover:text-[#B22234] transition">
+                            <a href="mailto:<?php echo esc_attr($contact['value']); ?>" class="text-black text-[22px] font-medium hover:text-[#B22234] transition">
                                 <?php echo esc_html($contact['value']); ?>
                             </a>
                             <?php else: ?>
@@ -90,11 +90,11 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
                 <?php endif; ?>
 
                 <?php if ($requisites_items): ?>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4"><?php echo esc_html($requisites_title); ?></h3>
-                    <div class="space-y-2">
+                <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-sm">
+                    <h3 class="text-[22px] font-semibold text-black mb-4"><?php echo esc_html($requisites_title); ?></h3>
+                    <div class="space-y-5">
                         <?php foreach ($requisites_items as $req): ?>
-                        <p class="text-gray-900"><span class="font-bold"><?php echo esc_html($req['label']); ?></span> <?php echo esc_html($req['value']); ?></p>
+                        <p class="text-black text-[22px] font-semibold"><span class="font-semibold"><?php echo esc_html($req['label']); ?></span> <?php echo esc_html($req['value']); ?></p>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -102,15 +102,15 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
             </div>
 
             <!-- Right Column: Form -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 lg:p-8 shadow-sm">
-                <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2"><?php echo esc_html($form_title); ?></h3>
+            <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-sm pt-5">
+                <h3 class="text-2xl lg:text-[36px] font-semibold text-black mb-2"><?php echo esc_html($form_title); ?></h3>
                 <?php if ($form_description): ?>
                 <p class="text-gray-600 text-sm mb-6"><?php echo esc_html($form_description); ?></p>
                 <?php endif; ?>
                 <form class="space-y-4">
-                    <input type="text" placeholder="Ваше имя" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
-                    <input type="tel" name="contact_phone" id="contact-phone" placeholder="+375 (XX) XXX-XX-XX" required class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
-                    <textarea placeholder="Комментарий" rows="3" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#B22234] resize-none"></textarea>
+                    <input type="text" placeholder="Ваше имя" class="w-full h-[50px] border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+                    <input type="tel" name="contact_phone" id="contact-phone" placeholder="+375 (XX) XXX-XX-XX" required class="w-full border border-gray-300 h-[50px] px-4 py-3 text-sm focus:outline-none focus:border-[#B22234]">
+                    <input placeholder="Комментарий" class="w-full border border-gray-300 h-[50px] px-4 py-3 text-sm focus:outline-none focus:border-[#B22234] resize-none"></textarea>
                     <label class="flex items-start gap-3 text-sm text-gray-600">
                         <div class="w-6 h-6 bg-[#B22234] rounded flex items-center justify-center flex-shrink-0 mt-0.5">
                             <i data-lucide="check" class="w-4 h-4 text-white"></i>
@@ -126,7 +126,7 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
 
 <?php if ($map_address): ?>
 <!-- Как нас найти -->
-<section class="py-16 lg:py-24 bg-gray-50">
+<section class="py-16">
     <div class="max-w-[1200px] mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html($map_title); ?></h2>
@@ -135,7 +135,7 @@ $map_address = get_field('contact_map_address') ?: 'Минск, улица Ол�
             <?php endif; ?>
         </div>
 
-        <div class="rounded-lg overflow-hidden border border-gray-200 shadow-sm bg-white">
+        <div class="rounded-[4px] overflow-hidden border border-gray-200 shadow-sm bg-white">
             <iframe 
                 src="https://yandex.ru/map-widget/v1/?text=<?php echo urlencode($map_address); ?>&z=16" 
                 width="100%" 

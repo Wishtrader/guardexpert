@@ -127,7 +127,7 @@ if ( empty( $form_bg ) ) {
 					<!-- Submit Button -->
 					<button 
 						type="submit" 
-						class="w-full bg-[#B3262E] text-white px-8 py-4 rounded hover:bg-[#9a1f26] transition-colors text-lg shadow-lg outline-none border-none"
+						class="flex items-center justify-center w-full bg-[#B3262E] h-[52px] text-white px-8 py-4 rounded-[2px] hover:bg-[#9a1f26] transition-colors text-lg shadow-lg outline-none border-none"
 					>
 						Отправить
 					</button>

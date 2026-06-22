@@ -58,13 +58,13 @@ if ( empty( $hero_bg ) ) {
 		<div class="hidden lg:grid lg:grid-cols-12 gap-4 items-center">
 			<!-- Left Column: Text Content (6 columns) -->
 			<div class="lg:col-span-6">
-				<h1 class="text-4xl xl:text-5xl font-bold text-black mb-6 leading-tight">
+				<h1 class="text-4xl xl:text-[48px] font-bold text-black mb-6 leading-tight">
 					<?php echo esc_html( $hero_title ); ?>
 				</h1>
-				<p class="text-base xl:text-lg text-gray-700 mb-8 leading-relaxed">
+				<p class="text-base xl:text-lg text-black mb-8 leading-[1.2]">
 					<?php echo esc_html( $hero_description ); ?>
 				</p>
-				<a href="/catalog" class="inline-flex items-center gap-3 bg-[#B3262E] text-white px-8 py-4 rounded hover:bg-[#9a1f26] transition-colors text-lg shadow-lg">
+				<a href="/catalog" class="inline-flex justify-center items-center gap-3 bg-[#B3262E] text-white px-8 py-4 rounded hover:bg-[#9a1f26] transition-colors text-lg shadow-lg md:w-[285px] md:h-[52px]">
 					<ion-icon name="grid-outline" class="text-2xl"></ion-icon>
 					Перейти в каталог
 				</a>

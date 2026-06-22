@@ -52,16 +52,38 @@ if ( $certificates ) {
 		</div>
 
 		<?php if ( count( $certificate_images ) > 0 ): ?>
-		<!-- Certificates Grid -->
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="certificates-grid">
+		<!-- Certificates Grid / Mobile Slider -->
+		<div class="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6" id="certificates-grid">
 			<?php foreach ( $certificate_images as $index => $image ): ?>
 			<div class="certificate-card bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow cursor-pointer group" data-certificate="<?php echo esc_attr( $index + 1 ); ?>">
 				<div class="aspect-[3/4] bg-gray-50 flex items-center justify-center">
 					<img src="<?php echo esc_url( $image ); ?>" alt="Сертификат <?php echo esc_attr( $index + 1 ); ?>" class="w-full h-full object-contain">
 				</div>
-				
 			</div>
 			<?php endforeach; ?>
+		</div>
+
+		<!-- Mobile Slider -->
+		<div class="sm:hidden relative" id="certificates-slider-wrap">
+			<div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scroll-smooth" id="certificates-slider" style="-webkit-overflow-scrolling: touch;">
+				<?php foreach ( $certificate_images as $index => $image ): ?>
+				<div class="snap-start shrink-0 w-[70%] first:ml-auto last:mr-auto certificate-card bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer" data-certificate="<?php echo esc_attr( $index + 1 ); ?>">
+					<div class="aspect-[3/4] bg-gray-50 flex items-center justify-center">
+						<img src="<?php echo esc_url( $image ); ?>" alt="Сертификат <?php echo esc_attr( $index + 1 ); ?>" class="w-full h-full object-contain">
+					</div>
+				</div>
+				<?php endforeach; ?>
+			</div>
+			<!-- Slider Arrows -->
+			<div class="flex justify-center items-center gap-4 mt-4">
+				<button id="cert-prev" class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#B22234] hover:text-[#B22234] transition-colors">
+					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+				</button>
+				<span id="cert-counter" class="text-sm text-gray-500">1 / <?php echo count( $certificate_images ); ?></span>
+				<button id="cert-next" class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#B22234] hover:text-[#B22234] transition-colors">
+					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+				</button>
+			</div>
 		</div>
 
 		<!-- Certificate Lightbox Modal -->
@@ -172,30 +194,49 @@ if ( $certificates ) {
 				}
 			});
 
-			// Touch/swipe support for mobile
-			let touchStartX = 0;
-			let touchEndX = 0;
+			// Mobile Slider
+			const slider = document.getElementById('certificates-slider');
+			const sliderWrap = document.getElementById('certificates-slider-wrap');
+			const prevBtn = document.getElementById('cert-prev');
+			const nextBtn = document.getElementById('cert-next');
+			const counter = document.getElementById('cert-counter');
 
-			modal.addEventListener('touchstart', function(e) {
-				touchStartX = e.changedTouches[0].screenX;
-			}, false);
+			if (slider && prevBtn && nextBtn) {
+				let currentSlide = 0;
+				const slides = slider.querySelectorAll('.certificate-card');
+				const totalSlides = slides.length;
 
-			modal.addEventListener('touchend', function(e) {
-				touchEndX = e.changedTouches[0].screenX;
-				handleSwipe();
-			}, false);
-
-			function handleSwipe() {
-				const swipeThreshold = 50;
-				const diff = touchStartX - touchEndX;
-				
-				if (Math.abs(diff) > swipeThreshold) {
-					if (diff > 0) {
-						navigateCertificate(1);
-					} else {
-						navigateCertificate(-1);
-					}
+				function updateSlider() {
+					const slideWidth = slides[0].offsetWidth + 16; // gap-4 = 16px
+					const maxScroll = slider.scrollWidth - slider.clientWidth;
+					const centerOffset = (slider.clientWidth - slides[0].offsetWidth) / 2;
+					const targetScroll = currentSlide * slideWidth - centerOffset;
+					slider.scrollTo({ left: Math.max(0, Math.min(targetScroll, maxScroll)), behavior: 'smooth' });
+					counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
 				}
+
+				prevBtn.addEventListener('click', function() {
+					if (currentSlide > 0) {
+						currentSlide--;
+						updateSlider();
+					}
+				});
+
+				nextBtn.addEventListener('click', function() {
+					if (currentSlide < totalSlides - 1) {
+						currentSlide++;
+						updateSlider();
+					}
+				});
+
+				// Update current slide on scroll
+				slider.addEventListener('scroll', function() {
+					const slideWidth = slides[0].offsetWidth + 16;
+					const centerOffset = (slider.clientWidth - slides[0].offsetWidth) / 2;
+					currentSlide = Math.round((slider.scrollLeft + centerOffset) / slideWidth);
+					currentSlide = Math.max(0, Math.min(currentSlide, totalSlides - 1));
+					counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+				});
 			}
 		});
 		</script>

@@ -11,7 +11,7 @@
 		<div class="flex flex-col md:flex-row gap-12 md:gap-20">
 			<!-- Column 1: Logo & Company Info -->
 			<div class="lg:col-span-1">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.png" alt="Gexpert - Системы безопасности" class="h-20 w-auto mb-6">
+				<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.png" alt="Gexpert - Системы безопасности" class="md:max-h-20 w-auto mb-6">
 				<div class="space-y-2 text-sm">
 					<p>УНП 171770720</p>
 					<p>ОКПО 380799555000</p>
