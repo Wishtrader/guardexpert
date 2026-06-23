@@ -99,29 +99,6 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
     </div>
 </section>
 
-<?php if ($features): ?>
-<!-- Features Bar -->
-<section class="bg-white border-b">
-    <div class="max-w-[1200px] mx-auto px-4">
-        <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-gray-200">
-            <?php foreach ($features as $feature): ?>
-            <div class="flex items-center gap-3 py-6 px-4">
-                <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
-                    <?php if ($feature['icon']): ?>
-                    <img src="<?php echo esc_url($feature['icon']); ?>" alt="<?php echo esc_attr($feature['title']); ?>" class="w-6 h-6 object-contain">
-                    <?php endif; ?>
-                </div>
-                <div>
-                    <div class="font-bold text-gray-900 text-sm"><?php echo esc_html($feature['title']); ?></div>
-                    <div class="text-gray-500 text-xs"><?php echo esc_html($feature['subtitle']); ?></div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
-
 <?php if ($about_content || $about_image): ?>
 <!-- Об услуге -->
 <section class="py-16 lg:py-24 bg-white">
