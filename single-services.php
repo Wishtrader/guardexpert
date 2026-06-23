@@ -45,7 +45,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
 ?>
 
 <!-- Hero Section -->
-<section class="hero-service-bg relative overflow-hidden -mt-[120px] lg:-mt-[220px]" <?php if ($hero_bg_image): ?>style="background-image: url('<?php echo esc_url($hero_bg_image); ?>');"<?php endif; ?>>
+<section class="hero-service-bg relative lg:min-h-[672px] overflow-hidden -mt-[120px] lg:-mt-[220px]" <?php if ($hero_bg_image): ?>style="background-image: url('<?php echo esc_url($hero_bg_image); ?>');"<?php endif; ?>>
     <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
         <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
             <div class="lg:w-1/2">
@@ -60,7 +60,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
                     <?php echo esc_html($hero_title); ?>
                 </h1>
                 <?php if ($hero_description): ?>
-                <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
+                <p class="text-gray-600 text-base lg:text-lg mb-5 max-w-lg">
                     <?php echo esc_html($hero_description); ?>
                 </p>
                 <?php endif; ?>
@@ -92,7 +92,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
                     <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-[#B22234]"></i>
                 <?php endif; ?>
                 <div>
-                    <div class="font-normal text-black md:max-w-[94px] text-sm"><?php echo esc_html( $stats_title ); ?></div>
+                    <div class="font-normal text-black md:max-w-[170px] text-sm"><?php echo esc_html( $stats_title ); ?></div>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -102,13 +102,13 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
 
 <?php if ($about_content || $about_image): ?>
 <!-- Об услуге -->
-<section class="py-16 lg:py-24 bg-white">
+<section class="py-8 lg:py-16">
     <div class="max-w-[1200px] mx-auto px-4">
-        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md">
             <div class="grid lg:grid-cols-2">
                 <div class="p-8 lg:p-12 flex flex-col justify-center">
-                    <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4"><?php echo esc_html($about_title); ?></h2>
-                    <div class="text-gray-600">
+                    <h2 class="text-2xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html($about_title); ?></h2>
+                    <div class="text-black lg:text-lg !leading-[1.2]">
                         <?php echo wp_kses_post($about_content); ?>
                     </div>
                 </div>
@@ -125,25 +125,23 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
 
 <?php if ($audience_items): ?>
 <!-- Для кого подойдут наши услуги -->
-<section class="py-16 lg:py-24 bg-gray-50">
+<section class="py-8 lg:py-16">
     <div class="max-w-[1200px] mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html($audience_title); ?></h2>
+            <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html($audience_title); ?></h2>
             <?php if ($audience_content): ?>
-            <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html($audience_content); ?></p>
+            <p class="text-black mx-auto px-4"><?php echo esc_html($audience_content); ?></p>
             <?php endif; ?>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <?php foreach ($audience_items as $item): ?>
-            <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                    <?php if ($item['icon']): ?>
-                    <img src="<?php echo esc_url($item['icon']); ?>" alt="<?php echo esc_attr($item['title']); ?>" class="w-5 h-5 object-contain">
+            <div class="bg-white border border-gray-200 rounded-[4px] p-6 shadow-md hover:shadow-lg transition">
+                <?php if ($item['icon']): ?>
+                    <img src="<?php echo esc_url($item['icon']); ?>" alt="<?php echo esc_attr($item['title']); ?>" class="w-auto md:h-[52px] object-contain mb-[10px]">
                     <?php endif; ?>
-                </div>
-                <h4 class="font-bold text-gray-900 mb-2"><?php echo esc_html($item['title']); ?></h4>
-                <p class="text-gray-600 text-sm"><?php echo esc_html($item['text']); ?></p>
+                <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-[10px]"><?php echo esc_html($item['title']); ?></h4>
+                <p class="text-black text-base leading-[1.2]"><?php echo esc_html($item['text']); ?></p>
             </div>
             <?php endforeach; ?>
         </div>
@@ -153,20 +151,20 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
 
 <?php if ($when_items): ?>
 <!-- Когда нужна услуга -->
-<section class="py-16 lg:py-24 bg-white">
+<section class="py-8 lg:py-16">
     <div class="max-w-[1200px] mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html($when_title); ?></h2>
+            <h2 class="text-3xl lg:text-5xl font-bold text-black mb-5"><?php echo esc_html($when_title); ?></h2>
             <?php if ($when_content): ?>
-            <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html($when_content); ?></p>
+            <p class="text-black text-lg mx-auto leading-[1.2]"><?php echo esc_html($when_content); ?></p>
             <?php endif; ?>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-4">
             <?php foreach ($when_items as $item): ?>
-            <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                <h4 class="font-bold text-gray-900 mb-3 text-lg"><?php echo esc_html($item['title']); ?></h4>
-                <p class="text-gray-600 text-sm"><?php echo esc_html($item['text']); ?></p>
+            <div class="bg-white border border-gray-200 rounded-[4px] p-5 shadow-md hover:shadow-lg transition">
+                <h4 class="font-semibold text-black mb-3 text-[22px] leading-[1.2]"><?php echo esc_html($item['title']); ?></h4>
+                <p class="text-black text-base leading-[1.2]"><?php echo esc_html($item['text']); ?></p>
             </div>
             <?php endforeach; ?>
         </div>
@@ -176,26 +174,36 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
 
 <?php if ($steps): ?>
 <!-- Как строится работа -->
-<section class="py-16 lg:py-24 bg-gray-50">
+<section class="py-8 lg:py-16">
     <div class="max-w-[1200px] mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html($steps_title); ?></h2>
+            <h2 class="text-3xl lg:text-5xl font-bold text-black mb-5"><?php echo esc_html($steps_title); ?></h2>
             <?php if ($steps_content): ?>
-            <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html($steps_content); ?></p>
+            <p class="text-black text-lg mx-auto"><?php echo esc_html($steps_content); ?></p>
             <?php endif; ?>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            <?php foreach ($steps as $step): ?>
-            <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition">
-                <div class="text-3xl font-bold text-gray-200 mb-3"><?php echo sprintf('%02d', $step['number']); ?></div>
-                <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                    <?php if ($step['icon']): ?>
-                    <img src="<?php echo esc_url($step['icon']); ?>" alt="<?php echo esc_attr($step['title']); ?>" class="w-6 h-6 object-contain">
-                    <?php endif; ?>
+        <?php $total_steps = count($steps); ?>
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 lg:gap-0 pb-4 sm:pb-0 sm:flex-row scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+            <?php foreach ($steps as $i => $step) :
+                $is_last = ($i === $total_steps - 1);
+            ?>
+            <div class="flex gap-0 shrink-0 snap-start w-[70%] sm:w-auto sm:flex-1 min-w-0">
+                <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                    <div class="md:text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo sprintf('%02d', $step['number']); ?></div>
+                    <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                        <?php if ($step['icon']): ?>
+                        <img src="<?php echo esc_url($step['icon']); ?>" alt="<?php echo esc_attr($step['title']); ?>" class="h-[52px] object-contain">
+                        <?php endif; ?>
+                    </div>
+                    <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html($step['title']); ?></h4>
+                    <p class="text-black text-sm leading-[1.2]"><?php echo esc_html($step['text']); ?></p>
                 </div>
-                <h4 class="font-bold text-gray-900 mb-2"><?php echo esc_html($step['title']); ?></h4>
-                <p class="text-gray-600 text-sm"><?php echo esc_html($step['text']); ?></p>
+                <?php if ( ! $is_last ) : ?>
+                <div class="hidden sm:flex items-center justify-center shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B22234" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m9 18 6-6-6-6"/></svg>
+                </div>
+                <?php endif; ?>
             </div>
             <?php endforeach; ?>
         </div>
