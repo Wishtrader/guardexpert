@@ -994,38 +994,6 @@ function guardexpert_register_service_fields() {
 				'toolbar' => 'basic',
 			),
 			array(
-				'key'   => 'field_service_stats_tab',
-				'label' => 'Статистика',
-				'name'  => '',
-				'type'  => 'tab',
-				'placement' => 'top',
-			),
-			array(
-				'key'      => 'field_service_stats_items',
-				'label'    => 'Пункты статистики',
-				'name'     => 'service_stats_items',
-				'type'     => 'repeater',
-				'layout'   => 'table',
-				'button_label' => 'Добавить пункт',
-				'min'      => 1,
-				'max'      => 4,
-				'sub_fields' => array(
-					array(
-						'key'   => 'field_service_stats_item_icon',
-						'label' => 'Иконка',
-						'name'  => 'icon',
-						'type'  => 'image',
-						'return_format' => 'url',
-					),
-					array(
-						'key'   => 'field_service_stats_item_title',
-						'label' => 'Заголовок',
-						'name'  => 'title',
-						'type'  => 'text',
-					),
-				),
-			),
-			array(
 				'key'   => 'field_service_bottom_button',
 				'label' => 'Текст нижней кнопки',
 				'name'  => 'service_bottom_button',

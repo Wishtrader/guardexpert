@@ -1,5 +1,6 @@
 <?php
 /**
+ * Template Name: Single Service 
  * Single Service template
  *
  * @package guardexpert
@@ -31,13 +32,13 @@ $why_large_text = get_field('service_why_large_text');
 $bottom_button = get_field('service_bottom_button') ?: 'Получить консультацию';
 $hero_bg_image = get_field('service_hero_bg');
 
-$stats_items = get_field('service_stats_items');
+$stats_items = get_field('service_features');
 if ( empty( $stats_items ) || ! is_array( $stats_items ) ) {
 	$stats_items = array(
-		array( 'icon' => '', 'title' => 'С 2012 года' ),
-		array( 'icon' => '', 'title' => '14+ лет' ),
-		array( 'icon' => '', 'title' => 'Поставка по всей РБ' ),
-		array( 'icon' => '', 'title' => 'Поддержка и сопровождение' ),
+		array( 'icon' => '', 'title' => 'С 2012 года', 'subtitle' => '' ),
+		array( 'icon' => '', 'title' => '14+ лет', 'subtitle' => '' ),
+		array( 'icon' => '', 'title' => 'Поставка по всей РБ', 'subtitle' => '' ),
+		array( 'icon' => '', 'title' => 'Поддержка и сопровождение', 'subtitle' => '' ),
 	);
 }
 $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones' );
