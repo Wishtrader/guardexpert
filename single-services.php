@@ -98,6 +98,8 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
         </div>
     </div>
 </section>
+
+<?php if ($features): ?>
 <!-- Features Bar -->
 <section class="bg-white border-b">
     <div class="max-w-[1200px] mx-auto px-4">
