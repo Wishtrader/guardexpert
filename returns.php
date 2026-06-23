@@ -138,48 +138,126 @@ if ( empty( $returns_hero_bg ) ) {
                 <p class="text-black text-lg"><?php echo esc_html( $returns_process_description ); ?></p>
             </div>
 
-            <div class="flex sm:flex-row items-stretch gap-0 overflow-x-auto snap-x snap-mandatory sm:snap-none process-scroll">
-                <?php
-                $step_defaults = array(
-                    array(
-                        'icon'        => 'file-text',
-                        'title'       => 'Обращение',
-                        'description' => 'Свяжитесь с нами по телефону или электронной почте и сообщите номер заказа либо наименование товара, по которому требуется возврат или обмен.',
-                    ),
-                    array(
-                        'icon'        => 'sliders-horizontal',
-                        'title'       => 'Уточнение деталей',
-                        'description' => 'Мы уточним состояние товара, комплектность, наличие упаковки и документы по заказу, а также подскажем, какой порядок действий подходит в вашей ситуации. Для возврата товара надлежащего качества обычно важно, чтобы товар не был в употреблении, были сохранены его потребительские свойства и упаковка, если товар продавался в ней.',
-                    ),
-                    array(
-                        'icon'        => 'file-check',
-                        'title'       => 'Согласование передачи товара',
-                        'description' => 'После уточнения деталей мы сообщим, куда и каким образом можно передать товар для рассмотрения обращения. Возврат или обмен производится в месте приобретения товара либо в иных местах, объявленных продавцом.',
-                    ),
-                    array(
-                        'icon'        => 'truck',
-                        'title'       => 'Проверка товара',
-                        'description' => 'После получения товара мы проверяем его комплектность, состояние, упаковку и сопроводительную информацию, чтобы определить дальнейший порядок обмена или возврата.',
-                    ),
-                    array(
-                        'icon'        => 'settings',
-                        'title'       => 'Решение по обращению',
-                        'description' => 'По результатам рассмотрения обращения мы сообщим, возможен ли обмен, возврат денежных средств или иное решение по вашей ситуации. Если речь идёт о возврате товара надлежащего качества, деньги возвращаются в той же форме, в которой была произведена оплата, если стороны не согласовали иной порядок; по общему правилу возврат суммы должен быть произведён незамедлительно, а если это невозможно — не позднее 7 дней.',
-                    ),
-                );
+            <?php
+            $step_defaults = array(
+                array(
+                    'icon'        => 'file-text',
+                    'title'       => 'Обращение',
+                    'description' => 'Свяжитесь с нами по телефону или электронной почте и сообщите номер заказа либо наименование товара, по которому требуется возврат или обмен.',
+                ),
+                array(
+                    'icon'        => 'sliders-horizontal',
+                    'title'       => 'Уточнение деталей',
+                    'description' => 'Мы уточним состояние товара, комплектность, наличие упаковки и документы по заказу, а также подскажем, какой порядок действий подходит в вашей ситуации. Для возврата товара надлежащего качества обычно важно, чтобы товар не был в употреблении, были сохранены его потребительские свойства и упаковка, если товар продавался в ней.',
+                ),
+                array(
+                    'icon'        => 'file-check',
+                    'title'       => 'Согласование передачи товара',
+                    'description' => 'После уточнения деталей мы сообщим, куда и каким образом можно передать товар для рассмотрения обращения. Возврат или обмен производится в месте приобретения товара либо в иных местах, объявленных продавцом.',
+                ),
+                array(
+                    'icon'        => 'truck',
+                    'title'       => 'Проверка товара',
+                    'description' => 'После получения товара мы проверяем его комплектность, состояние, упаковку и сопроводительную информацию, чтобы определить дальнейший порядок обмена или возврата.',
+                ),
+                array(
+                    'icon'        => 'settings',
+                    'title'       => 'Решение по обращению',
+                    'description' => 'По результатам рассмотрения обращения мы сообщим, возможен ли обмен, возврат денежных средств или иное решение по вашей ситуации. Если речь идёт о возврате товара надлежащего качества, деньги возвращаются в той же форме, в которой была произведена оплата, если стороны не согласовали иной порядок; по общему правилу возврат суммы должен быть произведён незамедлительно, а если это невозможно — не позднее 7 дней.',
+                ),
+            );
 
-                $cards = get_field( 'returns_process_cards' );
-                if ( ! empty( $cards ) ) :
-                    $total = count( $cards );
-                    foreach ( $cards as $i => $card ) :
+            $cards = get_field( 'returns_process_cards' );
+            $use_acf = ! empty( $cards ) && is_array( $cards );
+            $items = $use_acf ? $cards : $step_defaults;
+            $total = count( $items );
+            ?>
+
+            <!-- Mobile: horizontal slider -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-4 sm:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+                <?php foreach ( $items as $i => $item ) :
+                    if ( $use_acf ) {
                         $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
-                        $icon  = ! empty( $card['step_icon'] ) ? $card['step_icon'] : $step_defaults[ $i ]['icon'];
-                        $title = ! empty( $card['step_title'] ) ? $card['step_title'] : $step_defaults[ $i ]['title'];
-                        $desc  = ! empty( $card['step_description'] ) ? $card['step_description'] : $step_defaults[ $i ]['description'];
+                        $icon  = ! empty( $item['step_icon'] ) ? $item['step_icon'] : $step_defaults[ $i ]['icon'];
+                        $title = ! empty( $item['step_title'] ) ? $item['step_title'] : $step_defaults[ $i ]['title'];
+                        $desc  = ! empty( $item['step_description'] ) ? $item['step_description'] : $step_defaults[ $i ]['description'];
                         $is_url = filter_var( $icon, FILTER_VALIDATE_URL );
-                        $is_last = ( $i === $total - 1 );
+                    } else {
+                        $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                        $icon  = $item['icon'];
+                        $title = $item['title'];
+                        $desc  = $item['description'];
+                        $is_url = false;
+                    }
                 ?>
-                <div class="flex gap-2 shrink-0 snap-start w-[70%] sm:w-auto sm:flex-1 min-w-0">
+                <div class="flex gap-0 shrink-0 snap-start w-[70%] min-w-0">
+                    <div class="bg-white border border-gray-200 rounded-[4px] p-[10px] hover:shadow-md transition relative flex-1 min-w-0 h-full">
+                        <div class="text-[48px] font-bold text-black/15 mb-3"><?php echo esc_html( $num ); ?></div>
+                        <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                            <?php if ( $is_url ) : ?>
+                                <img src="<?php echo esc_url( $icon ); ?>" alt="" class="w-auto h-[52px] object-contain" />
+                            <?php else : ?>
+                                <i data-lucide="<?php echo esc_attr( $icon ); ?>" class="w-6 h-6 text-[#B22234]"></i>
+                            <?php endif; ?>
+                        </div>
+                        <h4 class="font-semibold text-[22px] leading-[1.2] text-black mb-2"><?php echo esc_html( $title ); ?></h4>
+                        <p class="text-gray-600 text-sm"><?php echo esc_html( $desc ); ?></p>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Tablet: 2 columns grid -->
+            <div class="hidden sm:grid sm:grid-cols-2 lg:hidden gap-4">
+                <?php foreach ( $items as $i => $item ) :
+                    if ( $use_acf ) {
+                        $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                        $icon  = ! empty( $item['step_icon'] ) ? $item['step_icon'] : $step_defaults[ $i ]['icon'];
+                        $title = ! empty( $item['step_title'] ) ? $item['step_title'] : $step_defaults[ $i ]['title'];
+                        $desc  = ! empty( $item['step_description'] ) ? $item['step_description'] : $step_defaults[ $i ]['description'];
+                        $is_url = filter_var( $icon, FILTER_VALIDATE_URL );
+                    } else {
+                        $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                        $icon  = $item['icon'];
+                        $title = $item['title'];
+                        $desc  = $item['description'];
+                        $is_url = false;
+                    }
+                ?>
+                <div class="bg-white border border-gray-200 rounded-[4px] p-[10px] hover:shadow-md transition relative flex-1 min-w-0 h-full">
+                    <div class="text-[48px] font-bold text-black/15 mb-3"><?php echo esc_html( $num ); ?></div>
+                    <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                        <?php if ( $is_url ) : ?>
+                            <img src="<?php echo esc_url( $icon ); ?>" alt="" class="w-auto h-[52px] object-contain" />
+                        <?php else : ?>
+                            <i data-lucide="<?php echo esc_attr( $icon ); ?>" class="w-6 h-6 text-[#B22234]"></i>
+                        <?php endif; ?>
+                    </div>
+                    <h4 class="font-semibold text-[22px] leading-[1.2] text-black mb-2"><?php echo esc_html( $title ); ?></h4>
+                    <p class="text-gray-600 text-sm"><?php echo esc_html( $desc ); ?></p>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Desktop: grid with arrows -->
+            <div class="hidden lg:flex gap-0">
+                <?php foreach ( $items as $i => $item ) :
+                    if ( $use_acf ) {
+                        $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                        $icon  = ! empty( $item['step_icon'] ) ? $item['step_icon'] : $step_defaults[ $i ]['icon'];
+                        $title = ! empty( $item['step_title'] ) ? $item['step_title'] : $step_defaults[ $i ]['title'];
+                        $desc  = ! empty( $item['step_description'] ) ? $item['step_description'] : $step_defaults[ $i ]['description'];
+                        $is_url = filter_var( $icon, FILTER_VALIDATE_URL );
+                    } else {
+                        $num   = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                        $icon  = $item['icon'];
+                        $title = $item['title'];
+                        $desc  = $item['description'];
+                        $is_url = false;
+                    }
+                    $is_last = ( $i === $total - 1 );
+                ?>
+                <div class="flex gap-0 flex-1 min-w-0">
                     <div class="bg-white border border-gray-200 rounded-[4px] p-[10px] hover:shadow-md transition relative flex-1 min-w-0 h-full">
                         <div class="text-[48px] font-bold text-black/15 mb-3"><?php echo esc_html( $num ); ?></div>
                         <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
@@ -198,33 +276,7 @@ if ( empty( $returns_hero_bg ) ) {
                     </div>
                     <?php endif; ?>
                 </div>
-                <?php
-                    endforeach;
-                else :
-                    $total = count( $step_defaults );
-                    foreach ( $step_defaults as $i => $step ) :
-                        $num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
-                        $is_last = ( $i === $total - 1 );
-                ?>
-                <div class="flex gap-2 shrink-0 snap-start w-[70%] sm:w-auto sm:flex-1 min-w-0">
-                    <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition relative flex-1 min-w-0 h-full">
-                        <div class="text-3xl font-bold text-gray-200 mb-3"><?php echo esc_html( $num ); ?></div>
-                        <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                            <i data-lucide="<?php echo esc_attr( $step['icon'] ); ?>" class="w-6 h-6 text-[#B22234]"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 mb-2"><?php echo esc_html( $step['title'] ); ?></h4>
-                        <p class="text-gray-600 text-sm"><?php echo esc_html( $step['description'] ); ?></p>
-                    </div>
-                    <?php if ( ! $is_last ) : ?>
-                    <div class="flex items-center justify-center shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B22234" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m9 18 6-6-6-6"/></svg>
-                    </div>
-                    <?php endif; ?>
-                </div>
-                <?php
-                    endforeach;
-                endif;
-                ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
