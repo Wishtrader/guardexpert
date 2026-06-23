@@ -30,6 +30,17 @@ $why_items = get_field('service_why_items');
 $why_large_text = get_field('service_why_large_text');
 $bottom_button = get_field('service_bottom_button') ?: 'Получить консультацию';
 $hero_bg_image = get_field('service_hero_bg');
+
+$stats_items = get_field('service_stats_items');
+if ( empty( $stats_items ) || ! is_array( $stats_items ) ) {
+	$stats_items = array(
+		array( 'icon' => '', 'title' => 'С 2012 года' ),
+		array( 'icon' => '', 'title' => '14+ лет' ),
+		array( 'icon' => '', 'title' => 'Поставка по всей РБ' ),
+		array( 'icon' => '', 'title' => 'Поддержка и сопровождение' ),
+	);
+}
+$stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones' );
 ?>
 
 <!-- Hero Section -->
@@ -65,7 +76,28 @@ $hero_bg_image = get_field('service_hero_bg');
     </div>
 </section>
 
-<?php if ($features): ?>
+<!-- Stats Bar -->
+<section class="relative md:mt-[-66px]">
+    <div class="max-w-[1200px] mx-auto px-4">
+        <div class="grid grid-cols-2 lg:grid-cols-4 bg-white shadow-md rounded-[2px] p-10">
+            <?php foreach ( $stats_items as $i => $item ) :
+                $stats_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
+                $stats_title = isset( $item['title'] ) ? $item['title'] : '';
+                $lucide_name = isset( $stats_lucide_icons[ $i ] ) ? $stats_lucide_icons[ $i ] : 'circle'; ?>
+            <div class="flex items-center gap-3">
+                <?php if ( ! empty( $stats_icon ) ) : ?>
+                    <img src="<?php echo esc_url( $stats_icon ); ?>" alt="" class="h-[52px] object-contain">
+                <?php else : ?>
+                    <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-[#B22234]"></i>
+                <?php endif; ?>
+                <div>
+                    <div class="font-normal text-black md:max-w-[94px] text-sm"><?php echo esc_html( $stats_title ); ?></div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
 <!-- Features Bar -->
 <section class="bg-white border-b">
     <div class="max-w-[1200px] mx-auto px-4">
