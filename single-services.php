@@ -185,7 +185,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
 
         <?php $total_steps = count($steps); ?>
         <!-- Mobile: horizontal slider -->
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 lg:gap-0 pb-4 lg:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-4 sm:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
             <?php foreach ($steps as $i => $step) : ?>
             <div class="flex gap-0 shrink-0 snap-start w-[70%] min-w-0">
                 <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
@@ -198,6 +198,22 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
                     <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html($step['title']); ?></h4>
                     <p class="text-black text-sm leading-[1.2]"><?php echo esc_html($step['text']); ?></p>
                 </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Tablet: 2 columns grid -->
+        <div class="hidden sm:grid sm:grid-cols-2 lg:hidden gap-4">
+            <?php foreach ($steps as $step) : ?>
+            <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo sprintf('%02d', $step['number']); ?></div>
+                <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                    <?php if ($step['icon']): ?>
+                    <img src="<?php echo esc_url($step['icon']); ?>" alt="<?php echo esc_attr($step['title']); ?>" class="h-[52px] object-contain">
+                    <?php endif; ?>
+                </div>
+                <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html($step['title']); ?></h4>
+                <p class="text-black text-sm leading-[1.2]"><?php echo esc_html($step['text']); ?></p>
             </div>
             <?php endforeach; ?>
         </div>
