@@ -221,7 +221,7 @@ if ( empty( $services_hero_bg ) ) {
             </div>
 
             <?php $total_work = count( $services_work_items ); ?>
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-4 sm:pb-0 sm:flex-row scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 lg:gap-0 pb-4 sm:pb-0 sm:flex-row scroll-smooth" style="-webkit-overflow-scrolling: touch;">
                 <?php foreach ( $services_work_items as $i => $item ) :
                     $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
                     $step_title = isset( $item['title'] ) ? $item['title'] : '';
@@ -230,9 +230,9 @@ if ( empty( $services_hero_bg ) ) {
                     $step_num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
                     $is_last = ( $i === $total_work - 1 );
                 ?>
-                <div class="flex gap-2 shrink-0 snap-start w-[70%] sm:w-auto sm:flex-1 min-w-0">
-                    <div class="bg-white border border-gray-200 rounded-[4px] p-2 md:p-5 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
-                        <div class="md:text-[48px] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
+                <div class="flex gap-0 shrink-0 snap-start w-[70%] sm:w-auto sm:flex-1 min-w-0">
+                    <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                        <div class="md:text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
                         <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
                             <?php if ( ! empty( $step_icon ) ) : ?>
                                 <img src="<?php echo esc_url( $step_icon ); ?>" alt="" class="h-[52px] object-contain">
