@@ -29,6 +29,8 @@ $why_title = get_field('service_why_title') ?: 'Почему это удобно
 $why_content = get_field('service_why_content');
 $why_items = get_field('service_why_items');
 $why_large_text = get_field('service_why_large_text');
+$why_large_title = get_field('service_why_large_title') ?: 'Понятная структура решения';
+$why_large_bg = get_field('service_why_large_bg');
 $bottom_button = get_field('service_bottom_button') ?: 'Получить консультацию';
 $hero_bg_image = get_field('service_hero_bg');
 
@@ -64,7 +66,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
                     <?php echo esc_html($hero_description); ?>
                 </p>
                 <?php endif; ?>
-                <a href="#" class="js-open-consultation inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                <a href="#" class="js-open-consultation inline-flex lg:w-[285px] lg:h-[52px] items-center justify-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded-[2px] font-medium hover:bg-[#8B1A2B] transition">
                     <?php echo esc_html($hero_button_text); ?>
                 </a>
             </div>
@@ -248,31 +250,35 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
 
 <?php if ($why_items || $why_large_text): ?>
 <!-- Почему это удобно для клиента -->
-<section class="py-16 lg:py-24 bg-white">
+<section class="py-8 lg:py-16">
     <div class="max-w-[1200px] mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html($why_title); ?></h2>
+            <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html($why_title); ?></h2>
             <?php if ($why_content): ?>
-            <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html($why_content); ?></p>
+            <p class="text-black text-lg leading-[1.2] mx-auto"><?php echo esc_html($why_content); ?></p>
             <?php endif; ?>
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-4 mb-8">
+        <div class="grid lg:grid-cols-2 gap-4 mb-8 items-center">
             <?php if ($why_large_text): ?>
-            <div class="bg-white border border-gray-200 rounded-lg p-8 lg:p-12 flex flex-col justify-center min-h-[300px]">
-                <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Понятная структура решения</h3>
-                <div class="text-gray-600">
+            <div class="relative shadow-md bg-white border border-gray-200 rounded-[4px] p-5 flex flex-col justify-center lg:min-h-[428px] overflow-hiddeni hover:shadow-lg">
+                <?php if ($why_large_bg): ?>
+                <img src="<?php echo esc_url($why_large_bg); ?>" alt="" class="hidden lg:block absolute top-0 right-0 w-[350px] h-[312px] object-cover rounded-tr-lg opacity-50">
+                <?php endif; ?>
+                <h3 class="relative text-xl lg:text-[28px] font-semibold text-black mb-4 z-10"><?php echo esc_html($why_large_title); ?></h3>
+                <div class="relative text-black lg:text-lg !leading-[1.2] z-10">
                     <?php echo wp_kses_post($why_large_text); ?>
                 </div>
             </div>
             <?php endif; ?>
 
             <?php if ($why_items): ?>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-                <?php foreach ($why_items as $item): ?>
-                <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                    <h4 class="font-bold text-gray-900 mb-2"><?php echo esc_html($item['title']); ?></h4>
-                    <p class="text-gray-600 text-sm"><?php echo esc_html($item['text']); ?></p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                <?php foreach ($why_items as $i => $item):
+                    $span_class = ( $i === 2 ) ? ' lg:col-span-2' : ''; ?>
+                <div class="bg-white shadow-md border border-gray-200 rounded-[4px] p-4 hover:shadow-lg transition<?php echo esc_attr($span_class); ?>">
+                    <h4 class="font-semibold text-black lg:text-[22px] mb-2.5 leading-[1.2]"><?php echo esc_html($item['title']); ?></h4>
+                    <p class="text-black text-base !leading-[1.2]"><?php echo esc_html($item['text']); ?></p>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -280,7 +286,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
         </div>
 
         <div class="text-center">
-            <a href="#" class="js-open-consultation inline-block bg-[#B22234] text-white px-12 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+            <a href="#" class="js-open-consultation inline-block lg:w-[448px] lg:h-[52px] bg-[#B22234] text-white text-base px-12 py-3 rounded-[2px] font-normal hover:bg-[#8B1A2B] transition">
                 <?php echo esc_html($bottom_button); ?>
             </a>
         </div>

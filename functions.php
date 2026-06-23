@@ -1964,6 +1964,76 @@ function guardexpert_register_services_fields() {
 }
 
 /**
+ * Register ACF fields for Single Service (services post type)
+ */
+add_action( 'acf/include_fields', 'guardexpert_register_single_service_fields' );
+function guardexpert_register_single_service_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group( array(
+		'key'      => 'group_single_service_fields',
+		'title'    => 'Данные услуги',
+		'location' => array(
+			array(
+				array(
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'services',
+				),
+			),
+		),
+		'fields'   => array(
+			array(
+				'key'   => 'field_single_service_hero_tab',
+				'label' => 'Hero-секция',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_single_service_hero_title',
+				'label' => 'Заголовок',
+				'name'  => 'service_hero_title',
+				'type'  => 'text',
+				'instructions' => 'Если пусто — используется название записи.',
+			),
+			array(
+				'key'   => 'field_single_service_hero_bg',
+				'label' => 'Фоновое изображение',
+				'name'  => 'service_hero_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+				'instructions' => 'Фон hero-секции.',
+			),
+
+			array(
+				'key'   => 'field_single_service_why_tab',
+				'label' => 'Почему это удобно',
+				'name'  => '',
+				'type'  => 'tab',
+				'placement' => 'top',
+			),
+			array(
+				'key'   => 'field_single_service_why_large_title',
+				'label' => 'Заголовок большой карточки',
+				'name'  => 'service_why_large_title',
+				'type'  => 'text',
+				'default_value' => 'Понятная структура решения',
+			),
+			array(
+				'key'   => 'field_single_service_why_large_bg',
+				'label' => 'Фон большой карточки',
+				'name'  => 'service_why_large_bg',
+				'type'  => 'image',
+				'return_format' => 'url',
+			),
+		),
+	) );
+}
+
+/**
  * Register ACF fields for Shipping page
  */
 add_action( 'acf/include_fields', 'guardexpert_register_shipping_fields' );
