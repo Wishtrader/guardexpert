@@ -221,7 +221,58 @@ if ( empty( $services_hero_bg ) ) {
             </div>
 
             <?php $total_work = count( $services_work_items ); ?>
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 lg:gap-0 pb-4 sm:pb-0 sm:flex-row scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+            <!-- Mobile: horizontal slider -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-4 sm:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+                <?php foreach ( $services_work_items as $i => $item ) :
+                    $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
+                    $step_title = isset( $item['title'] ) ? $item['title'] : '';
+                    $step_desc  = isset( $item['description'] ) ? $item['description'] : '';
+                    $lucide_name = isset( $services_work_lucide_icons[ $i ] ) ? $services_work_lucide_icons[ $i ] : 'circle';
+                    $step_num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                ?>
+                <div class="flex gap-0 shrink-0 snap-start w-[70%] min-w-0">
+                    <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                        <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
+                        <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                            <?php if ( ! empty( $step_icon ) ) : ?>
+                                <img src="<?php echo esc_url( $step_icon ); ?>" alt="" class="h-[52px] object-contain">
+                            <?php else : ?>
+                                <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-primary"></i>
+                            <?php endif; ?>
+                        </div>
+                        <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html( $step_title ); ?></h4>
+                        <p class="text-black text-sm leading-[1.2]"><?php echo esc_html( $step_desc ); ?></p>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Tablet: 2 columns grid -->
+            <div class="hidden sm:grid sm:grid-cols-2 lg:hidden gap-4">
+                <?php foreach ( $services_work_items as $i => $item ) :
+                    $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
+                    $step_title = isset( $item['title'] ) ? $item['title'] : '';
+                    $step_desc  = isset( $item['description'] ) ? $item['description'] : '';
+                    $lucide_name = isset( $services_work_lucide_icons[ $i ] ) ? $services_work_lucide_icons[ $i ] : 'circle';
+                    $step_num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                ?>
+                <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                    <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
+                    <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                        <?php if ( ! empty( $step_icon ) ) : ?>
+                            <img src="<?php echo esc_url( $step_icon ); ?>" alt="" class="h-[52px] object-contain">
+                        <?php else : ?>
+                            <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-primary"></i>
+                        <?php endif; ?>
+                    </div>
+                    <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html( $step_title ); ?></h4>
+                    <p class="text-black text-sm leading-[1.2]"><?php echo esc_html( $step_desc ); ?></p>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Desktop: grid with arrows -->
+            <div class="hidden lg:flex gap-0">
                 <?php foreach ( $services_work_items as $i => $item ) :
                     $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
                     $step_title = isset( $item['title'] ) ? $item['title'] : '';
@@ -230,9 +281,9 @@ if ( empty( $services_hero_bg ) ) {
                     $step_num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
                     $is_last = ( $i === $total_work - 1 );
                 ?>
-                <div class="flex gap-0 shrink-0 snap-start w-[70%] sm:w-auto sm:flex-1 min-w-0">
+                <div class="flex gap-0 flex-1 min-w-0">
                     <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
-                        <div class="md:text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
+                        <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
                         <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
                             <?php if ( ! empty( $step_icon ) ) : ?>
                                 <img src="<?php echo esc_url( $step_icon ); ?>" alt="" class="h-[52px] object-contain">
@@ -244,7 +295,7 @@ if ( empty( $services_hero_bg ) ) {
                         <p class="text-black text-sm leading-[1.2]"><?php echo esc_html( $step_desc ); ?></p>
                     </div>
                     <?php if ( ! $is_last ) : ?>
-                    <div class="hidden sm:flex items-center justify-center shrink-0">
+                    <div class="flex items-center justify-center shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B22234" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
                     <?php endif; ?>
