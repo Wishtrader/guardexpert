@@ -184,13 +184,32 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
         </div>
 
         <?php $total_steps = count($steps); ?>
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 lg:gap-0 pb-4 sm:pb-0 sm:flex-row scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+        <!-- Mobile: horizontal slider -->
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 lg:gap-0 pb-4 lg:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+            <?php foreach ($steps as $i => $step) : ?>
+            <div class="flex gap-0 shrink-0 snap-start w-[70%] min-w-0">
+                <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                    <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo sprintf('%02d', $step['number']); ?></div>
+                    <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                        <?php if ($step['icon']): ?>
+                        <img src="<?php echo esc_url($step['icon']); ?>" alt="<?php echo esc_attr($step['title']); ?>" class="h-[52px] object-contain">
+                        <?php endif; ?>
+                    </div>
+                    <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html($step['title']); ?></h4>
+                    <p class="text-black text-sm leading-[1.2]"><?php echo esc_html($step['text']); ?></p>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Desktop: grid with arrows -->
+        <div class="hidden lg:flex gap-0">
             <?php foreach ($steps as $i => $step) :
                 $is_last = ($i === $total_steps - 1);
             ?>
-            <div class="flex gap-0 shrink-0 snap-start w-[70%] sm:w-auto sm:flex-1 min-w-0">
+            <div class="flex gap-0 flex-1 min-w-0">
                 <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
-                    <div class="md:text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo sprintf('%02d', $step['number']); ?></div>
+                    <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo sprintf('%02d', $step['number']); ?></div>
                     <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
                         <?php if ($step['icon']): ?>
                         <img src="<?php echo esc_url($step['icon']); ?>" alt="<?php echo esc_attr($step['title']); ?>" class="h-[52px] object-contain">
@@ -200,7 +219,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
                     <p class="text-black text-sm leading-[1.2]"><?php echo esc_html($step['text']); ?></p>
                 </div>
                 <?php if ( ! $is_last ) : ?>
-                <div class="hidden sm:flex items-center justify-center shrink-0">
+                <div class="flex items-center justify-center shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B22234" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m9 18 6-6-6-6"/></svg>
                 </div>
                 <?php endif; ?>
