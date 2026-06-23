@@ -185,7 +185,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
 
         <?php $total_steps = count($steps); ?>
         <!-- Mobile: horizontal slider -->
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 xl:gap-0 pb-4 xl:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 lg:gap-0 pb-4 lg:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
             <?php foreach ($steps as $i => $step) : ?>
             <div class="flex gap-0 shrink-0 snap-start w-[70%] min-w-0">
                 <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
@@ -203,7 +203,7 @@ $stats_lucide_icons = array( 'calendar', 'shield-check', 'map-pin', 'headphones'
         </div>
 
         <!-- Desktop: grid with arrows -->
-        <div class="hidden xl:flex gap-0">
+        <div class="hidden lg:flex gap-0">
             <?php foreach ($steps as $i => $step) :
                 $is_last = ($i === $total_steps - 1);
             ?>
