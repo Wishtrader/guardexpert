@@ -39,7 +39,7 @@ $catalog_cta_button_2_link = get_field( 'catalog_cta_button_2_link' ) ?: '#conta
 		</p>
 
 		<!-- Search and Sort Bar -->
-		<div class="border border-gray-200 rounded-lg p-3 md:p-4 flex flex-col lg:flex-row items-stretch md:items-center gap-3 md:gap-4 mb-10">
+		<div class="bg-white border border-gray-200 rounded-[4px] p-3 md:p-4 flex flex-col lg:flex-row items-stretch md:items-center gap-3 md:gap-4 mb-10">
 			<form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="relative flex-1">
 				<label for="catalog-search" class="sr-only">Поиск по каталогу</label>
 				<span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
@@ -50,14 +50,14 @@ $catalog_cta_button_2_link = get_field( 'catalog_cta_button_2_link' ) ?: '#conta
 					id="catalog-search"
 					name="s"
 					placeholder="Поиск по каталогу"
-					class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded bg-white focus:border-[#B3262E] focus:outline-none focus:ring-2 focus:ring-[#B3262E]/20 transition-colors"
+					class="w-full pl-11 pr-4 py-3 border border-gray-200 bg-[#FAF9F7] focus:border-[#B3262E] focus:outline-none focus:ring-2 focus:ring-[#B3262E]/20 transition-colors max-w-[570px] text-black"
 				>
 			</form>
 			<div class="relative md:w-64">
 				<label for="catalog-sort" class="sr-only">Сортировка</label>
 				<select
 					id="catalog-sort"
-					class="w-full appearance-none pl-4 pr-10 py-3 border border-gray-200 rounded bg-white focus:border-[#B3262E] focus:outline-none focus:ring-2 focus:ring-[#B3262E]/20 transition-colors cursor-pointer"
+					class="w-full bg-[#FAF9F7] appearance-none pl-4 pr-10 py-3 border border-gray-200 rounded bg-white focus:border-[#B3262E] focus:outline-none focus:ring-2 focus:ring-[#B3262E]/20 transition-colors cursor-pointer"
 				>
 					<option value="popular">Сначала популярные</option>
 					<option value="name-asc">По названию (А-Я)</option>
@@ -86,8 +86,8 @@ $catalog_cta_button_2_link = get_field( 'catalog_cta_button_2_link' ) ?: '#conta
 				$thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true );
 				$image_url    = $thumbnail_id ? wp_get_attachment_image_src( $thumbnail_id, 'full' ) : '';
 			?>
-			<a href="<?php echo esc_url( guardexpert_get_category_url( $category ) ); ?>" class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow group flex flex-col">
-				<div class="aspect-square bg-gray-50 p-6 flex items-center justify-center">
+			<a href="<?php echo esc_url( guardexpert_get_category_url( $category ) ); ?>" class="bg-white border border-gray-200 rounded-[4px] overflow-hidden hover:shadow-lg transition-shadow group flex flex-col">
+				<div class="aspect-square bg-white p-5 flex items-center justify-center">
 					<?php if ( $image_url ) : ?>
 						<img src="<?php echo esc_url( $image_url[0] ); ?>" alt="<?php echo esc_attr( $category->name ); ?>" class="w-full h-full object-contain">
 					<?php else : ?>
@@ -111,10 +111,12 @@ $catalog_cta_button_2_link = get_field( 'catalog_cta_button_2_link' ) ?: '#conta
 		<?php else : ?>
 		<p class="text-center text-gray-600 py-12">Категории пока не добавлены.</p>
 		<?php endif; ?>
+	</div>
+</section>
 
 		<!-- Bottom CTA -->
-		<div class="border-t border-gray-200 pt-10 mt-6">
-			<div class="flex flex-col lg:flex-row items-center gap-6 md:gap-8">
+		<div class="border-t border-gray-200 py-12 bg-white shadow-lg">
+			<div class="flex flex-col lg:flex-row items-center gap-6 md:gap-4 max-w-[1200px] mx-auto">
 				<div class="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-[#B3262E]">
 					<?php if ( $catalog_cta_icon ) : ?>
 						<img src="<?php echo esc_url( $catalog_cta_icon ); ?>" alt="" class="w-full h-full object-contain">
@@ -123,26 +125,23 @@ $catalog_cta_button_2_link = get_field( 'catalog_cta_button_2_link' ) ?: '#conta
 					<?php endif; ?>
 				</div>
 				<div class="flex-1 text-center md:text-left">
-					<h3 class="text-xl md:text-2xl font-bold text-black mb-2">
+					<h3 class="text-xl md:text-[22px] font-semibold text-black mb-2">
 						<?php echo esc_html( $catalog_cta_title ); ?>
 					</h3>
-					<p class="text-base text-gray-700">
+					<p class="text-lg text-black !leading-[1.2] text-light">
 						<?php echo esc_html( $catalog_cta_description ); ?>
 					</p>
 				</div>
 				<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-					<a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B3262E] text-white px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#9a1f26] transition-colors text-base md:text-lg shadow-lg whitespace-nowrap">
+					<a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B3262E] text-white px-6 md:px-8 py-3 md:py-4 rounded-[2px] hover:bg-[#9a1f26] transition-colors text-base md:text-[15px] shadow-lg whitespace-nowrap lg:w-[290px] lg:h-[52px]">
 						<?php echo esc_html( $catalog_cta_button_1 ); ?>
 					</a>
-					<a href="<?php echo esc_url( $catalog_cta_button_2_link ); ?>" class="inline-flex items-center justify-center gap-2 bg-white text-[#B3262E] border-2 border-[#B3262E] px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-base md:text-lg whitespace-nowrap">
+					<a href="<?php echo esc_url( $catalog_cta_button_2_link ); ?>" class="inline-flex items-center justify-center gap-2 bg-white text-[#B3262E] border-2 border-[#B3262E] px-6 md:px-8 py-3 md:py-4 rounded-[2px] hover:bg-[#B3262E] hover:text-white transition-colors text-base md:text-[15px] whitespace-nowrap lg:w-[290px] lg:h-[52px]">
 						<?php echo esc_html( $catalog_cta_button_2 ); ?>
 					</a>
 				</div>
 			</div>
 		</div>
-
-	</div>
-</section>
 
 <?php
 get_footer();

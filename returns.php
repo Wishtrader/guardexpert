@@ -68,10 +68,10 @@ if ( empty( $returns_hero_bg ) ) {
                     <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
                         <?php echo esc_html( $returns_hero_title ); ?>
                     </h1>
-                    <p class="text-gray-600 text-base lg:text-lg mb-8 max-w-lg">
+                    <p class="text-black text-base lg:text-lg mb-8 max-w-lg !leading-[1.2]">
                         <?php echo esc_html( $returns_hero_description ); ?>
                     </p>
-                    <a href="#" class="js-open-consultation inline-flex items-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
+                    <a href="#" class="js-open-consultation inline-flex lg:w-[285px] lg:h-[52px] items-center justify-center gap-2 bg-[#B22234] text-white px-8 py-3 rounded-[2px] font-nornal text-[15px] hover:bg-[#8B1A2B] transition">
                         Получить консультацию
                     </a>
                 </div>

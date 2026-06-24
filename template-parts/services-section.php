@@ -58,7 +58,7 @@ if ( empty( $big_image ) ) {
 					<a href="<?php echo esc_url( get_permalink( $service->ID ) ); ?>" class="flex flex-col gap-[10px] items-start bg-white border border-gray-200 rounded-[2px] p-2 md:p-5 shadow-md hover:shadow-lg transition <?php echo $is_last_full ? 'sm:col-span-2' : ''; ?>">
 							<div class="flex flex-row md:flex-col justify-center items-start gap-4 md:gap-5">
 								<?php if ( $icon ) : ?>
-								<img src="<?php echo esc_url( $icon ); ?>" alt="" class="w-[26px] md:h-[52px] object-contain">
+								<img src="<?php echo esc_url( $icon ); ?>" alt="" class="w-[26px] md:h-[52px] md:w-auto object-contain">
 							<?php else : ?>
 								<i data-lucide="file-text" class="w-5 h-5 text-primary"></i>
 							<?php endif; ?>

@@ -293,7 +293,7 @@ if ( empty( $about_hero_bg ) ) {
 
             <?php $total_work = count( $about_work_items ); ?>
             <!-- Mobile: horizontal slider -->
-            <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-4 sm:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+            <div class="flex overflow-x-auto snap-x snap-mandatory pb-4 sm:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
                 <?php foreach ( $about_work_items as $i => $item ) :
                     $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
                     $step_title = isset( $item['title'] ) ? $item['title'] : '';

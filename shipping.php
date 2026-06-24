@@ -47,18 +47,18 @@ if ( empty( $shipping_hero_bg ) ) {
         <div class="max-w-[1200px] mx-auto px-4 pt-[120px] lg:pt-[220px] pb-12 lg:pb-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div class="lg:w-1/2 relative z-10">
-                    <nav class="text-[15px] mb-6">
-                        <a href="/" class="hover:text-[#66666B]">Главная</a>
+                    <nav class="text-[14px] mb-6">
+                        <a href="/" class="hover:text-[#66666B] text-gray-500">Главная</a>
                         <span class="mx-2">/</span>
                         <span class="text-black">Оплата и доставка</span>
                     </nav>
                     <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
                         <?php echo esc_html( $shipping_hero_title ); ?>
                     </h1>
-                    <p class="text-black text-base lg:text-lg mb-8 max-w-[590px]">
+                    <p class="text-black text-base lg:text-lg mb-8 max-w-[590px] !leading-[1.2]">
                         <?php echo esc_html( $shipping_hero_description ); ?>
                     </p>
-                    <a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B3262E] text-[#FAF9F7] px-8 py-3 rounded font-normal hover:bg-[#8B1A2B] transition shadow-md md:w-[285px] md:h-[52px] text-[15px]">
+                    <a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B3262E] text-[#FAF9F7] px-8 py-3 rounded-[2px] font-normal hover:bg-[#8B1A2B] transition shadow-md md:w-[285px] md:h-[52px] text-[15px]">
                         Получить консультацию
                     </a>
                 </div>
@@ -68,7 +68,7 @@ if ( empty( $shipping_hero_bg ) ) {
     </section>
 
     <!-- Способы оплаты -->
-    <section class="py-12 lg:py-[80px] bg-white">
+    <section class="py-8 lg:py-16">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="bg-white border border-gray-200 rounded-sm p-6 lg:p-[10px] shadow-md">
                 <h2 class="text-2xl lg:text-4xl font-semibold text-gray-900 mb-6"><?php echo esc_html( $shipping_payment_title ); ?></h2>
@@ -118,11 +118,11 @@ if ( empty( $shipping_hero_bg ) ) {
     </section>
 
     <!-- Как происходит оформление и поставка -->
-    <section class="py-16 lg:py-24 bg-gray-50">
+    <section class="py-8 lg:py-16">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $shipping_process_title ); ?></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $shipping_process_description ); ?></p>
+                <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html( $shipping_process_title ); ?></h2>
+                <p class="text-black px-2 lg:text-lg !leading-[1.2] mx-auto"><?php echo esc_html( $shipping_process_description ); ?></p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -171,11 +171,11 @@ if ( empty( $shipping_hero_bg ) ) {
     </section>
 
     <!-- Частые вопросы -->
-    <section class="py-16 lg:py-24 bg-white">
+    <section class="py-8 lg:py-16">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo esc_html( $shipping_faq_title ); ?></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto"><?php echo esc_html( $shipping_faq_description ); ?></p>
+                <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html( $shipping_faq_title ); ?></h2>
+                <p class="text-black px-2 !leading-[1.2] lg:text-lg mx-auto"><?php echo esc_html( $shipping_faq_description ); ?></p>
             </div>
 
             <div class="max-w-3xl mx-auto">
