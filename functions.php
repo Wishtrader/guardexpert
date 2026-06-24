@@ -2175,6 +2175,29 @@ function guardexpert_register_shipping_fields() {
 				'default_value' => 'Собрали ответы на основные вопросы по оформлению заказа, оплате и условиям поставки. Если нужной информации нет в списке, свяжитесь с нами — поможем уточнить детали.',
 				'wrapper' => array( 'width' => '50' ),
 			),
+			array(
+				'key'          => 'field_shipping_faq_items',
+				'label'        => 'Вопросы и ответы',
+				'name'         => 'shipping_faq_items',
+				'type'         => 'repeater',
+				'button_label' => 'Добавить вопрос',
+				'layout'       => 'block',
+				'sub_fields'   => array(
+					array(
+						'key'   => 'field_shipping_faq_question',
+						'label' => 'Вопрос',
+						'name'  => 'faq_question',
+						'type'  => 'text',
+					),
+					array(
+						'key'   => 'field_shipping_faq_answer',
+						'label' => 'Ответ',
+						'name'  => 'faq_answer',
+						'type'  => 'textarea',
+						'rows'  => 4,
+					),
+				),
+			),
 		),
 	) );
 }

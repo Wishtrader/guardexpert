@@ -225,79 +225,37 @@ if ( empty( $shipping_hero_bg ) ) {
     </section>
 
     <!-- Частые вопросы -->
-    <section class="py-8 lg:py-16">
-        <div class="max-w-[1200px] mx-auto px-4">
+    <section class="py-16">
+        <div class="max-w-[1200px] mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html( $shipping_faq_title ); ?></h2>
-                <p class="text-black px-2 !leading-[1.2] lg:text-lg mx-auto"><?php echo esc_html( $shipping_faq_description ); ?></p>
+                <h2 class="text-3xl md:text-[48px] font-bold text-black mb-4"><?php echo esc_html( $shipping_faq_title ); ?></h2>
+                <p class="text-black text-[18px] leading-relaxed"><?php echo esc_html( $shipping_faq_description ); ?></p>
             </div>
 
-            <div class="max-w-3xl mx-auto">
-                <!-- FAQ Item 1 (open) -->
-                <div class="faq-item border border-gray-200 rounded-lg mb-3 overflow-hidden">
+            <div class="w-full">
+                <?php
+                $faq_items = get_field( 'shipping_faq_items' );
+                if ( ! empty( $faq_items ) ) :
+                    foreach ( $faq_items as $item ) :
+                        $question = ! empty( $item['faq_question'] ) ? $item['faq_question'] : '';
+                        $answer   = ! empty( $item['faq_answer'] ) ? $item['faq_answer'] : '';
+                        if ( empty( $question ) && empty( $answer ) ) continue;
+                ?>
+                <div class="faq-item bg-white border border-gray-200 rounded-lg mb-3 overflow-hidden">
                     <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition" onclick="toggleFaq(this)">
-                        <span class="font-bold text-gray-900 pr-4">Можно ли оформить заказ без регистрации?</span>
-                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-[#B22234] flex-shrink-0 rotated"></i>
-                    </button>
-                    <div class="faq-answer open px-5 pb-5">
-                        <p class="text-gray-600 text-sm">Да, оформить заказ можно без регистрации. Для связи по заказу потребуется указать основные контактные данные.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 2 -->
-                <div class="faq-item border border-gray-200 rounded-lg mb-3 overflow-hidden">
-                    <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition" onclick="toggleFaq(this)">
-                        <span class="font-bold text-gray-900 pr-4">Как уточнить стоимость доставки?</span>
+                        <span class="font-semibold md:text-[22px] text-black pr-4"><?php echo esc_html( $question ); ?></span>
                         <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-[#B22234] flex-shrink-0"></i>
                     </button>
                     <div class="faq-answer px-5">
-                        <p class="text-gray-600 text-sm pb-5">Стоимость доставки зависит от адреса, объема заказа и формата поставки. Уточнить детали можно при согласовании заказа с менеджером.</p>
+                        <p class="text-black text-sm md:text-lg pb-5"><?php echo esc_html( $answer ); ?></p>
                     </div>
                 </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="faq-item border border-gray-200 rounded-lg mb-3 overflow-hidden">
-                    <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition" onclick="toggleFaq(this)">
-                        <span class="font-bold text-gray-900 pr-4">Можно ли согласовать поставку на объект?</span>
-                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-[#B22234] flex-shrink-0"></i>
-                    </button>
-                    <div class="faq-answer px-5">
-                        <p class="text-gray-600 text-sm pb-5">Да, по согласованию возможна доставка оборудования непосредственно на объект. Адрес и формат поставки уточняются при оформлении заказа.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 4 -->
-                <div class="faq-item border border-gray-200 rounded-lg mb-3 overflow-hidden">
-                    <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition" onclick="toggleFaq(this)">
-                        <span class="font-bold text-gray-900 pr-4">Какие способы оплаты доступны?</span>
-                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-[#B22234] flex-shrink-0"></i>
-                    </button>
-                    <div class="faq-answer px-5">
-                        <p class="text-gray-600 text-sm pb-5">Оплата возможна по безналичному расчету. Детали оплаты уточняются при согласовании заказа.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 5 -->
-                <div class="faq-item border border-gray-200 rounded-lg mb-3 overflow-hidden">
-                    <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition" onclick="toggleFaq(this)">
-                        <span class="font-bold text-gray-900 pr-4">Как узнать сроки поставки?</span>
-                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-[#B22234] flex-shrink-0"></i>
-                    </button>
-                    <div class="faq-answer px-5">
-                        <p class="text-gray-600 text-sm pb-5">Сроки зависят от наличия оборудования, объема заказа и адреса доставки. Точные условия уточняются при согласовании.</p>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 6 -->
-                <div class="faq-item border border-gray-200 rounded-lg mb-3 overflow-hidden">
-                    <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition" onclick="toggleFaq(this)">
-                        <span class="font-bold text-gray-900 pr-4">Что делать, если нужна консультация до оформления заказа?</span>
-                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-[#B22234] flex-shrink-0"></i>
-                    </button>
-                    <div class="faq-answer px-5">
-                        <p class="text-gray-600 text-sm pb-5">Свяжитесь с нами по телефону, электронной почте или оставьте заявку на сайте. Мы поможем подобрать оборудование и уточнить условия поставки.</p>
-                    </div>
-                </div>
+                <?php
+                    endforeach;
+                else :
+                ?>
+                <div class=""></div>
+                <?php endif; ?>
             </div>
         </div>
     </section>
