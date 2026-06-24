@@ -2424,15 +2424,36 @@ function guardexpert_register_catalog_fields() {
 				'default_value' => 'Нужна помощь с подбором оборудования?',
 				'wrapper' => array( 'width' => '50' ),
 			),
-			array(
-				'key'   => 'field_catalog_cta_description',
-				'label' => 'Описание CTA',
-				'name'  => 'catalog_cta_description',
-				'type'  => 'textarea',
-				'default_value' => 'Поможем подобрать решение по задаче, совместимости, стоимости и поставке.',
-				'wrapper' => array( 'width' => '50' ),
-			),
+		array(
+			'key'   => 'field_catalog_cta_description',
+			'label' => 'Описание CTA',
+			'name'  => 'catalog_cta_description',
+			'type'  => 'textarea',
+			'default_value' => 'Поможем подобрать решение по задаче, совместимости, стоимости и поставке.',
+			'wrapper' => array( 'width' => '50' ),
 		),
+		array(
+			'key'   => 'field_catalog_cta_button_1',
+			'label' => 'Текст первой кнопки',
+			'name'  => 'catalog_cta_button_1',
+			'type'  => 'text',
+			'default_value' => 'Получить консультацию',
+		),
+		array(
+			'key'   => 'field_catalog_cta_button_2',
+			'label' => 'Текст второй кнопки',
+			'name'  => 'catalog_cta_button_2',
+			'type'  => 'text',
+			'default_value' => 'Связаться с нами',
+		),
+		array(
+			'key'   => 'field_catalog_cta_button_2_link',
+			'label' => 'Ссылка второй кнопки',
+			'name'  => 'catalog_cta_button_2_link',
+			'type'  => 'url',
+			'default_value' => '#contacts',
+		),
+	),
 	) );
 }
 

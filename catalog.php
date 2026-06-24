@@ -11,10 +11,13 @@ $catalog_title        = get_field( 'catalog_title' ) ?: 'Каталог обор
 $catalog_description  = get_field( 'catalog_description' ) ?: 'Оборудование для ОПС, СКУД, видеонаблюдения и сопутствующих инженерных решений с возможностью подбора под задачу и объект.';
 $catalog_cta_title    = get_field( 'catalog_cta_title' ) ?: 'Нужна помощь с подбором оборудования?';
 $catalog_cta_description = get_field( 'catalog_cta_description' ) ?: 'Поможем подобрать решение по задаче, совместимости, стоимости и поставке.';
+$catalog_cta_button_1    = get_field( 'catalog_cta_button_1' ) ?: 'Получить консультацию';
+$catalog_cta_button_2    = get_field( 'catalog_cta_button_2' ) ?: 'Связаться с нами';
+$catalog_cta_button_2_link = get_field( 'catalog_cta_button_2_link' ) ?: '#contacts';
 ?>
 
 <!-- Catalog Section -->
-<section class="bg-white py-10 md:py-16">
+<section class="py-8 md:py-16">
 	<div class="max-w-[1200px] mx-auto px-4">
 
 		<!-- Breadcrumbs -->
@@ -124,10 +127,10 @@ $catalog_cta_description = get_field( 'catalog_cta_description' ) ?: 'Помож
 				</div>
 				<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
 					<a href="#" class="js-open-consultation inline-flex items-center justify-center gap-2 bg-[#B3262E] text-white px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#9a1f26] transition-colors text-base md:text-lg shadow-lg whitespace-nowrap">
-						Получить консультацию
+						<?php echo esc_html( $catalog_cta_button_1 ); ?>
 					</a>
-					<a href="#contacts" class="inline-flex items-center justify-center gap-2 bg-white text-[#B3262E] border-2 border-[#B3262E] px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-base md:text-lg whitespace-nowrap">
-						Связаться с нами
+					<a href="<?php echo esc_url( $catalog_cta_button_2_link ); ?>" class="inline-flex items-center justify-center gap-2 bg-white text-[#B3262E] border-2 border-[#B3262E] px-6 md:px-8 py-3 md:py-4 rounded hover:bg-[#B3262E] hover:text-white transition-colors text-base md:text-lg whitespace-nowrap">
+						<?php echo esc_html( $catalog_cta_button_2 ); ?>
 					</a>
 				</div>
 			</div>
