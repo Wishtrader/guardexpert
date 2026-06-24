@@ -138,6 +138,7 @@
 </footer>
 
 <?php get_template_part( 'template-parts/consultation-popup' ); ?>
+<?php get_template_part( 'template-parts/cookie-popup' ); ?>
 
 </div><!-- #page -->
 
@@ -203,6 +204,23 @@ document.addEventListener('DOMContentLoaded', function() {
 			.catch(function() {});
 		});
 	}
+
+	// Cookie consent popup
+	var cookiePopup = document.getElementById('cookie-popup');
+	var cookieAccept = document.getElementById('cookie-accept');
+	var cookieReject = document.getElementById('cookie-reject');
+
+	if (cookiePopup && !localStorage.getItem('cookie_consent')) {
+		cookiePopup.classList.remove('hidden');
+	}
+
+	function closeCookiePopup() {
+		cookiePopup.classList.add('hidden');
+		localStorage.setItem('cookie_consent', '1');
+	}
+
+	if (cookieAccept) cookieAccept.addEventListener('click', closeCookiePopup);
+	if (cookieReject) cookieReject.addEventListener('click', closeCookiePopup);
 });
 </script>
 
