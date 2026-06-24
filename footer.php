@@ -191,6 +191,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			var data = new FormData(form);
 			data.append('action', 'guardexpert_send_consultation');
 
+			var nameVal = form.querySelector('[name="name"]').value;
+			var phoneVal = form.querySelector('[name="phone"]').value;
+
 			fetch('<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>', {
 				method: 'POST',
 				body: data
@@ -198,7 +201,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(function(r) { return r.json(); })
 			.then(function(response) {
 				if (response.success) {
-					success.classList.remove('hidden');
+					var isCatalog = document.body.classList.contains('page-template-catalog');
+					if (isCatalog) {
+						success.classList.remove('hidden');
+					} else {
+						var params = new URLSearchParams({ name: nameVal, phone: phoneVal });
+						window.location.href = '/thank-you/?' + params.toString();
+					}
 				}
 			})
 			.catch(function() {});
