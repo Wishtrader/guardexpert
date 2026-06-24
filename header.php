@@ -50,7 +50,7 @@
 		#wpadminbar { top: 0 !important; }
 		@media (min-width: 1024px) and (max-width: 1199px) {
 			.header-cta-btn {
-				width: 100% !important;
+				width: 385px !important;
 				order: 99;
 			}
 			.header-cta-btn,
