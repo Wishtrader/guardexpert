@@ -8,10 +8,10 @@
 <footer class="relative bg-[#2D2D2D] text-white" style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/footer-bg.png'); background-size: cover; background-position: center;">
 	<div class="max-w-[1200px] mx-auto px-4 py-12 md:py-8">
 		<!-- Main Footer Content -->
-		<div class="flex flex-col md:flex-row gap-12 md:gap-20">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
 			<!-- Column 1: Logo & Company Info -->
-			<div class="lg:col-span-1">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.png" alt="Gexpert - Системы безопасности" class="md:max-h-20 w-auto mb-6">
+			<div>
+				<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.png" alt="Gexpert - Системы безопасности" class="max-h-16 md:max-h-20 w-auto mb-6">
 				<div class="space-y-2 text-sm">
 					<p>УНП 171770720</p>
 					<p>ОКПО 380799555000</p>
@@ -19,7 +19,7 @@
 			</div>
 
 			<!-- Column 2: Catalog -->
-			<div class="md:min-w-[310px]">
+			<div>
 				<h3 class="text-lg mb-4 pb-2 border-b border-[#B3262E] inline-block">
 					<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="hover:text-[#B3262E] transition-colors">Каталог</a>
 				</h3>
