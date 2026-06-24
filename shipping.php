@@ -225,7 +225,7 @@ if ( empty( $shipping_hero_bg ) ) {
     </section>
 
     <!-- Частые вопросы -->
-    <section class="py-16">
+    <section class="py-8 lg:py-16">
         <div class="max-w-[1200px] mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-[48px] font-bold text-black mb-4"><?php echo esc_html( $shipping_faq_title ); ?></h2>
@@ -241,13 +241,13 @@ if ( empty( $shipping_hero_bg ) ) {
                         $answer   = ! empty( $item['faq_answer'] ) ? $item['faq_answer'] : '';
                         if ( empty( $question ) && empty( $answer ) ) continue;
                 ?>
-                <div class="faq-item bg-white border border-gray-200 rounded-lg mb-3 overflow-hidden">
-                    <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition" onclick="toggleFaq(this)">
+                <div class="faq-item bg-white border border-[#D9D6D2] mb-3 overflow-hidden">
+                    <button class="faq-toggle w-full flex items-center justify-between p-2 text-left hover:bg-gray-50 transition" onclick="toggleFaq(this)">
                         <span class="font-semibold md:text-[22px] text-black pr-4"><?php echo esc_html( $question ); ?></span>
-                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-[#B22234] flex-shrink-0"></i>
+                        <i data-lucide="chevron-down" class="faq-icon w-6 h-6 text-[#B22234] flex-shrink-0"></i>
                     </button>
-                    <div class="faq-answer px-5">
-                        <p class="text-black text-sm md:text-lg pb-5"><?php echo esc_html( $answer ); ?></p>
+                    <div class="faq-answer px-2">
+                        <p class="text-black text-sm md:text-lg pb-2 pt-5"><?php echo esc_html( $answer ); ?></p>
                     </div>
                 </div>
                 <?php

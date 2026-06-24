@@ -23,8 +23,8 @@ if ( empty( $big_image ) ) {
     <section class="py-8 md:py-16 lg:py-24 bg-white">
         <div class="max-w-[1200px] mx-auto p-2 md:px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-semibold text-black mb-4"><?php echo esc_html( $services_title ); ?></h2>
-                <p class="text-black"><?php echo esc_html( $services_description ); ?></p>
+                <h2 class="text-3xl lg:text-5xl font-semibold text-black mb-4"><?php echo esc_html( $services_title ); ?></h2>
+                <p class="text-black lg:text-lg"><?php echo esc_html( $services_description ); ?></p>
             </div>
 
 			<div class="grid lg:grid-cols-[488px_650px] gap-6">

@@ -61,11 +61,11 @@ if ( empty( $hero_bg ) ) {
 				<h1 class="text-4xl xl:text-[48px] font-bold text-black mb-6 leading-tight">
 					<?php echo esc_html( $hero_title ); ?>
 				</h1>
-				<p class="text-base xl:text-lg text-black mb-8 leading-[1.2]">
+				<p class="text-base xl:text-lg text-black mb-8 !leading-[1.2]">
 					<?php echo esc_html( $hero_description ); ?>
 				</p>
 				<a href="/catalog" class="inline-flex justify-center items-center gap-3 bg-[#B3262E] text-white px-8 py-4 rounded hover:bg-[#9a1f26] transition-colors text-lg shadow-lg md:w-[285px] md:h-[52px]">
-					<ion-icon name="grid-outline" class="text-2xl"></ion-icon>
+					<img src="<?php echo get_template_directory_uri(); ?>/img/grid.svg" alt="grid" />
 					Перейти в каталог
 				</a>
 			</div>
@@ -149,11 +149,11 @@ if ( empty( $hero_bg ) ) {
 				<h1 class="text-[26px] font-semibold text-black mb-6 leading-tight">
 					<?php echo esc_html( $hero_title ); ?>
 				</h1>
-				<p class="text-base text-gray-700 mb-8 leading-relaxed">
+				<p class="text-base text-black mb-8 !leading-[1.2]">
 					<?php echo esc_html( $hero_description ); ?>
 				</p>
-				<a href="/catalog" class="w-full inline-flex items-center justify-center gap-3 bg-[#B3262E] text-white px-8 py-4 rounded-[4px] hover:bg-[#9a1f26] transition-colors text-lg shadow-lg">
-					<ion-icon name="grid-outline" class="text-2xl"></ion-icon>
+				<a href="/catalog" class="w-full inline-flex items-center justify-center gap-3 bg-[#B3262E] text-white px-8 py-4 rounded-[2px] hover:bg-[#9a1f26] transition-colors text-base shadow-lg">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/grid.svg" alt="grid" />
 					Перейти в каталог
 				</a>
 			</div>

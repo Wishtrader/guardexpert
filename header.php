@@ -112,7 +112,7 @@
 			<nav class="hidden lg:flex flex-wrap items-center gap-4">
 				<!-- Catalog Button -->
 				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center justify-center gap-2 bg-[#F2F2F0] rounded hover:bg-gray-200 transition-colors border-[#D9D6D2] border-[1px] w-[184px] h-[55px] shadow-md lg:mx-[16px] md:max-w-[184px]">
-					<ion-icon name="grid-outline" class="text-[#B3262E] text-2xl mr-[22px]"></ion-icon>
+							<img src="<?php echo get_template_directory_uri(); ?>/img/grid-outline.svg" alt="grid" />
 					<span class="font-normal text-base text-[#B3262E]">Каталог</span>
 				</a>
 

@@ -11,49 +11,15 @@ get_header();
 ?>
 
 	<main id="primary" class="site-main">
-
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'guardexpert' ); ?></h1>
-			</header><!-- .page-header -->
-
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'guardexpert' ); ?></p>
-
-					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'guardexpert' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$guardexpert_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'guardexpert' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$guardexpert_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
-
+		<div class="max-w-[1200px] mx-auto mb-10 lg:mb-[120px] px-[10px]">
+			<img src="<?php echo get_template_directory_uri(); ?>/img/404.png" alt="404" class='w-full mx-auto py-9'/>
+			<div class="flex flex-col items-center justify-center max-w-[670px] mx-auto">
+				<h4 class="text-black text-[22px] font-semibold font-['Geologica'] mb-5">Страница не найдена</h4>
+				<p class="text-base text-black text-normal text-center mb-5">К сожалению, запрашиваемая страница недоступна.</br>
+Возможно, страница была удалена, ссылка устарела или адрес указан с ошибкой.</p>
+				<a href="/" class="w-full h-[50px] max-w-[385px] text-[15px] text-white font-normal flex justify-center items-center bg-[#B3262E] rounded-[2px] shadow-md hover:shadow-lg hover:text-[#b3262E] hover:bg-transparent hover:border hover:border-[#B3262E] transition">Вернуться на главную</a>
+			</div>
+		</div>
 	</main><!-- #main -->
 
 <?php

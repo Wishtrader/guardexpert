@@ -61,9 +61,9 @@
 		</div>
 
 		<!-- Action Buttons -->
-		<div class="flex flex-col sm:flex-row gap-5 justify-center">
+		<div class="flex flex-col sm:flex-row gap-5 justify-start">
 			<a href="/catalog" class="md:w-[285px] h-[52px] inline-flex items-center justify-center gap-3 bg-[#B3262E] text-white px-8 py-4 rounded-[2px] hover:bg-[#9a1f26] transition-colors text-base shadow-lg">
-				<ion-icon name="grid-outline" class="text-2xl"></ion-icon>
+			<img src="<?php echo get_template_directory_uri(); ?>/img/grid.svg" alt="grid" />
 				Смотреть весь каталог
 			</a>
 			<a href="#" class="md:w-[285px] h-[52px] js-open-consultation inline-flex items-center justify-center gap-3 text-[#B3262E] border-[1px] border-[#B3262E] px-8 py-4 rounded-[2px] hover:bg-[#B3262E] hover:text-white transition-colors text-base">
