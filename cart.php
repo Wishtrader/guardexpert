@@ -33,9 +33,9 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 			<span class="text-gray-700">Корзина</span>
 		</nav>
 
-		<h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">Корзина</h1>
-
 		<?php if ( WC()->cart->get_cart_contents_count() > 0 ): $currency = get_woocommerce_currency(); ?>
+
+		<h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">Корзина</h1>
 		<div class="grid lg:grid-cols-3 gap-6">
 			<!-- Products List -->
 			<div class="lg:col-span-2 space-y-4">
@@ -167,10 +167,12 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 			</div>
 		</div>
 		<?php else: ?>
-		<div class="text-center py-12">
-			<p class="text-gray-600 text-lg mb-4">Ваша корзина пуста</p>
-			<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="inline-block bg-[#B22234] text-white px-6 py-3 rounded font-medium hover:bg-[#8B1A2B] transition">
-				Перейти в каталог
+		<div class="text-center max-w-[350px] mx-auto lg:mb-[100px]">
+				<img class="mx-auto shadow-md hover:shadow-lg rounded-full" src="<?php echo get_template_directory_uri(); ?>/img/cart-empty.svg" alt="empty cart" />
+			<h3 class="text-black text-[28px] mb-[10px] font-['Geologica'] font-semibold">Ваша корзина пуста</h3>
+			<p class="text-lg text-[#66666B] font-regular leading-[1.2] mb-[10px]">Добавьте товары из каталога, чтобы оформить заказ.</p>
+			<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="inline-block w-full bg-[#B22234] text-white text-[15px] px-6 py-3 rounded-[2px] font-normal hover:bg-[#8B1A2B] transition">
+			Вернуться в каталог
 			</a>
 		</div>
 		<?php endif; ?>
