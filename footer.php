@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					if (isCatalog) {
 						success.classList.remove('hidden');
 					} else {
-						var params = new URLSearchParams({ name: nameVal, phone: phoneVal });
+						var params = new URLSearchParams({ client_name: nameVal, client_phone: phoneVal });
 						window.location.href = '/thank-you/?' + params.toString();
 					}
 				}

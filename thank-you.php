@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	var params = new URLSearchParams(window.location.search);
 	var nameInput = document.getElementById('thankyou-name');
 	var phoneInput = document.getElementById('thankyou-phone');
-	if (nameInput) nameInput.value = params.get('name') || '';
-	if (phoneInput) phoneInput.value = params.get('phone') || '';
+	if (nameInput) nameInput.value = params.get('client_name') || '';
+	if (phoneInput) phoneInput.value = params.get('client_phone') || '';
 });
 </script>
 
