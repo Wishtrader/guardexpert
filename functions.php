@@ -2433,6 +2433,14 @@ function guardexpert_register_catalog_fields() {
 			'wrapper' => array( 'width' => '50' ),
 		),
 		array(
+			'key'   => 'field_catalog_cta_icon',
+			'label' => 'Иконка',
+			'name'  => 'catalog_cta_icon',
+			'type'  => 'image',
+			'return_format' => 'url',
+			'instructions' => 'Если не загружена — используется иконка по умолчанию.',
+		),
+		array(
 			'key'   => 'field_catalog_cta_button_1',
 			'label' => 'Текст первой кнопки',
 			'name'  => 'catalog_cta_button_1',

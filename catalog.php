@@ -11,6 +11,7 @@ $catalog_title        = get_field( 'catalog_title' ) ?: 'Каталог обор
 $catalog_description  = get_field( 'catalog_description' ) ?: 'Оборудование для ОПС, СКУД, видеонаблюдения и сопутствующих инженерных решений с возможностью подбора под задачу и объект.';
 $catalog_cta_title    = get_field( 'catalog_cta_title' ) ?: 'Нужна помощь с подбором оборудования?';
 $catalog_cta_description = get_field( 'catalog_cta_description' ) ?: 'Поможем подобрать решение по задаче, совместимости, стоимости и поставке.';
+$catalog_cta_icon        = get_field( 'catalog_cta_icon' );
 $catalog_cta_button_1    = get_field( 'catalog_cta_button_1' ) ?: 'Получить консультацию';
 $catalog_cta_button_2    = get_field( 'catalog_cta_button_2' ) ?: 'Связаться с нами';
 $catalog_cta_button_2_link = get_field( 'catalog_cta_button_2_link' ) ?: '#contacts';
@@ -115,7 +116,11 @@ $catalog_cta_button_2_link = get_field( 'catalog_cta_button_2_link' ) ?: '#conta
 		<div class="border-t border-gray-200 pt-10 mt-6">
 			<div class="flex flex-col lg:flex-row items-center gap-6 md:gap-8">
 				<div class="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center text-[#B3262E]">
-					<ion-icon name="help-circle-outline" class="text-5xl md:text-6xl"></ion-icon>
+					<?php if ( $catalog_cta_icon ) : ?>
+						<img src="<?php echo esc_url( $catalog_cta_icon ); ?>" alt="" class="w-full h-full object-contain">
+					<?php else : ?>
+						<ion-icon name="help-circle-outline" class="text-5xl md:text-6xl"></ion-icon>
+					<?php endif; ?>
 				</div>
 				<div class="flex-1 text-center md:text-left">
 					<h3 class="text-xl md:text-2xl font-bold text-black mb-2">
