@@ -12,8 +12,22 @@ $shipping_hero_description  = get_field( 'shipping_hero_description' ) ?: 'На 
 $shipping_hero_bg           = get_field( 'shipping_hero_bg' );
 $shipping_payment_title     = get_field( 'shipping_payment_title' ) ?: 'Способы оплаты';
 $shipping_delivery_title    = get_field( 'shipping_delivery_title' ) ?: 'Условия доставки';
-$shipping_process_title     = get_field( 'shipping_process_title' ) ?: 'Как происходит оформление и поставка';
-$shipping_process_description = get_field( 'shipping_process_description' ) ?: 'Выстроили процесс так, чтобы заказ был понятным и удобным: от выбора оборудования и согласования деталей до поставки на объект.';
+$shipping_process_title     = get_field( 'shipping_process_title' ) ?: 'Как строится работа';
+$shipping_process_description = get_field( 'shipping_process_description' ) ?: 'Выстраиваем работу последовательно: от запроса и подбора оборудования до поставки и дальнейшего сопровождения.';
+
+$shipping_process_items = get_field( 'shipping_process_items' );
+if ( empty( $shipping_process_items ) || ! is_array( $shipping_process_items ) ) {
+	$shipping_process_items = array(
+		array( 'icon' => '', 'title' => 'Запрос', 'description' => 'Клиент обращается с задачей, перечнем оборудования или описанием объекта.' ),
+		array( 'icon' => '', 'title' => 'Консультация и подбор', 'description' => 'Помогаем подобрать оборудование с учетом требований, совместимости и бюджета.' ),
+		array( 'icon' => '', 'title' => 'Согласование решения', 'description' => 'Уточняем состав поставки, характеристики, наличие и условия сотрудничества.' ),
+		array( 'icon' => '', 'title' => 'Поставка оборудования', 'description' => 'Организуем поставку оборудования по Минску и по всей Беларуси.' ),
+		array( 'icon' => '', 'title' => 'Поддержка и сопровождение', 'description' => 'При необходимости консультируем дальше, подключаем обслуживание, модернизацию и техническую помощь.' ),
+	);
+}
+
+$shipping_process_lucide_icons = array( 'file-text', 'sliders-horizontal', 'file-check', 'truck', 'settings' );
+
 $shipping_faq_title         = get_field( 'shipping_faq_title' ) ?: 'Частые вопросы';
 $shipping_faq_description   = get_field( 'shipping_faq_description' ) ?: 'Собрали ответы на основные вопросы по оформлению заказа, оплате и условиям поставки. Если нужной информации нет в списке, свяжитесь с нами — поможем уточнить детали.';
 
@@ -117,55 +131,95 @@ if ( empty( $shipping_hero_bg ) ) {
         </div>
     </section>
 
-    <!-- Как происходит оформление и поставка -->
-    <section class="py-8 lg:py-16">
+    <!-- Как строится работа -->
+    <section class="py-16">
         <div class="max-w-[1200px] mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-5xl font-bold text-black mb-4"><?php echo esc_html( $shipping_process_title ); ?></h2>
-                <p class="text-black px-2 lg:text-lg !leading-[1.2] mx-auto"><?php echo esc_html( $shipping_process_description ); ?></p>
+                <h2 class="text-3xl lg:text-[48px] font-bold text-black mb-4"><?php echo esc_html( $shipping_process_title ); ?></h2>
+                <p class="text-black md:text-lg mx-auto"><?php echo esc_html( $shipping_process_description ); ?></p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition relative">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">01</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="file-text" class="w-6 h-6 text-[#B22234]"></i>
+            <?php $total_work = count( $shipping_process_items ); ?>
+            <!-- Mobile: horizontal slider -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-4 sm:hidden scroll-smooth" style="-webkit-overflow-scrolling: touch;">
+                <?php foreach ( $shipping_process_items as $i => $item ) :
+                    $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
+                    $step_title = isset( $item['title'] ) ? $item['title'] : '';
+                    $step_desc  = isset( $item['description'] ) ? $item['description'] : '';
+                    $lucide_name = isset( $shipping_process_lucide_icons[ $i ] ) ? $shipping_process_lucide_icons[ $i ] : 'circle';
+                    $step_num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                ?>
+                <div class="flex gap-0 shrink-0 snap-start w-[70%] min-w-0">
+                    <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                        <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
+                        <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                            <?php if ( ! empty( $step_icon ) ) : ?>
+                                <img src="<?php echo esc_url( $step_icon ); ?>" alt="" class="h-[52px] object-contain">
+                            <?php else : ?>
+                                <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-primary"></i>
+                            <?php endif; ?>
+                        </div>
+                        <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html( $step_title ); ?></h4>
+                        <p class="text-black text-sm leading-[1.2]"><?php echo esc_html( $step_desc ); ?></p>
                     </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Выбор товара</h4>
-                    <p class="text-gray-600 text-sm">Клиент выбирает оборудование в каталоге или обращается за консультацией, если нужна помощь с подбором.</p>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition relative">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">02</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="sliders-horizontal" class="w-6 h-6 text-[#B22234]"></i>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Tablet: 2 columns grid -->
+            <div class="hidden sm:grid sm:grid-cols-2 lg:hidden gap-4">
+                <?php foreach ( $shipping_process_items as $i => $item ) :
+                    $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
+                    $step_title = isset( $item['title'] ) ? $item['title'] : '';
+                    $step_desc  = isset( $item['description'] ) ? $item['description'] : '';
+                    $lucide_name = isset( $shipping_process_lucide_icons[ $i ] ) ? $shipping_process_lucide_icons[ $i ] : 'circle';
+                    $step_num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                ?>
+                <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                    <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
+                    <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                        <?php if ( ! empty( $step_icon ) ) : ?>
+                            <img src="<?php echo esc_url( $step_icon ); ?>" alt="" class="h-[52px] object-contain">
+                        <?php else : ?>
+                            <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-primary"></i>
+                        <?php endif; ?>
                     </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Уточнение заказа</h4>
-                    <p class="text-gray-600 text-sm">Мы уточняем наличие, характеристики, комплектность и условия поставки по выбранным позициям.</p>
+                    <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html( $step_title ); ?></h4>
+                    <p class="text-black text-sm leading-[1.2]"><?php echo esc_html( $step_desc ); ?></p>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition relative">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">03</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="file-check" class="w-6 h-6 text-[#B22234]"></i>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Desktop: grid with arrows -->
+            <div class="hidden lg:flex gap-0">
+                <?php foreach ( $shipping_process_items as $i => $item ) :
+                    $step_icon  = isset( $item['icon'] ) ? $item['icon'] : '';
+                    $step_title = isset( $item['title'] ) ? $item['title'] : '';
+                    $step_desc  = isset( $item['description'] ) ? $item['description'] : '';
+                    $lucide_name = isset( $shipping_process_lucide_icons[ $i ] ) ? $shipping_process_lucide_icons[ $i ] : 'circle';
+                    $step_num = str_pad( $i + 1, 2, '0', STR_PAD_LEFT );
+                    $is_last = ( $i === $total_work - 1 );
+                ?>
+                <div class="flex gap-0 flex-1 min-w-0">
+                    <div class="bg-white border border-gray-200 rounded-[4px] p-2 shadow-md hover:shadow-lg transition relative flex-1 min-w-0 h-full">
+                        <div class="text-[48px] font-['Geologica'] font-semibold text-gray-200 mb-3"><?php echo esc_html( $step_num ); ?></div>
+                        <div class="w-[94px] h-[94px] rounded-full bg-red-50 flex items-center justify-center mb-4">
+                            <?php if ( ! empty( $step_icon ) ) : ?>
+                                <img src="<?php echo esc_url( $step_icon ); ?>" alt="" class="h-[52px] object-contain">
+                            <?php else : ?>
+                                <i data-lucide="<?php echo esc_attr( $lucide_name ); ?>" class="w-6 h-6 text-primary"></i>
+                            <?php endif; ?>
+                        </div>
+                        <h4 class="font-semibold text-black text-[22px] leading-[1.2] mb-4"><?php echo esc_html( $step_title ); ?></h4>
+                        <p class="text-black text-sm leading-[1.2]"><?php echo esc_html( $step_desc ); ?></p>
                     </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Согласование оплаты</h4>
-                    <p class="text-gray-600 text-sm">Согласовываем состав заказа, стоимость и порядок оплаты.</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition relative">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">04</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="truck" class="w-6 h-6 text-[#B22234]"></i>
+                    <?php if ( ! $is_last ) : ?>
+                    <div class="flex items-center justify-center shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B22234" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Подготовка к поставке</h4>
-                    <p class="text-gray-600 text-sm">Комплектуем заказ, уточняем адрес, формат доставки и организационные детали по передаче оборудования.</p>
+                    <?php endif; ?>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition relative">
-                    <div class="text-3xl font-bold text-gray-200 mb-3">05</div>
-                    <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                        <i data-lucide="settings" class="w-6 h-6 text-[#B22234]"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Доставка или передача заказа</h4>
-                    <p class="text-gray-600 text-sm">Организуем поставку оборудования по всей Беларуси, при необходимости — непосредственно на объект.</p>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
