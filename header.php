@@ -45,7 +45,20 @@
 
 	<?php wp_head(); ?>
 
-	<style>html { margin-top: 0 !important; } #wpadminbar { top: 0 !important; }</style>
+	<style>
+		html { margin-top: 0 !important; }
+		#wpadminbar { top: 0 !important; }
+		@media (min-width: 1024px) and (max-width: 1199px) {
+			.header-cta-btn {
+				width: 100% !important;
+				order: 99;
+			}
+			.header-cta-btn,
+			nav.hidden.lg\:flex {
+				justify-content: center;
+			}
+		}
+	</style>
 </head>
 
 <body <?php body_class(); ?>>
@@ -96,7 +109,7 @@
 			</a>
 
 			<!-- Desktop Navigation -->
-			<nav class="hidden lg:flex items-center gap-4">
+			<nav class="hidden lg:flex flex-wrap items-center gap-4">
 				<!-- Catalog Button -->
 				<a href="<?php echo esc_url( guardexpert_get_catalog_url() ); ?>" class="flex items-center justify-center gap-2 bg-[#F2F2F0] rounded hover:bg-gray-200 transition-colors border-[#D9D6D2] border-[1px] w-[184px] h-[55px] shadow-md lg:mx-[16px] md:max-w-[184px]">
 					<ion-icon name="grid-outline" class="text-[#B3262E] text-2xl mr-[22px]"></ion-icon>
@@ -113,7 +126,7 @@
 				</div>
 
 				<!-- CTA Button -->
-				<a href="#" class="js-open-consultation flex items-center justify-center border-[1px] border-[#B3262E] text-[#B3262E] w-[203px] h-[52px] rounded-[2px] hover:bg-[#B3262E] hover:text-white transition-colors">
+				<a href="#" class="js-open-consultation header-cta-btn flex items-center justify-center border-[1px] border-[#B3262E] text-[#B3262E] w-[203px] h-[52px] rounded-[2px] hover:bg-[#B3262E] hover:text-white transition-colors">
 					Получить консультацию
 				</a>
 			</nav>
